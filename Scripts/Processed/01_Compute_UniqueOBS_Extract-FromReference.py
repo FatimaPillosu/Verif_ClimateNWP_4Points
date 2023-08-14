@@ -4,50 +4,43 @@ from datetime import datetime, timedelta
 import numpy as np
 import metview as mv
 
-######################################################################################################################
+#############################################################################################################################
 # CODE DESCRIPTION
-# 01_Compute_UniqueOBS.py determines, over different times and datasets, which stations are not present in the reference station (i.e., synop 
-# at 00 UTC). This is done to maximize the geographical coverage of considered rainfall observations, without double counting overlapping 
-# rainfall observations at different reporting times and in different datasets.
+# 01_Compute_UniqueOBS_Extract-FromReference.py determines, over different times and datasets, which stations are not present in the reference 
+# stations (i.e., synop at 00 UTC). This is done to maximize the geographical coverage of considered rainfall observations, without double counting 
+# overlapping rainfall observations at different reporting times and in different datasets.
 
 # DESCRIPTION OF INPUT PARAMETERS
 # Acc (number, in hours): rainfall accumulation period.
-# DateTimeS (date, in YYYYMMDDHHMM format): start date/time to retrieve. The time values correspond to the considered reference time.
-# DateTimeF (date, in YYYYMMDDHHMM format): final date/time to retrieve. The time values correspond to the considered reference time.
+# DateTimeS (date, in YYYYMMDDHHMM format): start date/time to retrieve. The time values correspond to the considered reference time (i.e. 00 UTC).
+# DateTimeF (date, in YYYYMMDDHHMM format): final date/time to retrieve. The time values correspond to the considered reference time (i.e. 00 UTC).
 # Disc_time (number, in hours): discretization to determine the extra times to consider compared to the reference time.
 # Dataset_ref (string): name of the reference dataset.
 # Dataset_extra_list (list of strings): names of the considered extra datasets compared to the reference dataset.
-# Git_repo (string): path of local github repository
-# DirIN (string): relative path for the input directory
-# DirOUT (string): relative path for the output directory
+# Git_repo (string): path of local github repository.
+# DirIN (string): relative path for the input directory.
+# DirOUT (string): relative path for the output directory.
 
 # INPUT PARAMETERS
 Acc = 24
 DateTimeS = datetime(2000,1,1,0,0)
-DateTimeF = datetime(2020,1,1,0,0)
+DateTimeF = datetime(2019,12,31,0,0)
 Disc_time = 1
 Dataset_ref = "synop"
-Dataset_extra_list = ["hdobs", "bom", "india", "efas", "vnm", "ukceda"]
-Git_repo = "/home/mofp/vol_ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate"
-DirIN = "Data/Raw/OBS"
-DirOUT = "Data/Processed/01_UniqueOBS"
-######################################################################################################################
+Dataset_extra_list = ["synop","hdobs", "bom", "india", "efas", "vnm", "ukceda"]
+Git_repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate"
+DirIN = "Data/Raw/OBS/STVL"
+DirOUT = "Data/Processed/01_UniqueOBS_Extract-FromReference"
+#############################################################################################################################
 
-# Adding the reference dataset to the list of the considered extra datasets
-Dataset_extra_list.insert(0, Dataset_ref)
 
-# Setting main input/output directory
-MainDirIN = Git_repo + "/" + DirIN
-MainDirOUT = Git_repo + "/" + DirOUT + "_" + str(Acc) + "h_" + Dataset_ref + "_" + DateTimeS.strftime("%H") + "UTC"
-
-# Adding unique stations over extra times and datasets respect to the reference date/time and dataset
 TheDateTime_ref = DateTimeS
 while TheDateTime_ref <= DateTimeF:
       
       # Reading the observations for the reference date/time and dataset
       TheDateSTR_ref = TheDateTime_ref.strftime("%Y%m%d")
       TheTimeSTR_ref = TheDateTime_ref.strftime("%H")
-      FileIN_ref_temp = MainDirIN + "/" + Dataset_ref + "/" + TheDateSTR_ref + "/tp" + str(Acc) + "_obs_" + TheDateSTR_ref + TheTimeSTR_ref + ".geo"
+      FileIN_ref_temp = Git_repo + "/" + DirIN + "_" + str(Acc) + "h/" + Dataset_ref + "/" + TheDateSTR_ref + "/tp" + str(Acc) + "_obs_" + TheDateSTR_ref + TheTimeSTR_ref + ".geo"
       if exists(FileIN_ref_temp):
             print("Considering reference date/time:", TheDateTime_ref)
             geo_ref = mv.read(FileIN_ref_temp)
@@ -61,7 +54,7 @@ while TheDateTime_ref <= DateTimeF:
             vals_ref = mv.values(geo_ref) # array
             
             # Saving the observations for the reference date/time and dataset
-            MainDirOUT_ref_temp = MainDirOUT + "/" + Dataset_ref + "/" + TheDateSTR_ref
+            MainDirOUT_ref_temp = Git_repo + "/" + DirOUT + "/" + Dataset_ref + "/" + TheDateSTR_ref
             if not exists(MainDirOUT_ref_temp):
                   os.makedirs(MainDirOUT_ref_temp)
             FileOUT_ref_temp = MainDirOUT_ref_temp + "/tp" + str(Acc) + "_obs_" + TheDateSTR_ref + TheTimeSTR_ref + ".geo"
@@ -93,7 +86,7 @@ while TheDateTime_ref <= DateTimeF:
                         TheDateTime_extra = TheDateTime_ref + timedelta(hours=hours_extra)
                         TheDateSTR_extra = TheDateTime_extra.strftime("%Y%m%d")
                         TheTimeSTR_extra = TheDateTime_extra.strftime("%H")
-                        FileIN_extra_temp = MainDirIN + "/" + Dataset + "/" + TheDateSTR_extra + "/tp" + str(Acc) + "_obs_" + TheDateSTR_extra + TheTimeSTR_extra + ".geo"
+                        FileIN_extra_temp = Git_repo + "/" + DirIN + "/" + Dataset + "/" + TheDateSTR_extra + "/tp" + str(Acc) + "_obs_" + TheDateSTR_extra + TheTimeSTR_extra + ".geo"
                         if exists(FileIN_extra_temp):
                               geo_extra = mv.read(FileIN_extra_temp)
                               geo_extra = mv.remove_missing_values(geo_extra)

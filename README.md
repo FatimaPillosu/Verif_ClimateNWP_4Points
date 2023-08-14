@@ -24,6 +24,7 @@ To establish climatologies that facilitate the contextualization of extreme, hig
 ||-> Retrieve_OBS_STVL.sh <br>
 ||-> Retrieve_LSM.sh <br>
 |-> **Processed/** <br>
+||-> README.md <br>
 ||-> 01_Compute_UniqueOBS.py <br>
 ||-> 02_Compute_Combined_UniqueOBS.py <br>
 ||-> 03_Compute_List_UniqueStnids.py <br>

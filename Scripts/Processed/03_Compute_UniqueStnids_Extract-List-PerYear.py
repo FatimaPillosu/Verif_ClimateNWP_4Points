@@ -5,9 +5,10 @@ from datetime import date, timedelta
 import numpy as np
 import metview as mv
 
-##########################################################################
+#####################################################################
 # CODE DESCRIPTION
-# 03_Compute_List_UniqueStnids.py extracts the list of unique stnids in a given year.
+# 03_Compute_UniqueStnids_Extract-List-PerYear.py extracts the list of unique stnids 
+# in a given year.
 
 # DESCRIPTION OF INPUT PARAMETERS
 # Year (number, in YYYY format): year to consider.
@@ -19,13 +20,13 @@ import metview as mv
 # INPUT PARAMETERS
 Year = int(sys.argv[1])
 Acc = 24
-Git_repo = "/home/mofp/vol_ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate"
-DirIN = "Data/Processed/02_Combined_UniqueOBS"
-DirOUT = "Data/Processed/03_List_UniqueStnids"
-##########################################################################
+Git_repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate"
+DirIN = "Data/Processed/02_UniqueOBS_Combine-Datasets-Times-PerDay"
+DirOUT = "Data/Processed/03_UniqueStnids_Extract-List-PerYear"
+#####################################################################
 
 # Setting main output directory
-MainDirOUT = Git_repo + "/" + DirOUT  + "_" + str(Acc) + "h"
+MainDirOUT = Git_repo + "/" + DirOUT
 if not exists(MainDirOUT):
       os.makedirs(MainDirOUT)
 

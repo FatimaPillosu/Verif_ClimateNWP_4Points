@@ -3,38 +3,36 @@ from os.path import exists
 from datetime import date, timedelta
 import metview as mv
 
-#################################################################################################################################################
+#####################################################################
 # CODE DESCRIPTION
-# 02_Compute_Combined_UniqueOBS.py combines, into a single geopoint file for a given day, all rainfall observations from different datasets and times in a day.
-# The combined observations group measurements valid for the end of the accumulation period. Therefore, observations saved as day X refer to measurements valid for day (X-1).
+# 02_Compute_UniqueOBS_Combine-Datasets-Times-PerDay.py combines into a 
+# single geopoint file all rainfall observations from different datasets and times for a 
+# given day. Observations saved as day X refer to measurements valid for day (X-1).
 
 # DESCRIPTION OF INPUT PARAMETERS
 # YearS (number, in YYYY format): start year to consider.
 # YearF (number, in YYYY format): final year to consider.
 # Acc (number, in hours): rainfall accumulation period.
 # Dataset_list (string): name of datasets to consider.
-# Git_repo (string): path of local github repository
-# DirIN (string): relative path for the input directory
-# DirOUT (string): relative path for the output directory
+# Git_repo (string): path of local github repository.
+# DirIN (string): relative path for the input directory.
+# DirOUT (string): relative path for the output directory.
 
 # INPUT PARAMETERS
 YearS = 2000
-YearF = 2020
+YearF = 2019
 Acc = 24
 Dataset_list = ["synop", "bom", "india", "vnm"]
-Git_repo = "/home/mofp/vol_ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate"
-DirIN = "Data/Processed/01_UniqueOBS_synop_00UTC"
-DirOUT = "Data/Processed/02_Combined_UniqueOBS"
-#################################################################################################################################################
-
-# Setting main input directory
-MainDirIN = Git_repo + "/" + DirIN
+Git_repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate"
+DirIN = "Data/Processed/01_UniqueOBS_Extract-FromReference"
+DirOUT = "Data/Processed/02_UniqueOBS_Combine-Datasets-Times-PerDay"
+#####################################################################
 
 # Combining, into a single geopoint file for a given day, all rainfall observations from different datasets and times in a day
 for Year in range(YearS,YearF+1):
 
       # Setting main output directory for the given year
-      MainDirOUT = Git_repo + "/" + DirOUT + "_" + str(Acc) + "h/" + str(Year)
+      MainDirOUT = Git_repo + "/" + DirOUT + "/" + str(Year)
       if not exists(MainDirOUT):
             os.makedirs(MainDirOUT)
 
@@ -53,7 +51,7 @@ for Year in range(YearS,YearF+1):
             for TheTime in range(0,24):
                   TheTimeSTR = f"{TheTime:02d}"
                   for Dataset in Dataset_list:
-                        FileIN_temp = MainDirIN + "/" + Dataset + "/" + TheDateSTR + "/tp" + str(Acc) + "_obs_" + TheDateSTR + TheTimeSTR + ".geo"
+                        FileIN_temp = Git_repo + "/" + DirIN + "/" + Dataset + "/" + TheDateSTR + "/tp" + str(Acc) + "_obs_" + TheDateSTR + TheTimeSTR + ".geo"
                         if exists(FileIN_temp):
                               obs_combined = mv.merge(obs_combined, mv.read(FileIN_temp))
 
