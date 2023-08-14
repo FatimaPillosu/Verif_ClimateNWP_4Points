@@ -11,24 +11,24 @@ To establish climatologies that facilitate the contextualization of extreme, hig
 -> .gitignore  
 
 -> **Scripts/** <br>
-|-> **Raw/** <br>  
-||-> README.md <br>  
-||-> Retrieve_ERA5_ecPoint.sh <br> 
-||-> Retrieve_ERA5_EDA_LongRange.sh <br>  
-||-> Retrieve_ERA5_EDA_ShortRange.sh <br>  
-||-> Retrieve_ERA5_LongRange.sh <br>  
-||-> Retrieve_ERA5_ShortRange.sh <br>  
-||-> Retrieve_HRES_46r1.sh <br>  
-||-> Retrieve_Reforecasts_46r1.sh <br>  
-||-> Retrieve_OBS_CPC.sh <br>  
-||-> Retrieve_OBS_STVL.sh <br>  
-||-> Retrieve_LSM.sh <br>  
-|-> **Processed/** <br>  
-||-> 01_Compute_UniqueOBS.py <br>  
-||-> 02_Compute_Combined_UniqueOBS.py <br>  
+|-> **Raw/** <br>
+||-> README.md <br>
+||-> Retrieve_ERA5_ecPoint.sh <br>
+||-> Retrieve_ERA5_EDA_LongRange.sh <br>
+||-> Retrieve_ERA5_EDA_ShortRange.sh <br>
+||-> Retrieve_ERA5_LongRange.sh <br>
+||-> Retrieve_ERA5_ShortRange.sh <br>
+||-> Retrieve_HRES_46r1.sh <br>
+||-> Retrieve_Reforecasts_46r1.sh <br>
+||-> Retrieve_OBS_CPC.sh <br>
+||-> Retrieve_OBS_STVL.sh <br>
+||-> Retrieve_LSM.sh <br>
+|-> **Processed/** <br>
+||-> 01_Compute_UniqueOBS.py <br>
+||-> 02_Compute_Combined_UniqueOBS.py <br>
+||-> 03_Compute_List_UniqueStnids.py <br>
 
-
--> **Data/** <br>  
+-> **Data/** <br>
 |-> **Raw/** <br>
 ||-> _FC/_ <br>
 |||-> ERA5_ecPoint <br>
