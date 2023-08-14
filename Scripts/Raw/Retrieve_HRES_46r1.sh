@@ -14,7 +14,7 @@
 # INPUT PARAMETERS
 BaseDateS=20190701
 BaseDateF=20200630
-Git_repo="/home/mofp/vol_ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate"
+Git_repo="/ec/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate"
 DirOUT="Data/Raw/Forecasts/HRES_46r1"
 #################################################################################################
 

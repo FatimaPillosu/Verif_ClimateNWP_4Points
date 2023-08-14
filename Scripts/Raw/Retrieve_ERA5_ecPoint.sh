@@ -13,7 +13,7 @@
 
 # INPUT PARAMETERS
 Years_array=(2000 2001 2002 2003 2004 2005 2006 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019)
-Git_repo="/home/mofp/vol_ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate"
+Git_repo="/ec/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate"
 DirIN_full="/ec/vol/highlander/ERA5_ecPoint_70yr/Rainfall_24h"
 DirOUT="Data/Raw/FC/ERA5_ecPoint"
 ###############################################################################################################################

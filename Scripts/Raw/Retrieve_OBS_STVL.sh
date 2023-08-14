@@ -19,7 +19,7 @@ Acc=24
 DateS=20000101
 DateF=20200101
 Dataset_array=("synop" "hdobs" "bom" "india" "efas" "vnm" "ukceda")
-Git_repo="/home/mofp/vol_ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate"
+Git_repo="/ec/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate"
 DirOUT="Data/Raw/OBS/STVL"
 #########################################################################
 

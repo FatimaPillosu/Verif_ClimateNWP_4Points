@@ -9,7 +9,7 @@
 # DirOUT (string): relative path for the output directory
 
 # INPUT PARAMETERS
-Git_repo="/home/mofp/vol_ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate"
+Git_repo="/ec/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate"
 DirOUT="Data/Raw/LSM"
 ##########################################################################
 

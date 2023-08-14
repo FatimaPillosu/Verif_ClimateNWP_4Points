@@ -16,7 +16,7 @@
 YearS=2000
 YearF=2019
 Acc = 24
-Git_repo="/home/mofp/vol_ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate"
+Git_repo="/ec/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate"
 DirOUT="Data/Raw/OBS/CPC"
 #########################################################################################################################
 
