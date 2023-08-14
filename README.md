@@ -25,9 +25,12 @@ To establish climatologies that facilitate the contextualization of extreme, hig
 ||-> Retrieve_LSM.sh <br>
 |-> **Processed/** <br>
 ||-> README.md <br>
-||-> 01_Compute_UniqueOBS.py <br>
-||-> 02_Compute_Combined_UniqueOBS.py <br>
-||-> 03_Compute_List_UniqueStnids.py <br>
+||-> 01_Compute_UniqueOBS_Extract-FromReference.py <br>
+||-> 02_Compute_UniqueOBS_Combine-Datasets-Times-PerDay.py <br>
+||-> 03_Compute_UniqueStnids_Extract-List-PerYear.py <br>
+||-> 04_Compute_UniqueStnids_Combine-Years.py <br>
+||-> 05_Compute_AlignOBS_Extract-PerYear.py <br>
+||-> 06_Compute_AlignOBS_Combine-Years.py <br>
 
 -> **Data/** <br>
 |-> **Raw/** <br>
