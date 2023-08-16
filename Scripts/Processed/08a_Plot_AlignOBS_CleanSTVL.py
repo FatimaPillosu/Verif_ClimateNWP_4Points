@@ -18,7 +18,7 @@ import metview as mv
 
 # INPUT PARAMETERS
 Date = date(2019,9,19)
-Coeff_Grid2Point = 5
+Coeff_Grid2Point = 100
 Git_repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate"
 DirIN = "Data/Compute/08_AlignedOBS_CleanSTVL"
 DirOUT = "Data/Plot/08a_AlignOBS-CleanSTVL"
@@ -27,7 +27,8 @@ DirOUT = "Data/Plot/08a_AlignOBS-CleanSTVL"
 
 # Reading the aligned clean STVL rainfall observations
 print(" ")
-print("Reading the aligned gridded CPC point rainfall observations and the correspondent metadata (i.e., lats/lons/dates)")
+print("Reading the aligned gridded CPC point rainfall observations and the correspondent metadata (i.e., lats/lons/dates).")
+print("Considering the Coeff_Grid2Point = " + str(Coeff_Grid2Point))
 MainDirIN = Git_repo + "/" + DirIN + "/Coeff_Grid2Point_" + str(Coeff_Grid2Point)
 lats = np.load(MainDirIN + "/stn_lats.npy")
 lons = np.load(MainDirIN + "/stn_lons.npy")
