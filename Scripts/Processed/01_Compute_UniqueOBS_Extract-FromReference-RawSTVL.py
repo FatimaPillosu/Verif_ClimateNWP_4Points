@@ -7,8 +7,8 @@ import metview as mv
 
 ###########################################################################################
 # CODE DESCRIPTION
-# 01_Compute_UniqueOBS_Extract-FromReference.py determines, over different times and datasets, which 
-# stations are not present in the reference stations (i.e., synop at 00 UTC). This is done to maximize the 
+# 01_Compute_UniqueOBS_Extract-FromReference-RawSTVL.py determines, over different times and datasets,  
+# which stations are not present in the reference stations (i.e., synop at 00 UTC). This is done to maximize the 
 # geographical coverage of considered rainfall observations, without double counting overlapping rainfall 
 # observations at different reporting times and in different datasets.
 # Code runtime: ~ 30 minutes.
@@ -31,7 +31,7 @@ Time_ref = 0
 Dataset_extra_list = ["synop","hdobs", "bom", "india", "efas", "vnm"]
 Git_repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate"
 DirIN = "Data/Raw/OBS/STVL"
-DirOUT = "Data/Compute/01_UniqueOBS_Extract-FromReference"
+DirOUT = "Data/Compute/01_UniqueOBS_Extract-FromReference-RawSTVL"
 ###########################################################################################
 
 
