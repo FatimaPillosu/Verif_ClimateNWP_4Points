@@ -33,4 +33,4 @@ DirOUT="Data/Raw/OBS/CPC"
 # https://downloads.psl.noaa.gov/Datasets/cpc_global_precip/
 
 # The data is stored in the following directory:
-MainDirOUT = Git_repo + "/" + DirOUT + "_" + str(Acc)
+MainDirOUT = Git_repo + "/" + DirOUT + "_" + str(Acc) + "h"
