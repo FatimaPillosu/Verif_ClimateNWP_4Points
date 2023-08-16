@@ -9,6 +9,8 @@ import metview as mv
 # CODE DESCRIPTION
 # 03_Compute_UniqueStnids_Extract-List-PerYear.py extracts the list of unique stnids 
 # in a given year.
+# Code runtime: ~ 2 minutes. 
+# The code is splitted in years not because of long runtimes but for memory issues.
 
 # DESCRIPTION OF INPUT PARAMETERS
 # Year (number, in YYYY format): year to consider.
@@ -21,8 +23,8 @@ import metview as mv
 Year = int(sys.argv[1])
 Acc = 24
 Git_repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate"
-DirIN = "Data/Processed/02_UniqueOBS_Combine-Datasets-Times-PerDay"
-DirOUT = "Data/Processed/03_UniqueStnids_Extract-List-PerYear"
+DirIN = "Data/Compute/02_UniqueOBS_Combine-Datasets-Times-PerDay"
+DirOUT = "Data/Compute/03_UniqueStnids_Extract-List-PerYear"
 #####################################################################
 
 # Setting main output directory
@@ -37,7 +39,7 @@ lats_year = np.array([])
 lons_year = np.array([])
 
 TheDateS = date(Year,1,2)
-TheDateF = date(Year+1,1,1)
+TheDateF = date(Year,12,31)
 TheDate = TheDateS
 
 while TheDate <= TheDateF:

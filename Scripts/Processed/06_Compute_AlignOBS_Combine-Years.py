@@ -7,6 +7,7 @@ import pandas as pd
 ####################################################################################################################
 # CODE DESCRIPTION
 # 06_Compute_AlignOBS_Combine-Years.py combines the aligned stvl observations for all the years in the period of interest.
+# Code runtime: negligible.
 
 # DESCRIPTION OF INPUT PARAMETERS
 # YearS (number, in YYYY format): start year to consider.
@@ -22,9 +23,9 @@ YearS = 2000
 YearF = 2019
 Acc = 24
 Git_repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate"
-DirIN_UniqueStnids = "Data/Processed/04_UniqueStnids_Combine-Years"
-DirIN_AlignOBS_Year = "Data/Processed/05_AlignOBS_Extract-PerYear"
-DirOUT = "Data/Processed/06_AlignOBS_Combine-Years"
+DirIN_UniqueStnids = "Data/Compute/04_UniqueStnids_Combine-Years"
+DirIN_AlignOBS_Year = "Data/Compute/05_AlignOBS_Extract-PerYear"
+DirOUT = "Data/Compute/06_AlignOBS_Combine-Years"
 ####################################################################################################################
 
 # Setting main input/output directory
@@ -34,17 +35,17 @@ MainDirOUT = Git_repo + "/" + DirOUT
 if not exists(MainDirOUT):
       os.makedirs(MainDirOUT)
 
-# Define the list of dates over the considered period
-DateS = date(YearS,1,1)
-DateF = date(YearF+1,1,1)
-Dates_range = np.array((pd.date_range(DateS.strftime("%Y%m%d"), DateF.strftime("%Y%m%d")).strftime('%Y%m%d')).tolist())
-NumDays_period = len(Dates_range)
-
 # Reading the ids/lats/lons for the unqiue stations over the period of interest
 stnids_unique = np.load(MainDirIN_UniqueStnids+ "/stnids_unique.npy")
 lats_unique = np.load(MainDirIN_UniqueStnids+ "/lats_unique.npy")
 lons_unique = np.load(MainDirIN_UniqueStnids+ "/lons_unique.npy")
 NumStns_period = len(stnids_unique)
+
+# Defining the list of dates over the considered period
+DateS = date(YearS,1,1)
+DateF = date(YearF,12,31)
+Dates_range = np.array((pd.date_range(DateS.strftime("%Y%m%d"), DateF.strftime("%Y%m%d")).strftime('%Y%m%d')).tolist())
+NumDays_period = len(Dates_range)
 
 # Merging the aligned observations for each year over the period of interest
 print(" ")
@@ -59,7 +60,7 @@ for Year in range(YearS+1,YearF+1):
 NumStns = align_obs.shape[0]
 NumDays = align_obs.shape[1]
 
-# Checking that the number of unique stations and number of days over the considered period matches the total number of stations and days for the single imported files
+# Checking that the shape of the final matrix contains the expected number of unique stations and days over the considered period
 print(" ")
 if (NumStns == NumStns_period) and (NumDays == NumDays_period):
       print("Considering " + str(NumStns) + " rainfall stations each day over the period of interest.")
@@ -73,7 +74,7 @@ elif (NumDays != NumDays_period):
 
 # Saving the aligned observations over the whole considered period
 print(" ")
-print("Saving the aligned observations over the whole considered period")
+print("Saving the aligned observations for the whole considered period")
 np.save(MainDirOUT + "/stn_ids.npy", stnids_unique)
 np.save(MainDirOUT + "/stn_lats.npy", lats_unique)
 np.save(MainDirOUT + "/stn_lons.npy", lons_unique)

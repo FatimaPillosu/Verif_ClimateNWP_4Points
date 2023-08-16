@@ -8,6 +8,7 @@ import metview as mv
 # 02_Compute_UniqueOBS_Combine-Datasets-Times-PerDay.py combines into a 
 # single geopoint file all rainfall observations from different datasets and times for a 
 # given day. Observations saved as day X refer to measurements valid for day (X-1).
+# Code runtime: ~ 10 minutes.
 
 # DESCRIPTION OF INPUT PARAMETERS
 # YearS (number, in YYYY format): start year to consider.
@@ -22,10 +23,10 @@ import metview as mv
 YearS = 2000
 YearF = 2019
 Acc = 24
-Dataset_list = ["synop", "bom", "india", "vnm"]
+Dataset_list = ["synop", "bom", "india", "vnm", "efas"]
 Git_repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate"
-DirIN = "Data/Processed/01_UniqueOBS_Extract-FromReference"
-DirOUT = "Data/Processed/02_UniqueOBS_Combine-Datasets-Times-PerDay"
+DirIN = "Data/Compute/01_UniqueOBS_Extract-FromReference"
+DirOUT = "Data/Compute/02_UniqueOBS_Combine-Datasets-Times-PerDay"
 #####################################################################
 
 # Combining, into a single geopoint file for a given day, all rainfall observations from different datasets and times in a day

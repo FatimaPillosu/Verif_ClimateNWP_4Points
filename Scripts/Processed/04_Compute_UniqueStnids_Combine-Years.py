@@ -1,8 +1,12 @@
+import os
+from os.path import exists
 import numpy as np
 
-####################################################################################################
+#############################################################
 # CODE DESCRIPTION
-# 04_Compute_UniqueStnids_Combine-Years.py combines the unique stnids for each year in the considered period of time.
+# 04_Compute_UniqueStnids_Combine-Years.py combines the unique 
+# stnids in each year for all the years considered.
+# Code runtime: negligible
 
 # DESCRIPTION OF INPUT PARAMETERS
 # YearS (number, in YYYY format): start year to consider.
@@ -14,13 +18,15 @@ import numpy as np
 YearS = 2000
 YearF = 2019
 Git_repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate"
-DirIN = "Data/Processed/03_UniqueStnids_Extract-List-PerYear"
-DirOUT = "Data/Processed/04_UniqueStnids_Combine-Years"
-####################################################################################################
+DirIN = "Data/Compute/03_UniqueStnids_Extract-List-PerYear"
+DirOUT = "Data/Compute/04_UniqueStnids_Combine-Years"
+#############################################################
 
-# Setting main input/output directory
+# Setting main input/output directories
 MainDirIN = Git_repo + "/" + DirIN
 MainDirOUT = Git_repo + "/" + DirOUT
+if not exists(MainDirOUT):
+      os.makedirs(MainDirOUT)
 
 # Defining the unique stnids for the considered period of time
 stnids_all = np.array([])
