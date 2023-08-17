@@ -19,7 +19,7 @@ import metview as mv
 # INPUT PARAMETERS
 Date = date(2019,9,19)
 Git_repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate"
-DirIN = "Data/Compute/07_AlignedOBS-Extract-GridCPC"
+DirIN = "Data/Compute/07_AlignOBS-Extract-GridCPC"
 DirOUT = "Data/Plot/07a_AlignOBS-GridCPC"
 #############################################################
 
@@ -85,6 +85,6 @@ symbol_plotting = mv.msymb(
 MainDirOUT = Git_repo + "/" + DirOUT
 if not exists(MainDirOUT):
       os.makedirs(MainDirOUT)
-png = mv.png_output(output_name = MainDirOUT + "/AligOBS_GridCPC_" + Date.strftime("%Y%m%d"))
+png = mv.png_output(output_name = MainDirOUT + "/AlignOBS_GridCPC_" + Date.strftime("%Y%m%d"))
 mv.setoutput(png)
 mv.plot(coastlines, symbol_plotting, legend, geo)

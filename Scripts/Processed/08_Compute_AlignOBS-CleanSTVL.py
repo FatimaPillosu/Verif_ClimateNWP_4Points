@@ -4,7 +4,7 @@ import numpy as np
 
 ##################################################################################################################################
 # CODE DESCRIPTION
-# 08_Compute_AlignOBS_CleanSTVL.py cleans the STVL point rainfall observations from possible dodgy values using the gridded rainfall values from the "CPC 
+# 08_Compute_AlignOBS-CleanSTVL.py cleans the STVL point rainfall observations from possible dodgy values using the gridded rainfall values from the "CPC 
 # Global Unified Gauge-Based Analysis of Daily Precipitation" dataset. The CPC values are multiplied by a constant coefficient to transform the gridded values
 # into point values, so they can be compared with the point STVL observations.
 # Code runtime: ~ 2 minutes.
@@ -26,8 +26,8 @@ Acc = 24
 Coeff_Grid2Point_list = [2,5,10,20,50,100]
 Git_repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate"
 DirIN_STVL = "Data/Compute/06_AlignOBS_Combine-Years-RawSTVL"
-DirIN_CPC = "Data/Compute/07_AlignedOBS-Extract-GridCPC"
-DirOUT = "Data/Compute/08_AlignedOBS_CleanSTVL"
+DirIN_CPC = "Data/Compute/07_AlignOBS-Extract-GridCPC"
+DirOUT = "Data/Compute/08_AlignOBS-CleanSTVL"
 ##################################################################################################################################
 
 np.set_printoptions(suppress=True, formatter={'float_kind':'{:0.2f}'.format})
