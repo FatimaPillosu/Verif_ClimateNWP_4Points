@@ -6,12 +6,12 @@ import metview as mv
 
 #############################################################
 # CODE DESCRIPTION
-# 07a_Plot_AlignOBS-GridCPC.py plots a map with the aligned gridded CPC  
+# 06a_Plot_AlignOBS_RawSTVL.py plots a map with the aligned raw STVL  
 # rainfall observations.
 # Code runtime: negligible.
 
 # DESCRIPTION OF INPUT PARAMETERS
-# Date (date, in YYYY-MM-DDformat): date to plot
+# Date (date, in YYYY_MM_DDformat): date to plot
 # Git_repo (string): path of local github repository
 # DirIN (string): relative path for the input directory
 # DirOUT (string): relative path for the output directory
@@ -19,14 +19,14 @@ import metview as mv
 # INPUT PARAMETERS
 Date = date(2019,9,19)
 Git_repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate"
-DirIN = "Data/Compute/07_AlignOBS_Extract-GridCPC"
-DirOUT = "Data/Plot/07a_AlignOBS-GridCPC"
+DirIN = "Data/Compute/06_AlignOBS_Combine_Years_RawSTVL"
+DirOUT = "Data/Plot/06a_AlignOBS_RawSTVL"
 #############################################################
 
 
-# Reading the aligned gridded CPC rainfall observations
+# Reading the aligned raw STVL rainfall observations
 print(" ")
-print("Reading the aligned gridded CPC point rainfall observations and the correspondent metadata (i.e., lats/lons/dates)")
+print("Reading the aligned raw STVL point rainfall observations and the correspondent metadata (i.e., lats/lons/dates)")
 MainDirIN = Git_repo + "/" + DirIN
 lats = np.load(MainDirIN + "/stn_lats.npy")
 lons = np.load(MainDirIN + "/stn_lons.npy")
@@ -85,6 +85,6 @@ symbol_plotting = mv.msymb(
 MainDirOUT = Git_repo + "/" + DirOUT
 if not exists(MainDirOUT):
       os.makedirs(MainDirOUT)
-png = mv.png_output(output_name = MainDirOUT + "/AlignOBS_GridCPC_" + Date.strftime("%Y%m%d"))
+png = mv.png_output(output_name = MainDirOUT + "/AligOBS_RawSTVL_" + Date.strftime("%Y%m%d"))
 mv.setoutput(png)
 mv.plot(coastlines, symbol_plotting, legend, geo)

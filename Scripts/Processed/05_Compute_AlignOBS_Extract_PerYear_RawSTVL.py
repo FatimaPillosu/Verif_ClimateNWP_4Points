@@ -8,7 +8,7 @@ import metview as mv
 
 ####################################################################################################################
 # CODE DESCRIPTION
-# 05_Compute_AlignOBS_Extract-PerYear-RawSTVL.py aligns the observation stations to have the same number of stations per day over a year.
+# 05_Compute_AlignOBS_Extract_PerYear_RawSTVL.py aligns the observation stations to have the same number of stations per day over a year.
 # Code Runtime: 10 minutes.
 
 # DESCRIPTION OF INPUT PARAMETERS
@@ -24,9 +24,9 @@ import metview as mv
 Year = int(sys.argv[1])
 Acc = 24
 Git_repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate"
-DirIN_UniqueOBS = "Data/Compute/02_UniqueOBS_Combine-Datasets-Times-PerDay-RawSTVL"
-DirIN_UniqueStnids = "Data/Compute/04_UniqueStnids_Combine-Years-RawSTVL"
-DirOUT = "Data/Compute/05_AlignOBS_Extract-PerYear-RawSTVL"
+DirIN_UniqueOBS = "Data/Compute/02_UniqueOBS_Combine_Datasets_Times_PerDay_RawSTVL"
+DirIN_UniqueStnids = "Data/Compute/04_UniqueStnids_Combine_Years_RawSTVL"
+DirOUT = "Data/Compute/05_AlignOBS_Extract_PerYear_RawSTVL"
 ####################################################################################################################
 
 

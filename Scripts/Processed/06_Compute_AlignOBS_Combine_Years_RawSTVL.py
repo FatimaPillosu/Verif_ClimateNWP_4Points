@@ -6,7 +6,7 @@ import pandas as pd
 
 ####################################################################################################################
 # CODE DESCRIPTION
-# 06_Compute_AlignOBS_Combine-Years-RawSTVL-RawSTVL.py combines the raw aligned stvl observations for all the years in the period of 
+# 06_Compute_AlignOBS_Combine_Years_RawSTVL_RawSTVL.py combines the raw aligned stvl observations for all the years in the period of 
 # interest.
 # Code runtime: negligible.
 
@@ -24,9 +24,9 @@ YearS = 2000
 YearF = 2019
 Acc = 24
 Git_repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate"
-DirIN_UniqueStnids = "Data/Compute/04_UniqueStnids_Combine-Years-RawSTVL"
-DirIN_AlignOBS_Year = "Data/Compute/05_AlignOBS_Extract-PerYear-RawSTVL"
-DirOUT = "Data/Compute/06_AlignOBS_Combine-Years-RawSTVL-RawSTVL"
+DirIN_UniqueStnids = "Data/Compute/04_UniqueStnids_Combine_Years_RawSTVL"
+DirIN_AlignOBS_Year = "Data/Compute/05_AlignOBS_Extract_PerYear_RawSTVL"
+DirOUT = "Data/Compute/06_AlignOBS_Combine_Years_RawSTVL_RawSTVL"
 ####################################################################################################################
 
 # Setting main input/output directory

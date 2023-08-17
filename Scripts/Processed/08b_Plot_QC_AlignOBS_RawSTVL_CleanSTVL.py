@@ -6,7 +6,7 @@ import metview as mv
 
 ###################################################################################################################################
 # CODE DESCRIPTION
-# 08b_Plot_QC-AlignOBS-RawSTVL-CleanSTVL.py plots the results of the quality checks carried out on the raw STVL point rainfall observations within the 20-year 
+# 08b_Plot_QC_AlignOBS_RawSTVL_CleanSTVL.py plots the results of the quality checks carried out on the raw STVL point rainfall observations within the 20-year 
 # period of interest, and compares them with the results for the cleaned STVL rainfall observations.
 # Code runtime: ~ 20 minutes.
 
@@ -29,11 +29,11 @@ YearF = 2019
 Acc = 24
 DatasetSTVL_list = "The aligned observations have been built considering the following STVL datasets: 'synop', 'bom', 'india', 'vnm', and, 'efas'."
 ReportingTimeSTVL_list = "The aligned observations have been built considering, for each dataset, reporting times from 00 to 23 UTC at hourly steps when available."
-NameOBS_list = ["06_AlignOBS_Combine-Years-RawSTVL", "08_AlignOBS-CleanSTVL"]
+NameOBS_list = ["06_AlignOBS_Combine_Years_RawSTVL", "08_AlignOBS_CleanSTVL"]
 Coeff_Grid2Point_list = [2,5,10,20,50,100]
 Git_repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate"
 DirIN = "Data/Compute"
-DirOUT= "Data/Plot/08b_QC-AlignOBS-RawSTVL-CleanSTVL"
+DirOUT= "Data/Plot/08b_QC_AlignOBS_RawSTVL_CleanSTVL"
 #########################################################################################################################################
 
 # Costum function for quality checks

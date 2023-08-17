@@ -7,7 +7,7 @@ import metview as mv
 
 #####################################################################
 # CODE DESCRIPTION
-# 03_Compute_UniqueStnids_Extract-List-PerYear-RawSTVL.py extracts the list of 
+# 03_Compute_UniqueStnids_Extract_List_PerYear_RawSTVL.py extracts the list of 
 # unique stnids in a given year.
 # Code runtime: ~ 2 minutes. 
 # The code is splitted in years not because of long runtimes but for memory issues.
@@ -23,8 +23,8 @@ import metview as mv
 Year = int(sys.argv[1])
 Acc = 24
 Git_repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate"
-DirIN = "Data/Compute/02_UniqueOBS_Combine-Datasets-Times-PerDay-RawSTVL"
-DirOUT = "Data/Compute/03_UniqueStnids_Extract-List-PerYear-RawSTVL"
+DirIN = "Data/Compute/02_UniqueOBS_Combine_Datasets_Times_PerDay_RawSTVL"
+DirOUT = "Data/Compute/03_UniqueStnids_Extract_List_PerYear_RawSTVL"
 #####################################################################
 
 # Setting main output directory

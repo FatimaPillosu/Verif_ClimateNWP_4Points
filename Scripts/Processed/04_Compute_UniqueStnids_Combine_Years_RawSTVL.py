@@ -4,7 +4,7 @@ import numpy as np
 
 #############################################################
 # CODE DESCRIPTION
-# 04_Compute_UniqueStnids_Combine-Years-RawSTVL.py combines the 
+# 04_Compute_UniqueStnids_Combine_Years_RawSTVL.py combines the 
 # unique stnids in each year for all the years considered.
 # Code runtime: negligible
 
@@ -18,8 +18,8 @@ import numpy as np
 YearS = 2000
 YearF = 2019
 Git_repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate"
-DirIN = "Data/Compute/03_UniqueStnids_Extract-List-PerYear-RawSTVL"
-DirOUT = "Data/Compute/04_UniqueStnids_Combine-Years-RawSTVL"
+DirIN = "Data/Compute/03_UniqueStnids_Extract_List_PerYear_RawSTVL"
+DirOUT = "Data/Compute/04_UniqueStnids_Combine_Years_RawSTVL"
 #############################################################
 
 # Setting main input/output directories

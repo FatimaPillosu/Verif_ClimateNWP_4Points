@@ -25,7 +25,7 @@ import numpy as np
 YearS = 2000
 YearF = 2019
 Acc = 24
-NameOBS_list = ["06_AlignOBS_Combine-Years-RawSTVL", "07_AlignOBS_Extract-GridCPC", "08_AlignOBS-CleanSTVL"]
+NameOBS_list = ["06_AlignOBS_Combine_Years_RawSTVL", "07_AlignOBS_Extract_GridCPC", "08_AlignOBS_CleanSTVL"]
 Coeff_Grid2Point_list = [2,5,10,20,50,100]
 MinDays_Perc_list = [0.5, 0.75]
 Perc_year = np.concatenate([np.arange(0,100), np.array([99.5, 99.8, 99.9, 99.95])], axis=0)
@@ -111,7 +111,7 @@ for MinDays_Perc in MinDays_Perc_list:
 
       for NameOBS in NameOBS_list:
 
-            if (NameOBS == "06_AlignOBS_Combine-Years-RawSTVL") or (NameOBS == "07_AlignOBS_Extract-GridCPC"):
+            if (NameOBS == "06_AlignOBS_Combine_Years_RawSTVL") or (NameOBS == "07_AlignOBS_Extract_GridCPC"):
                   
                   print(" ")
                   print("Computing the observational climatologies for "+ NameOBS + " with a minimum of " + str(int(MinDays_Perc*100)) + "% of days over the considered period with valid observations to compute the climatologies")
@@ -125,7 +125,7 @@ for MinDays_Perc in MinDays_Perc_list:
                   # Computing the observational climatologies
                   compute_climate_obs(MinDays_Perc, Perc_year, Perc_season, MainDirIN, MainDirOUT)
 
-            elif NameOBS == "08_AlignOBS-CleanSTVL":
+            elif NameOBS == "08_AlignOBS_CleanSTVL":
 
                   for Coeff_Grid2Point in Coeff_Grid2Point_list:
                         

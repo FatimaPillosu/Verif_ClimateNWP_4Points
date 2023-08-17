@@ -8,7 +8,7 @@ from mpl_toolkits.basemap import Basemap
 
 #######################################################################################################################################
 # CODE DESCRIPTION
-# 07_Compute_AlignOBS_Extract-GridCPC.py extracts the gridded rainfall values from the "CPC Global Unified Gauge-Based Analysis of Daily Precipitation" dataset 
+# 07_Compute_AlignOBS_Extract_GridCPC.py extracts the gridded rainfall values from the "CPC Global Unified Gauge-Based Analysis of Daily Precipitation" dataset 
 # for the nearest grid point to each aligned station in the STVL dataset. 
 # Code runtime: negligible.
 
@@ -27,8 +27,8 @@ YearF = 2019
 Acc = 24
 Git_repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate"
 DirIN_CPC = "Data/Raw/OBS/CPC"
-DirIN_STVL = "Data/Compute/06_AlignOBS_Combine-Years-RawSTVL"
-DirOUT = "Data/Compute/07_AlignOBS_Extract-GridCPC"
+DirIN_STVL = "Data/Compute/06_AlignOBS_Combine_Years_RawSTVL"
+DirOUT = "Data/Compute/07_AlignOBS_Extract_GridCPC"
 #######################################################################################################################################
 
 np.set_printoptions(suppress=True, formatter={'float_kind':'{:0.2f}'.format})

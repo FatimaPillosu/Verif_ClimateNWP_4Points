@@ -5,7 +5,7 @@ import metview as mv
 
 #############################################################
 # CODE DESCRIPTION
-# 01b_Plot_LocOBS-RawSTVL.py plots a map with an example of the
+# 01b_Plot_LocOBS_RawSTVL.py plots a map with an example of the
 # location of rainfall stations reporting observations at different times of 
 # the day.
 # Code runtime: negligible.
@@ -23,8 +23,8 @@ Acc = 24
 Date = date(2019,1,1)
 Dataset_list = ["synop", "hdobs", "bom", "india", "efas", "vnm"]
 Git_repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate"
-DirIN = "Data/Compute/01_UniqueOBS_Extract-FromReference-RawSTVL"
-DirOUT = "Data/Plot/01b_LocOBS-RawSTVL"
+DirIN = "Data/Compute/01_UniqueOBS_Extract_FromReference_RawSTVL"
+DirOUT = "Data/Plot/01b_LocOBS_RawSTVL"
 #############################################################
 
 

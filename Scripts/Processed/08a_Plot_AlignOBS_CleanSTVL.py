@@ -6,7 +6,7 @@ import metview as mv
 
 ##############################################################################################
 # CODE DESCRIPTION
-# 08a_Plot_AlignOBS-CleanSTVL.py plots a map with the aligned clean STVL rainfall observations.
+# 08a_Plot_AlignOBS_CleanSTVL.py plots a map with the aligned clean STVL rainfall observations.
 # Code runtime: negligible.
 
 # DESCRIPTION OF INPUT PARAMETERS
@@ -21,7 +21,7 @@ Date = date(2019,9,19)
 Coeff_Grid2Point = 100
 Git_repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate"
 DirIN = "Data/Compute/08_AlignOBS_CleanSTVL"
-DirOUT = "Data/Plot/08a_AlignOBS-CleanSTVL"
+DirOUT = "Data/Plot/08a_AlignOBS_CleanSTVL"
 ##############################################################################################
 
 

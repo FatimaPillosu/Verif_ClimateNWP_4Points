@@ -6,7 +6,7 @@ import metview as mv
 
 #############################################################
 # CODE DESCRIPTION
-# 01a_Plot_TempDistrOBS-RawSTVL.py plots the temporal distribution of 
+# 01a_Plot_TempDistrOBS_RawSTVL.py plots the temporal distribution of 
 # the average number of rainfall observations per day, in a given year, in  
 # each considered rainfall dataset in stvl.
 # Code runtime: ~ 30 minutes.
@@ -30,8 +30,8 @@ Plot_cols = 2
 Plot_row_loc_list = [0,0,1,1,2,2]
 Plot_col_loc_list = [0,1,0,1,0,1]
 Git_repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate"
-DirIN = "Data/Compute/01_UniqueOBS_Extract-FromReference-RawSTVL"
-DirOUT = "Data/Plot/01a_TempDistrOBS-RawSTVL"
+DirIN = "Data/Compute/01_UniqueOBS_Extract_FromReference_RawSTVL"
+DirOUT = "Data/Plot/01a_TempDistrOBS_RawSTVL"
 #############################################################
 
 
@@ -98,6 +98,6 @@ for ind_Dataset in ind_Dataset_list:
 MainDirOUT = Git_repo + "/" + DirOUT
 if not exists(MainDirOUT):
       os.makedirs(MainDirOUT)
-FileOUT = MainDirOUT + "/TemDistr_OBS.png"
+FileOUT = MainDirOUT + "/TemDistrOBS.png"
 plt.savefig(FileOUT)
 plt.close()
