@@ -6,6 +6,7 @@ import numpy as np
 ##########################################################################################################################################################
 # CODE DESCRIPTION
 # 09_Compute_Climate_OBS.py computes rainfall climatologies from point observations.
+# Code runtime: ~ 5 minutes.
 
 # DESCRIPTION OF INPUT PARAMETERS
 # YearS (number, in YYYY format): start year to consider.
