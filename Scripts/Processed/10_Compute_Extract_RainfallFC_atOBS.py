@@ -28,9 +28,9 @@ import metview as mv
 Year = int(sys.argv[1])
 SystemFC_list = sys.argv[2].split(',')
 Acc = 24
-MinDays_Perc_list = [0.5,0.75]
-NameOBS_list = ["06_AlignOBS_Combine_Years_RawSTVL", "07_AlignOBS_Extract_GridCPC", "08_AlignOBS_CleanSTVL"]
-Coeff_Grid2Point_list = [2,5,10,20,50,100]
+MinDays_Perc_list = [0.75]
+NameOBS_list = ["08_AlignOBS_CleanSTVL"]
+Coeff_Grid2Point_list = [20]
 Git_repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate"
 DirIN_ClimateOBS = "Data/Compute/09_Climate_OBS"
 DirIN_FC = "Data/Raw/FC"

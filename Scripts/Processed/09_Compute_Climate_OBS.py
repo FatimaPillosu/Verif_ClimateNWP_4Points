@@ -14,7 +14,6 @@ import numpy as np
 # Acc (number, in hours): rainfall accumulation period.
 # NameOBS_list (list of strings): list of the names of the observations to quality check
 # Coeff_Grid2Point_list (list of integer number): list of coefficients used to make comparable CPC's gridded rainfall values with  STVL's point rainfall observations. 
-#                                                                                    Used only when running the quality check on the clean STVL observations.
 # MinDays_Perc_list (list of number, from 0 to 1): list of percentages for the minimum number of days over the considered period with valid observations to compute the climatologies.
 # Perc_year (array of float numbers): percentiles to compute for the year climatology.
 # Perc_season (array of float numbers): percentiles to compute for the seasonal climatologies.
@@ -26,11 +25,11 @@ import numpy as np
 YearS = 2000
 YearF = 2019
 Acc = 24
-NameOBS_list = ["06_AlignOBS_Combine_Years_RawSTVL", "07_AlignOBS_Extract_GridCPC", "08_AlignOBS_CleanSTVL"]
-Coeff_Grid2Point_list = [2,5,10,20,50,100]
-MinDays_Perc_list = [0.5, 0.75]
-Perc_year = np.concatenate([np.arange(0,100), np.array([99.5, 99.8, 99.9, 99.95])], axis=0)
-Perc_season = np.concatenate([np.arange(0,100), np.array([99.5, 99.8])], axis=0)
+NameOBS_list = ["08_AlignOBS_CleanSTVL"]
+Coeff_Grid2Point_list = [20]
+MinDays_Perc_list = [0.75]
+Perc_year = np.concatenate([np.arange(0,100), np.array([99.5, 99.8, 99.9, 99.95, 99.98])], axis=0)
+Perc_season = np.concatenate([np.arange(0,100), np.array([99.5, 99.8, 99.9])], axis=0)
 Git_repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate"
 DirIN = "Data/Compute"
 DirOUT = "Data/Compute/09_Climate_OBS"
@@ -91,6 +90,9 @@ def compute_climate_obs(MinDays_Perc, Perc_year, Perc_season, DirIN, DirOUT):
             stnids_MinNumDays = stnids[ind_stns_MinNumDays]
 
             # Adjusting the dataset to not have the minimum and the maximum values assigned to the 0th and 100th percentile
+            # This is done to ensure the minimum and the maximum rainfall totals are used in the computations of the percentiles greater than 0 and smaller than 100th. 
+            # For example, in the case of the maximum value in the dataset, if this trick is not applied, the code might interpreted as the maximum rainfall
+            # total that is possible (but that is not known) and it will be not considered for the computation of smaller percentiles such as 99.8th, 99.9th, etc. 
             print("     - Adjusting the dataset to not have the minimum and the maximum values in the observational dataset assigned to the 0th and 100th percentile...")
             min_obs = np.nanmin(obs_temp_MinNumDays, axis=1)
             max_obs = np.nanmax(obs_temp_MinNumDays, axis=1)

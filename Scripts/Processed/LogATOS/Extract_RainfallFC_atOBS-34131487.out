@@ -1,0 +1,79 @@
+[ECMWF-INFO -sbatch] - -------------------------------------------------------------------------------------
+[ECMWF-INFO -sbatch] -  This is the ECMWF jobfilter
+[ECMWF-INFO -sbatch] -  +++ Please report issues using the Support portal +++
+[ECMWF-INFO -sbatch] -  +++ https://support.ecmwf.int                     +++
+[ECMWF-INFO -sbatch] -  /usr/local/bin/ecsbatch: size: 48802, mtime: Mon Jul  3 10:31:21 2023
+[ECMWF-INFO -sbatch] - -------------------------------------------------------------------------------------
+[ECMWF-INFO -sbatch] - Time at submit: Thu Aug 17 20:41:07 2023 (1692304867.4918249) on ac6-100.bullx:/etc/ecmwf/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate/Scripts/Processed
+[ECMWF-INFO -sbatch] - --- SLURM VARIABLES ---
+[ECMWF-INFO -sbatch] - EC_CLUSTER=ac
+[ECMWF-INFO -sbatch] - SLURM_EXPORT_ENV=ALL
+[ECMWF-INFO -sbatch] - SBATCH_EXPORT=NONE
+[ECMWF-INFO -sbatch] - -----------------------
+[ECMWF-INFO -sbatch] - jobscript: /etc/ecmwf/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate/Scripts/Processed/10a_SubmitATOS_Extract_RainfallFC_atOBS.sh
+[ECMWF-INFO -sbatch] - --- SCRIPT OPTIONS ---
+[ECMWF-INFO -sbatch] - #SBATCH --job-name=Extract_RainfallFC_atOBS
+[ECMWF-INFO -sbatch] - #SBATCH --output=LogATOS/Extract_RainfallFC_atOBS-%J.out
+[ECMWF-INFO -sbatch] - #SBATCH --error=LogATOS/Extract_RainfallFC_atOBS-%J.out
+[ECMWF-INFO -sbatch] - #SBATCH --cpus-per-task=1
+[ECMWF-INFO -sbatch] - #SBATCH --mem=64G
+[ECMWF-INFO -sbatch] - #SBATCH --qos=nf
+[ECMWF-INFO -sbatch] - #SBATCH --mail-type=FAIL
+[ECMWF-INFO -sbatch] - #SBATCH --mail-user=fatima.pillosu@ecmwf.int
+[ECMWF-INFO -sbatch] - -----------------------
+[ECMWF-INFO -sbatch] - --- POST-PROCESSED OPTIONS ---
+[ECMWF-INFO -sbatch] - ARG --positional=['10a_SubmitATOS_Extract_RainfallFC_atOBS.sh', '2001', 'ERA5_ShortRange,ERA5_EDA_ShortRange,ERA5_LongRange,ERA5_EDA_LongRange,ERA5_ecPoint/Grid_BC_VALS,ERA5_ecPoint/Pt_BC_PERC']
+[ECMWF-INFO -sbatch] - ARG --cpus_per_task=1
+[ECMWF-INFO -sbatch] - ARG --error=LogATOS/Extract_RainfallFC_atOBS-%J.out
+[ECMWF-INFO -sbatch] - ARG --job_name=Extract_RainfallFC_atOBS
+[ECMWF-INFO -sbatch] - ARG --mail_type=FAIL
+[ECMWF-INFO -sbatch] - ARG --mail_user=fatima.pillosu@ecmwf.int
+[ECMWF-INFO -sbatch] - ARG --output=LogATOS/Extract_RainfallFC_atOBS-%J.out
+[ECMWF-INFO -sbatch] - ARG --qos=nf
+[ECMWF-INFO -sbatch] - ARG --mem=64G
+[ECMWF-INFO -sbatch] - ------------------------------
+[ECMWF-INFO -sbatch] - jobtag: mofp-Extract_Ra_llFC_atOBS-1x2-/etc/ecmwf/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate/Scripts/Processed/LogATOS/Extract_RainfallFC_atOBS-_.out
+[ECMWF-INFO -sbatch] - ['/usr/bin/sbatch', '--cpus-per-task=1', '--error=LogATOS/Extract_RainfallFC_atOBS-%J.out', '--job-name=Extract_RainfallFC_atOBS', '--mail-type=FAIL', '--mail-user=fatima.pillosu@ecmwf.int', '--output=LogATOS/Extract_RainfallFC_atOBS-%J.out', '--qos=nf', '--mem=64G', '--licenses=h2resw01', '--time=1-00:00:00', '/etc/ecmwf/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate/Scripts/Processed/10a_SubmitATOS_Extract_RainfallFC_atOBS.sh', '2001', 'ERA5_ShortRange,ERA5_EDA_ShortRange,ERA5_LongRange,ERA5_EDA_LongRange,ERA5_ecPoint/Grid_BC_VALS,ERA5_ecPoint/Pt_BC_PERC']
+[ECMWF-INFO -sbatch] - sbatch executed on ac
+[ECMWF-INFO -sbatch] - Job queued on ac using method local
+[ECMWF-INFO -sbatch] - Submitted batch job 34131487
+[ECMWF-INFO -ecprofile] /usr/bin/bash NON_INTERACTIVE on ac6-128 at 20230817_204148.887, PID: 2339792, JOBID: 34131487
+[ECMWF-INFO -ecprofile] $SCRATCH=/ec/res4/scratch/mofp
+[ECMWF-INFO -ecprofile] $PERM=/perm/mofp
+[ECMWF-INFO -ecprofile] $HPCPERM=/ec/res4/hpcperm/mofp
+[ECMWF-INFO -ecprofile] $TMPDIR=/etc/ecmwf/ssd/ssd1/tmpdirs/mofp.34131487
+[ECMWF-INFO -ecprofile] $SCRATCHDIR=/ec/res4/scratchdir/mofp/7/34131487
+ 
+Computing modelled (ERA5_ShortRange) climatologies at stations for 08_AlignOBS_CleanSTVL (Coeff_Grid2Point=20) with a minimum of 75% of days over the considered period with valid observations
+Traceback (most recent call last):
+  File "/etc/ecmwf/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate/Scripts/Processed/10_Compute_Extract_RainfallFC_atOBS.py", line 824, in <module>
+    os.makedirs(MainDirOUT)
+  File "/usr/local/apps/python3/3.10.10-01/lib/python3.10/os.py", line 225, in makedirs
+    mkdir(name, mode)
+FileExistsError: [Errno 17] File exists: '/ec/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate/Data/Compute/10_Extract_RainfallFC_atOBS/ERA5_ShortRange/MinDays_Perc75/08_AlignOBS_CleanSTVL/Coeff_Grid2Point_20'
+[ECMWF-INFO -ecepilog] ----------------------------------------------------------------------------------------------------
+[ECMWF-INFO -ecepilog] This is the ECMWF job Epilogue
+[ECMWF-INFO -ecepilog] +++ Please report issues using the Support portal +++
+[ECMWF-INFO -ecepilog] +++ https://support.ecmwf.int                     +++
+[ECMWF-INFO -ecepilog] ----------------------------------------------------------------------------------------------------
+[ECMWF-INFO -ecepilog] Run at 2023-08-17T20:41:51 on ac
+[ECMWF-INFO -ecepilog] JobName                   : Extract_RainfallFC_atOBS
+[ECMWF-INFO -ecepilog] JobID                     : 34131487
+[ECMWF-INFO -ecepilog] Submit                    : 2023-08-17T20:41:07
+[ECMWF-INFO -ecepilog] Start                     : 2023-08-17T20:41:45
+[ECMWF-INFO -ecepilog] End                       : 2023-08-17T20:41:51
+[ECMWF-INFO -ecepilog] QueuedTime                : 38.0
+[ECMWF-INFO -ecepilog] ElapsedRaw                : 6
+[ECMWF-INFO -ecepilog] ExitCode                  : 1:0
+[ECMWF-INFO -ecepilog] DerivedExitCode           : 0:0
+[ECMWF-INFO -ecepilog] State                     : FAILED
+[ECMWF-INFO -ecepilog] Account                   : ecodmdmo
+[ECMWF-INFO -ecepilog] QOS                       : nf
+[ECMWF-INFO -ecepilog] User                      : mofp
+[ECMWF-INFO -ecepilog] StdOut                    : /etc/ecmwf/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate/Scripts/Processed/LogATOS/Extract_RainfallFC_atOBS-34131487.out
+[ECMWF-INFO -ecepilog] StdErr                    : /etc/ecmwf/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate/Scripts/Processed/LogATOS/Extract_RainfallFC_atOBS-34131487.out
+[ECMWF-INFO -ecepilog] NNodes                    : 1
+[ECMWF-INFO -ecepilog] NCPUS                     : 2
+[ECMWF-INFO -ecepilog] SBU                       : 0.032
+[ECMWF-INFO -ecepilog] ----------------------------------------------------------------------------------------------------
+

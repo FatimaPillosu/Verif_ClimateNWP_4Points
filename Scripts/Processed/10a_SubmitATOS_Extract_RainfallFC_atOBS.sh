@@ -1,8 +1,8 @@
 #!/bin/bash
 
-#SBATCH --job-name=Extract_Rainfall_atOBS
-#SBATCH --output=LogATOS/Extract_Rainfall_atOBS-%J.out
-#SBATCH --error=LogATOS/Extract_Rainfall_atOBS-%J.out
+#SBATCH --job-name=Extract_RainfallFC_atOBS
+#SBATCH --output=LogATOS/Extract_RainfallFC_atOBS-%J.out
+#SBATCH --error=LogATOS/Extract_RainfallFC_atOBS-%J.out
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=64G
 #SBATCH --qos=nf
