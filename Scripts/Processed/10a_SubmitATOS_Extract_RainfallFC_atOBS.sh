@@ -11,7 +11,7 @@
 
 # INPUTS
 Year=${1}
-SystemFC_list = ${1}
+SystemFC_list=${2}
 
 # CODE
 python3 10_Compute_Extract_RainfallFC_atOBS.py ${Year} ${SystemFC_list}
