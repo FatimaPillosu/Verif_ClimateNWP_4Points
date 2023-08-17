@@ -35,6 +35,7 @@ DirIN = "Data/Compute"
 DirOUT = "Data/Compute/09_Climate_OBS"
 ##########################################################################################################################################################
 
+np.set_printoptions(threshold = np.inf, suppress=True, formatter={'float_kind':'{:0.2f}'.format})
 
 # Costum functions
 
@@ -81,9 +82,9 @@ def compute_climate_obs(MinDays_Perc, Perc_year, Perc_season, DirIN, DirOUT):
             # Selecting the stations with the considered minimum number of days with valid observations
             print("     - Selecting the stations with the considered minimum number of days with valid observations")
             MinNumDays = round(obs_temp.shape[1] * MinDays_Perc)
-            NumDays_NotNaN = np.sum(~np.isnan(obs_temp), axis=1)
+            NumDays_NotNaN = np.sum(~np.isnan(obs_temp), axis=1) # array containing the n. of days with observations for each rain gauge
             ind_stns_MinNumDays = np.where(NumDays_NotNaN >= MinNumDays)[0]
-            obs_temp_MinNumDays = obs_temp[ind_stns_MinNumDays,:]
+            obs_temp_MinNumDays = obs_temp[ind_stns_MinNumDays,:] # array containin only the stations that satisfied the minimum n. of days with observationss
             lats_MinNumDays = lats[ind_stns_MinNumDays]
             lons_MinNumDays = lons[ind_stns_MinNumDays]
             stnids_MinNumDays = stnids[ind_stns_MinNumDays]

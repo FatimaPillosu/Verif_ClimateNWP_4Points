@@ -19,7 +19,7 @@ import metview as mv
 # INPUT PARAMETERS
 Date = date(2019,9,19)
 Git_repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate"
-DirIN = "Data/Compute/07_AlignOBS-Extract-GridCPC"
+DirIN = "Data/Compute/07_AlignOBS_Extract-GridCPC"
 DirOUT = "Data/Plot/07a_AlignOBS-GridCPC"
 #############################################################
 
