@@ -1,0 +1,206 @@
+[ECMWF-INFO -sbatch] - -------------------------------------------------------------------------------------
+[ECMWF-INFO -sbatch] -  This is the ECMWF jobfilter
+[ECMWF-INFO -sbatch] -  +++ Please report issues using the Support portal +++
+[ECMWF-INFO -sbatch] -  +++ https://support.ecmwf.int                     +++
+[ECMWF-INFO -sbatch] -  /usr/local/bin/ecsbatch: size: 48802, mtime: Mon Jul  3 10:31:21 2023
+[ECMWF-INFO -sbatch] - -------------------------------------------------------------------------------------
+[ECMWF-INFO -sbatch] - Time at submit: Fri Aug 18 20:48:49 2023 (1692391729.135794) on ac6-100.bullx:/etc/ecmwf/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate/Scripts/Processed
+[ECMWF-INFO -sbatch] - --- SLURM VARIABLES ---
+[ECMWF-INFO -sbatch] - EC_CLUSTER=ac
+[ECMWF-INFO -sbatch] - SLURM_EXPORT_ENV=ALL
+[ECMWF-INFO -sbatch] - SBATCH_EXPORT=NONE
+[ECMWF-INFO -sbatch] - -----------------------
+[ECMWF-INFO -sbatch] - jobscript: /etc/ecmwf/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate/Scripts/Processed/11a_SubmitATOS_ClimateFC_atOBS.sh
+[ECMWF-INFO -sbatch] - --- SCRIPT OPTIONS ---
+[ECMWF-INFO -sbatch] - #SBATCH --job-name=Compute_ClimateFC_atOBS
+[ECMWF-INFO -sbatch] - #SBATCH --output=LogATOS/Compute_ClimateFC_atOBS-%J.out
+[ECMWF-INFO -sbatch] - #SBATCH --error=LogATOS/Compute_ClimateFC_atOBS-%J.out
+[ECMWF-INFO -sbatch] - #SBATCH --cpus-per-task=1
+[ECMWF-INFO -sbatch] - #SBATCH --mem=64G
+[ECMWF-INFO -sbatch] - #SBATCH --qos=nf
+[ECMWF-INFO -sbatch] - #SBATCH --mail-type=FAIL
+[ECMWF-INFO -sbatch] - #SBATCH --mail-user=fatima.pillosu@ecmwf.int
+[ECMWF-INFO -sbatch] - -----------------------
+[ECMWF-INFO -sbatch] - --- POST-PROCESSED OPTIONS ---
+[ECMWF-INFO -sbatch] - ARG --positional=['11a_SubmitATOS_ClimateFC_atOBS.sh', '2000', '2019', 'ERA5_ShortRange']
+[ECMWF-INFO -sbatch] - ARG --cpus_per_task=1
+[ECMWF-INFO -sbatch] - ARG --error=LogATOS/Compute_ClimateFC_atOBS-%J.out
+[ECMWF-INFO -sbatch] - ARG --job_name=Compute_ClimateFC_atOBS
+[ECMWF-INFO -sbatch] - ARG --mail_type=FAIL
+[ECMWF-INFO -sbatch] - ARG --mail_user=fatima.pillosu@ecmwf.int
+[ECMWF-INFO -sbatch] - ARG --output=LogATOS/Compute_ClimateFC_atOBS-%J.out
+[ECMWF-INFO -sbatch] - ARG --qos=nf
+[ECMWF-INFO -sbatch] - ARG --mem=64G
+[ECMWF-INFO -sbatch] - ------------------------------
+[ECMWF-INFO -sbatch] - jobtag: mofp-Compute_Cl_teFC_atOBS-1x2-/etc/ecmwf/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate/Scripts/Processed/LogATOS/Compute_ClimateFC_atOBS-_.out
+[ECMWF-INFO -sbatch] - ['/usr/bin/sbatch', '--cpus-per-task=1', '--error=LogATOS/Compute_ClimateFC_atOBS-%J.out', '--job-name=Compute_ClimateFC_atOBS', '--mail-type=FAIL', '--mail-user=fatima.pillosu@ecmwf.int', '--output=LogATOS/Compute_ClimateFC_atOBS-%J.out', '--qos=nf', '--mem=64G', '--licenses=h2resw01', '--time=1-00:00:00', '/etc/ecmwf/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate/Scripts/Processed/11a_SubmitATOS_ClimateFC_atOBS.sh', '2000', '2019', 'ERA5_ShortRange']
+[ECMWF-INFO -sbatch] - sbatch executed on ac
+[ECMWF-INFO -sbatch] - Job queued on ac using method local
+[ECMWF-INFO -sbatch] - Submitted batch job 34459427
+[ECMWF-INFO -ecprofile] /usr/bin/bash NON_INTERACTIVE on ac6-145 at 20230818_204857.916, PID: 3704194, JOBID: 34459427
+[ECMWF-INFO -ecprofile] $SCRATCH=/ec/res4/scratch/mofp
+[ECMWF-INFO -ecprofile] $PERM=/perm/mofp
+[ECMWF-INFO -ecprofile] $HPCPERM=/ec/res4/hpcperm/mofp
+[ECMWF-INFO -ecprofile] $TMPDIR=/etc/ecmwf/ssd/ssd1/tmpdirs/mofp.34459427
+[ECMWF-INFO -ecprofile] $SCRATCHDIR=/ec/res4/scratchdir/mofp/3/34459427
+/etc/ecmwf/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate/Scripts/Processed/11_Compute_ClimateFC_atOBS.py:78: DeprecationWarning: the `interpolation=` argument to nanpercentile was renamed to `method=`, which has additional options.
+Users of the modes 'nearest', 'lower', 'higher', or 'midpoint' are encouraged to review the method they used. (Deprecated NumPy 1.22)
+  climate = np.transpose(np.around(np.float32(np.nanpercentile(tp, Perc, axis=1, interpolation="linear").astype(float)), decimals=1))
+ 
+Computing modelled (ERA5_ShortRange) climatologies at stations for 08_AlignOBS_CleanSTVL (Coeff_Grid2Point=20) with a minimum of 75% of days over the considered period with valid observations
+ - Computing percentiles for Year
+     - Reading the indipendent rainfall realizations for year: 2000
+     - Reading the indipendent rainfall realizations for year: 2001
+     - Reading the indipendent rainfall realizations for year: 2002
+     - Reading the indipendent rainfall realizations for year: 2003
+     - Reading the indipendent rainfall realizations for year: 2004
+     - Reading the indipendent rainfall realizations for year: 2005
+     - Reading the indipendent rainfall realizations for year: 2006
+     - Reading the indipendent rainfall realizations for year: 2007
+     - Reading the indipendent rainfall realizations for year: 2008
+     - Reading the indipendent rainfall realizations for year: 2009
+     - Reading the indipendent rainfall realizations for year: 2010
+     - Reading the indipendent rainfall realizations for year: 2011
+     - Reading the indipendent rainfall realizations for year: 2012
+     - Reading the indipendent rainfall realizations for year: 2013
+     - Reading the indipendent rainfall realizations for year: 2014
+     - Reading the indipendent rainfall realizations for year: 2015
+     - Reading the indipendent rainfall realizations for year: 2016
+     - Reading the indipendent rainfall realizations for year: 2017
+     - Reading the indipendent rainfall realizations for year: 2018
+     - Reading the indipendent rainfall realizations for year: 2019
+     - Adjusting the dataset to not have the minimum and the maximum values in the observational dataset assigned to the 0th and 100th percentile...
+     - Computing the percentiles for the year/seasonal climatologies
+     - Saving the year/seasonal climatologies and their correspondent metadata
+ - Computing percentiles for DJF
+     - Reading the indipendent rainfall realizations for year: 2000
+     - Reading the indipendent rainfall realizations for year: 2001
+     - Reading the indipendent rainfall realizations for year: 2002
+     - Reading the indipendent rainfall realizations for year: 2003
+     - Reading the indipendent rainfall realizations for year: 2004
+     - Reading the indipendent rainfall realizations for year: 2005
+     - Reading the indipendent rainfall realizations for year: 2006
+     - Reading the indipendent rainfall realizations for year: 2007
+     - Reading the indipendent rainfall realizations for year: 2008
+     - Reading the indipendent rainfall realizations for year: 2009
+     - Reading the indipendent rainfall realizations for year: 2010
+     - Reading the indipendent rainfall realizations for year: 2011
+     - Reading the indipendent rainfall realizations for year: 2012
+     - Reading the indipendent rainfall realizations for year: 2013
+     - Reading the indipendent rainfall realizations for year: 2014
+     - Reading the indipendent rainfall realizations for year: 2015
+     - Reading the indipendent rainfall realizations for year: 2016
+     - Reading the indipendent rainfall realizations for year: 2017
+     - Reading the indipendent rainfall realizations for year: 2018
+     - Reading the indipendent rainfall realizations for year: 2019
+     - Adjusting the dataset to not have the minimum and the maximum values in the observational dataset assigned to the 0th and 100th percentile...
+     - Computing the percentiles for the year/seasonal climatologies
+     - Saving the year/seasonal climatologies and their correspondent metadata
+ - Computing percentiles for MAM
+     - Reading the indipendent rainfall realizations for year: 2000
+     - Reading the indipendent rainfall realizations for year: 2001
+     - Reading the indipendent rainfall realizations for year: 2002
+     - Reading the indipendent rainfall realizations for year: 2003
+     - Reading the indipendent rainfall realizations for year: 2004
+     - Reading the indipendent rainfall realizations for year: 2005
+     - Reading the indipendent rainfall realizations for year: 2006
+     - Reading the indipendent rainfall realizations for year: 2007
+     - Reading the indipendent rainfall realizations for year: 2008
+     - Reading the indipendent rainfall realizations for year: 2009
+     - Reading the indipendent rainfall realizations for year: 2010
+     - Reading the indipendent rainfall realizations for year: 2011
+     - Reading the indipendent rainfall realizations for year: 2012
+     - Reading the indipendent rainfall realizations for year: 2013
+     - Reading the indipendent rainfall realizations for year: 2014
+     - Reading the indipendent rainfall realizations for year: 2015
+     - Reading the indipendent rainfall realizations for year: 2016
+     - Reading the indipendent rainfall realizations for year: 2017
+     - Reading the indipendent rainfall realizations for year: 2018
+     - Reading the indipendent rainfall realizations for year: 2019
+     - Adjusting the dataset to not have the minimum and the maximum values in the observational dataset assigned to the 0th and 100th percentile...
+     - Computing the percentiles for the year/seasonal climatologies
+     - Saving the year/seasonal climatologies and their correspondent metadata
+ - Computing percentiles for JJA
+     - Reading the indipendent rainfall realizations for year: 2000
+     - Reading the indipendent rainfall realizations for year: 2001
+     - Reading the indipendent rainfall realizations for year: 2002
+     - Reading the indipendent rainfall realizations for year: 2003
+     - Reading the indipendent rainfall realizations for year: 2004
+     - Reading the indipendent rainfall realizations for year: 2005
+     - Reading the indipendent rainfall realizations for year: 2006
+     - Reading the indipendent rainfall realizations for year: 2007
+     - Reading the indipendent rainfall realizations for year: 2008
+     - Reading the indipendent rainfall realizations for year: 2009
+     - Reading the indipendent rainfall realizations for year: 2010
+     - Reading the indipendent rainfall realizations for year: 2011
+     - Reading the indipendent rainfall realizations for year: 2012
+     - Reading the indipendent rainfall realizations for year: 2013
+     - Reading the indipendent rainfall realizations for year: 2014
+     - Reading the indipendent rainfall realizations for year: 2015
+     - Reading the indipendent rainfall realizations for year: 2016
+     - Reading the indipendent rainfall realizations for year: 2017
+     - Reading the indipendent rainfall realizations for year: 2018
+     - Reading the indipendent rainfall realizations for year: 2019
+     - Adjusting the dataset to not have the minimum and the maximum values in the observational dataset assigned to the 0th and 100th percentile...
+     - Computing the percentiles for the year/seasonal climatologies
+     - Saving the year/seasonal climatologies and their correspondent metadata
+ - Computing percentiles for SON
+     - Reading the indipendent rainfall realizations for year: 2000
+     - Reading the indipendent rainfall realizations for year: 2001
+     - Reading the indipendent rainfall realizations for year: 2002
+     - Reading the indipendent rainfall realizations for year: 2003
+     - Reading the indipendent rainfall realizations for year: 2004
+     - Reading the indipendent rainfall realizations for year: 2005
+     - Reading the indipendent rainfall realizations for year: 2006
+     - Reading the indipendent rainfall realizations for year: 2007
+     - Reading the indipendent rainfall realizations for year: 2008
+     - Reading the indipendent rainfall realizations for year: 2009
+     - Reading the indipendent rainfall realizations for year: 2010
+     - Reading the indipendent rainfall realizations for year: 2011
+     - Reading the indipendent rainfall realizations for year: 2012
+     - Reading the indipendent rainfall realizations for year: 2013
+     - Reading the indipendent rainfall realizations for year: 2014
+     - Reading the indipendent rainfall realizations for year: 2015
+     - Reading the indipendent rainfall realizations for year: 2016
+     - Reading the indipendent rainfall realizations for year: 2017
+     - Reading the indipendent rainfall realizations for year: 2018
+     - Reading the indipendent rainfall realizations for year: 2019
+     - Adjusting the dataset to not have the minimum and the maximum values in the observational dataset assigned to the 0th and 100th percentile...
+     - Computing the percentiles for the year/seasonal climatologies
+     - Saving the year/seasonal climatologies and their correspondent metadata
+Traceback (most recent call last):
+  File "/etc/ecmwf/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate/Scripts/Processed/11_Compute_ClimateFC_atOBS.py", line 188, in <module>
+    stn_lats = np.load(MainDirIN_Climate_OBS + "/Stn_lats.npy")
+  File "/usr/local/apps/python3/3.10.10-01/lib/python3.10/site-packages/numpy/lib/npyio.py", line 405, in load
+    fid = stack.enter_context(open(os_fspath(file), "rb"))
+FileNotFoundError: [Errno 2] No such file or directory: '/ec/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate/Data/Compute/09_Climate_OBS/MinDays_Perc75/08_AlignOBS_CleanSTVL/Coeff_Grid2Point_20/Stn_lats.npy'
+
+real	0m11.077s
+user	0m2.927s
+sys	0m0.144s
+[ECMWF-INFO -ecepilog] ----------------------------------------------------------------------------------------------------
+[ECMWF-INFO -ecepilog] This is the ECMWF job Epilogue
+[ECMWF-INFO -ecepilog] +++ Please report issues using the Support portal +++
+[ECMWF-INFO -ecepilog] +++ https://support.ecmwf.int                     +++
+[ECMWF-INFO -ecepilog] ----------------------------------------------------------------------------------------------------
+[ECMWF-INFO -ecepilog] Run at 2023-08-18T20:49:09 on ac
+[ECMWF-INFO -ecepilog] JobName                   : Compute_ClimateFC_atOBS
+[ECMWF-INFO -ecepilog] JobID                     : 34459427
+[ECMWF-INFO -ecepilog] Submit                    : 2023-08-18T20:48:49
+[ECMWF-INFO -ecepilog] Start                     : 2023-08-18T20:48:54
+[ECMWF-INFO -ecepilog] End                       : 2023-08-18T20:49:09
+[ECMWF-INFO -ecepilog] QueuedTime                : 5.0
+[ECMWF-INFO -ecepilog] ElapsedRaw                : 15
+[ECMWF-INFO -ecepilog] ExitCode                  : 1:0
+[ECMWF-INFO -ecepilog] DerivedExitCode           : 0:0
+[ECMWF-INFO -ecepilog] State                     : FAILED
+[ECMWF-INFO -ecepilog] Account                   : ecodmdmo
+[ECMWF-INFO -ecepilog] QOS                       : nf
+[ECMWF-INFO -ecepilog] User                      : mofp
+[ECMWF-INFO -ecepilog] StdOut                    : /etc/ecmwf/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate/Scripts/Processed/LogATOS/Compute_ClimateFC_atOBS-34459427.out
+[ECMWF-INFO -ecepilog] StdErr                    : /etc/ecmwf/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate/Scripts/Processed/LogATOS/Compute_ClimateFC_atOBS-34459427.out
+[ECMWF-INFO -ecepilog] NNodes                    : 1
+[ECMWF-INFO -ecepilog] NCPUS                     : 2
+[ECMWF-INFO -ecepilog] SBU                       : 0.079
+[ECMWF-INFO -ecepilog] ----------------------------------------------------------------------------------------------------
+

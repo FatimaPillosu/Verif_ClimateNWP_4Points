@@ -51,24 +51,24 @@ def compute_climate_obs(MinDays_Perc, Perc_year, Perc_season, DirIN, DirOUT):
       obs = np.load(DirIN + "/obs.npy")
       
       # Computing the climatologies
-      ClimateType_list = ["Year", "DJF", "MAM", "JJA", "SON"]
-      for ClimateType in ClimateType_list:
+      Season_list = ["Year", "DJF", "MAM", "JJA", "SON"]
+      for Season in Season_list:
 
             # Selecting the year or the seasonal subset with the observational dataset
             print(" ")
-            print("     - Selecting the " + ClimateType + "  subset with the observational dataset")
-            if ClimateType == "Year":
+            print("     - Selecting the " + Season + "  subset with the observational dataset")
+            if Season == "Year":
                   obs_temp = obs
                   percs = Perc_year
                   NamePercs = "Percentiles_Year"
             else:
-                  if ClimateType == "DJF":
+                  if Season == "DJF":
                         M1 = 12; M2 = 1; M3 = 2
-                  if ClimateType == "MAM":
+                  if Season == "MAM":
                         M1 = 3; M2 = 4; M3 = 5
-                  if ClimateType == "JJA":
+                  if Season == "JJA":
                         M1 = 6; M2 = 7; M3 = 8
-                  if ClimateType == "SON":
+                  if Season == "SON":
                         M1 = 9; M2 = 10; M3 = 11
                   ind_dates_season = []
                   for ind_dates in range(obs.shape[1]):
@@ -102,10 +102,10 @@ def compute_climate_obs(MinDays_Perc, Perc_year, Perc_season, DirIN, DirOUT):
             print("     - Computing and saving the climatologies and their metadata")
             climate = np.transpose(np.round(np.float32(np.nanpercentile(obs_temp_MinNumDays_new, percs, axis=1, interpolation="linear").astype(float)), decimals=1))
             np.save(DirOUT + "/" + NamePercs + ".npy", percs)
-            np.save(DirOUT + "/Climate_" + ClimateType + ".npy", climate)
-            np.save(DirOUT + "/" + "Stn_ids_" + ClimateType + ".npy", stnids_MinNumDays)
-            np.save(DirOUT + "/" + "Stn_lats_" + ClimateType + ".npy", lats_MinNumDays)
-            np.save(DirOUT + "/" + "Stn_lons_" + ClimateType + ".npy", lons_MinNumDays)
+            np.save(DirOUT + "/Climate_" + Season + ".npy", climate)
+            np.save(DirOUT + "/" + "Stn_ids_" + Season + ".npy", stnids_MinNumDays)
+            np.save(DirOUT + "/" + "Stn_lats_" + Season + ".npy", lats_MinNumDays)
+            np.save(DirOUT + "/" + "Stn_lons_" + Season + ".npy", lons_MinNumDays)
 ###############################################################################################################
 
 # Computing the observational climatologies

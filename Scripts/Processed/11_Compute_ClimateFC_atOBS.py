@@ -45,20 +45,27 @@ DirOUT_Climate_FC = "Data/Compute/11_ClimateFC_atOBS"
 ########################################
 # Compute and save distribution of percentiles  # 
 ########################################
-def distribution_percentiles(YearS, YearF, PercYear, PercSeason, DirIN_FC, DirOUT_Climate_FC):
+def distribution_percentiles(YearS, YearF, PercYear, PercSeason, DirIN_Climate_OBS, DirIN_FC, DirOUT_Climate_FC):
       
-      Dataset_list = ["Year", "DJF", "MAM", "JJA", "SON"]
-      
-      for Dataset in Dataset_list:
+      Season_list = ["Year", "DJF", "MAM", "JJA", "SON"]
+      for Season in Season_list:
             
-            print(" - Computing percentiles for " + Dataset)
+            print(" - Computing percentiles for " + Season)
             
+            # Reading and saving the metadata (i.e. station id/lat/lon) for the considered point observational climatologies         
+            stn_lats = np.load(DirIN_Climate_OBS + "/Stn_lats_" + Season + ".npy")
+            stn_lons = np.load(DirIN_Climate_OBS + "/Stn_lons_" + Season + ".npy")
+            stn_ids = np.load(DirIN_Climate_OBS + "/Stn_ids_" + Season + ".npy")
+            np.save(DirOUT_Climate_FC + "/Stn_ids_" + Season + ".npy", stn_ids)
+            np.save(DirOUT_Climate_FC + "/Stn_lats_" + Season + ".npy", stn_lats)
+            np.save(DirOUT_Climate_FC + "/Stn_lons_" + Season + ".npy", stn_lons)
+
             # Reading the indipendent rainfall realizations for the period under consideration
             print("     - Reading the indipendent rainfall realizations for year: " + str(YearS))
-            tp = np.load(DirIN_FC + "/tp_" + Dataset + "_" + str(YearS) + ".npy")
+            tp = np.load(DirIN_FC + "/tp_" + Season + "_" + str(YearS) + ".npy")
             for Year in range (YearS+1,YearF+1):
                         print("     - Reading the indipendent rainfall realizations for year: " + str(Year))
-                        tp_raw = np.hstack((tp, np.load(DirIN_FC + "/tp_" + Dataset + "_" + str(Year) + ".npy")))
+                        tp_raw = np.hstack((tp, np.load(DirIN_FC + "/tp_" + Season + "_" + str(Year) + ".npy")))
 
             # Adjusting the dataset to not have the minimum and the maximum values in "align_obs" assigned to the 0th and 100th percentile
             # Note: If the whole dataset for a station contains only nan, a warning message will appear on the screen, and the minimum or maximum
@@ -71,7 +78,7 @@ def distribution_percentiles(YearS, YearF, PercYear, PercSeason, DirIN_FC, DirOU
 
             # Computing the percentiles for the year/seasonal climatologies
             print("     - Computing the percentiles for the year/seasonal climatologies")
-            if Dataset == "Year":
+            if Season == "Year":
                   Perc = PercYear
             else:
                   Perc = PercSeason
@@ -79,7 +86,7 @@ def distribution_percentiles(YearS, YearF, PercYear, PercSeason, DirIN_FC, DirOU
 
             # Saving the year/seasonal climatologies and their correspondent metadata
             print("     - Saving the year/seasonal climatologies and their correspondent metadata")
-            np.save(DirOUT_Climate_FC + "/Climate_" + Dataset + ".npy", climate)
+            np.save(DirOUT_Climate_FC + "/Climate_" + Season + ".npy", climate)
 
       # Saving the percentiles computed for the year/seasonal climatologies
       np.save(DirOUT_Climate_FC + "/Percentiles_Year.npy", PercYear)
@@ -88,6 +95,7 @@ def distribution_percentiles(YearS, YearF, PercYear, PercSeason, DirIN_FC, DirOU
 #############################################################################################################################################
 
 
+# Computing the modelled climatologies
 for MinDays_Perc in MinDays_Perc_list:
 
       for NameOBS in NameOBS_list:
@@ -125,21 +133,15 @@ for MinDays_Perc in MinDays_Perc_list:
                               PercYear = np.concatenate([np.arange(0,100), np.array([99.5, 99.8, 99.9, 99.95, 99.98, 99.99, 99.995, 99.998, 99.999, 99.9995, 99.9998])])
                               PercSeason = np.concatenate([np.arange(0,100), np.array([99.5, 99.8, 99.9, 99.95, 99.98, 99.99, 99.995, 99.998, 99.999])])
 
+                        # Setting the input directory for the observational climatologies
+                        MainDirIN_Climate_OBS = Git_repo + "/" + DirIN_Climate_OBS + "/MinDays_Perc" + str(int(MinDays_Perc*100)) + "/" + NameOBS
+                        
                         # Computing and saving the modelled rainfall climatologies (i.e. the distribution of percentiles computed from the independent rainfall realizations)
                         MainDirIN_FC = Git_repo + "/" + DirIN_FC + "/" + SystemFC + "/MinDays_Perc" + str(int(MinDays_Perc*100)) + "/" + NameOBS
                         MainDirOUT_Climate_FC = Git_repo + "/" + DirOUT_Climate_FC + "/" + SystemFC + "/MinDays_Perc" + str(int(MinDays_Perc*100)) + "/" + NameOBS
                         if not exists(MainDirOUT_Climate_FC):
                               os.makedirs(MainDirOUT_Climate_FC)
-                        distribution_percentiles(YearS, YearF, PercYear, PercSeason, MainDirIN_FC, MainDirOUT_Climate_FC)
-
-                       # Reading and saving the metadata (i.e. station id/lat/lon) for the considered point observational climatologies
-                        MainDirIN_Climate_OBS = Git_repo + "/" + DirIN_Climate_OBS + "/MinDays_Perc" + str(int(MinDays_Perc*100)) + "/" + NameOBS
-                        stn_lats = np.load(MainDirIN_Climate_OBS + "/Stn_lats.npy")
-                        stn_lons = np.load(MainDirIN_Climate_OBS + "/Stn_lons.npy")
-                        stn_ids = np.load(MainDirIN_Climate_OBS + "/Stn_ids.npy")
-                        np.save(MainDirOUT_Climate_FC + "/Stn_ids.npy", stn_ids)
-                        np.save(MainDirOUT_Climate_FC + "/Stn_lats.npy", stn_lats)
-                        np.save(MainDirOUT_Climate_FC + "/Stn_lons.npy", stn_lons)
+                        distribution_percentiles(YearS, YearF, PercYear, PercSeason, MainDirIN_Climate_OBS, MainDirIN_FC, MainDirOUT_Climate_FC)
 
             elif NameOBS == "08_AlignOBS_CleanSTVL":
 
@@ -176,18 +178,12 @@ for MinDays_Perc in MinDays_Perc_list:
                                     PercYear = np.concatenate([np.arange(0,100), np.array([99.5, 99.8, 99.9, 99.95, 99.98, 99.99, 99.995, 99.998, 99.999, 99.9995, 99.9998])])
                                     PercSeason = np.concatenate([np.arange(0,100), np.array([99.5, 99.8, 99.9, 99.95, 99.98, 99.99, 99.995, 99.998, 99.999])])
 
+                              # Setting the input directory for the observational climatologies
+                              MainDirIN_Climate_OBS = Git_repo + "/" + DirIN_Climate_OBS + "/MinDays_Perc" + str(int(MinDays_Perc*100)) + "/" + NameOBS + "/Coeff_Grid2Point_" + str(Coeff_Grid2Point)
+                  
                               # Computing and saving the modelled rainfall climatologies (i.e. the distribution of percentiles computed from the independent rainfall realizations)
                               MainDirIN_FC = Git_repo + "/" + DirIN_FC + "/" + SystemFC + "/MinDays_Perc" + str(int(MinDays_Perc*100)) + "/" + NameOBS + "/Coeff_Grid2Point_" + str(Coeff_Grid2Point)
                               MainDirOUT_Climate_FC = Git_repo + "/" + DirOUT_Climate_FC + "/" + SystemFC + "/MinDays_Perc" + str(int(MinDays_Perc*100)) + "/" + NameOBS + "/Coeff_Grid2Point_" + str(Coeff_Grid2Point)
                               if not exists(MainDirOUT_Climate_FC):
                                     os.makedirs(MainDirOUT_Climate_FC)
-                              distribution_percentiles(YearS, YearF, PercYear, PercSeason, MainDirIN_FC, MainDirOUT_Climate_FC)
-
-                              # Reading and saving the metadata (i.e. station id/lat/lon) for the considered point observational climatologies
-                              MainDirIN_Climate_OBS = Git_repo + "/" + DirIN_Climate_OBS + "/MinDays_Perc" + str(int(MinDays_Perc*100)) + "/" + NameOBS + "/Coeff_Grid2Point_" + str(Coeff_Grid2Point)
-                              stn_lats = np.load(MainDirIN_Climate_OBS + "/Stn_lats.npy")
-                              stn_lons = np.load(MainDirIN_Climate_OBS + "/Stn_lons.npy")
-                              stn_ids = np.load(MainDirIN_Climate_OBS + "/Stn_ids.npy")
-                              np.save(MainDirOUT_Climate_FC + "/Stn_ids.npy", stn_ids)
-                              np.save(MainDirOUT_Climate_FC + "/Stn_lats.npy", stn_lats)
-                              np.save(MainDirOUT_Climate_FC + "/Stn_lons.npy", stn_lons)
+                              distribution_percentiles(YearS, YearF, PercYear, PercSeason, MainDirIN_Climate_OBS, MainDirIN_FC, MainDirOUT_Climate_FC)
