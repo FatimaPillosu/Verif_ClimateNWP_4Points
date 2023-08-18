@@ -43,7 +43,7 @@ DirOUT = "Data/Compute/10_Extract_RainfallFC_atOBS"
 ##############################################
 # Compute independent rainfall realizations from HRES # 
 ##############################################
-def rainfall_HRES(BaseDateS, BaseDateF, Acc, stn_lats, stn_lons, DirIN, DirOUT):
+def rainfall_HRES(BaseDateS, BaseDateF, Acc, DirIN_ClimateOBS, DirIN_FC, DirOUT):
 
       # Specific parameters for the considered forecasting system
       BaseTime = 0
@@ -51,9 +51,26 @@ def rainfall_HRES(BaseDateS, BaseDateF, Acc, stn_lats, stn_lons, DirIN, DirOUT):
       StepF = 240
       NumEM = 1
 
-      # Initializing the variables that will contain the independent rainfall realizations
-      NumStations = len(stn_lats)
+      # Loading the stations for year and seasonal climatologies
+      stn_lats_year = np.load(DirIN_ClimateOBS + "/Stn_lats_Year.npy")
+      stn_lons_year = np.load(DirIN_ClimateOBS + "/Stn_lons_Year.npy")
+      stn_lats_DJF = np.load(DirIN_ClimateOBS + "/Stn_lats_DJF.npy")
+      stn_lons_DJF = np.load(DirIN_ClimateOBS + "/Stn_lons_DJF.npy")
+      stn_lats_MAM = np.load(DirIN_ClimateOBS + "/Stn_lats_MAM.npy")
+      stn_lons_MAM = np.load(DirIN_ClimateOBS + "/Stn_lons_MAM.npy")
+      stn_lats_JJA = np.load(DirIN_ClimateOBS + "/Stn_lats_JJA.npy")
+      stn_lons_JJA = np.load(DirIN_ClimateOBS + "/Stn_lons_JJA.npy")
+      stn_lats_SON = np.load(DirIN_ClimateOBS + "/Stn_lats_SON.npy")
+      stn_lons_SON = np.load(DirIN_ClimateOBS + "/Stn_lons_SON.npy")
 
+      # Defining the n. of stations in the year and seasonal climatologies
+      NumStn_year = len(stn_lats_year)
+      NumStn_DJF = len(stn_lats_DJF)
+      NumStn_MAM = len(stn_lats_MAM)
+      NumStn_JJA = len(stn_lats_JJA)
+      NumStn_SON = len(stn_lats_SON)
+
+      # Defining the n. of total realizations for year and seasonal climatologies
       NumRealizations_Day = int(((StepF - StepS) / Acc) * NumEM)
       NumDays_Year = (BaseDateF - BaseDateS).days + 1
       NumDays_DJF = monthrange(BaseDateS.year, 12)[1] + monthrange(BaseDateS.year, 1)[1] + monthrange(BaseDateS.year, 2)[1]
@@ -65,12 +82,13 @@ def rainfall_HRES(BaseDateS, BaseDateF, Acc, stn_lats, stn_lons, DirIN, DirOUT):
       NumRealizations_MAM = int(NumDays_MAM * NumRealizations_Day * NumEM)
       NumRealizations_JJA = int(NumDays_JJA * NumRealizations_Day * NumEM)
       NumRealizations_SON = int(NumDays_SON * NumRealizations_Day * NumEM)
-      
-      tp_year = np.float16(np.empty([NumStations, NumRealizations_Year]) * np.nan)
-      tp_DJF = np.float16(np.empty([NumStations, NumRealizations_DJF]) * np.nan)
-      tp_MAM = np.float16(np.empty([NumStations, NumRealizations_MAM]) * np.nan)
-      tp_JJA = np.float16(np.empty([NumStations, NumRealizations_JJA]) * np.nan)
-      tp_SON = np.float16(np.empty([NumStations, NumRealizations_SON]) * np.nan)
+
+      # Initializing the variables that will store the indipendent rainfall realizations
+      tp_year = np.float16(np.empty([NumStn_year, NumRealizations_Year]) * np.nan)
+      tp_DJF = np.float16(np.empty([NumStn_DJF, NumRealizations_DJF]) * np.nan)
+      tp_MAM = np.float16(np.empty([NumStn_MAM, NumRealizations_MAM]) * np.nan)
+      tp_JJA = np.float16(np.empty([NumStn_JJA, NumRealizations_JJA]) * np.nan)
+      tp_SON = np.float16(np.empty([NumStn_SON, NumRealizations_SON]) * np.nan)
 
       # Computing the independent rainfall realizations for the year/seasonal climatologies
       print(" - Computing the independent rainfall realizations for the year/seasonal climatologies. Processing " + str(Acc) + "-hourly accumulation period ending on:")
@@ -80,6 +98,7 @@ def rainfall_HRES(BaseDateS, BaseDateF, Acc, stn_lats, stn_lons, DirIN, DirOUT):
       ind_JJA = 0
       ind_SON = 0
       
+      # Extracting the independent rainfall realizations for year/seasonal climatologies
       BaseDate = BaseDateS
       while BaseDate <= BaseDateF:
 
@@ -88,7 +107,7 @@ def rainfall_HRES(BaseDateS, BaseDateF, Acc, stn_lats, stn_lons, DirIN, DirOUT):
             for Step1 in np.arange( StepS, (StepF-Acc+1), Acc ):
                         
                   Step2 = Step1 + Acc
-                  DirIN_temp = DirIN + "/" + BaseDate.strftime("%Y%m%d") + f'{BaseTime:02d}'
+                  DirIN_temp = DirIN_FC + "/" + BaseDate.strftime("%Y%m%d") + f'{BaseTime:02d}'
                   FileIN_1 =  DirIN_temp + "/tp_" + BaseDate.strftime("%Y%m%d") + "_" + f'{BaseTime:02d}' + "_" + f'{Step1:03d}' + ".grib"
                   FileIN_2 =  DirIN_temp + "/tp_" + BaseDate.strftime("%Y%m%d") + "_" + f'{BaseTime:02d}' + "_" + f'{Step2:03d}' + ".grib"
 
@@ -99,27 +118,33 @@ def rainfall_HRES(BaseDateS, BaseDateF, Acc, stn_lats, stn_lons, DirIN, DirOUT):
                         tp2 = mv.read(FileIN_2)
                         tp = (tp2 - tp1) * 1000
                         
-                        # Extracting the tp values for the considered day at the locations where point observational climatologies were computed
-                        tp_obs = np.round(np.float16(mv.nearest_gridpoint(tp, stn_lats, stn_lons)), decimals =1)
-
-                        # Populating the variable that contains the independent rainfall realizations for the year climatology
-                        tp_year[:, ind_year] = tp_obs
+                        # Extracting the independent rainfall realizations for the year climatology
+                        tp_obs_temp = np.round(np.float16(mv.nearest_gridpoint(tp, stn_lats_year, stn_lons_year)), decimals =1)
+                        tp_year[:, ind_year] = tp_obs_temp
                         ind_year += 1
                         
                         # Populating the variables that contains the independent rainfall realizations for the seasonal climatologies
                         if BaseDate.month == 12 or BaseDate.month == 1 or BaseDate.month == 2:
-                              tp_DJF[:, ind_DJF] = tp_obs
+                              tp_obs_temp = np.round(np.float16(mv.nearest_gridpoint(tp, stn_lats_DJF, stn_lons_DJF)), decimals =1)
+                              tp_DJF[:, ind_DJF] = tp_obs_temp
                               ind_DJF += 1
                         elif BaseDate.month == 3 or BaseDate.month == 4 or BaseDate.month == 5:
-                              tp_MAM[:, ind_MAM] = tp_obs
+                              tp_obs_temp = np.round(np.float16(mv.nearest_gridpoint(tp, stn_lats_MAM, stn_lons_MAM)), decimals =1)
+                              tp_MAM[:, ind_MAM] = tp_obs_temp
                               ind_MAM += 1
                         elif BaseDate.month == 6 or BaseDate.month == 7 or BaseDate.month == 8:
-                              tp_JJA[:, ind_JJA] = tp_obs
+                              tp_obs_temp = np.round(np.float16(mv.nearest_gridpoint(tp, stn_lats_JJA, stn_lons_JJA)), decimals =1)
+                              tp_JJA[:, ind_JJA] = tp_obs_temp
                               ind_JJA += 1
                         elif BaseDate.month == 9 or BaseDate.month == 10 or BaseDate.month == 11:
-                              tp_SON[:, ind_SON] = tp_obs
+                              tp_obs_temp = np.round(np.float16(mv.nearest_gridpoint(tp, stn_lats_SON, stn_lons_SON)), decimals =1)
+                              tp_SON[:, ind_SON] = tp_obs_temp
                               ind_SON += 1
-                        
+
+                  else:
+
+                        print("Forecast not availbale in the database.")
+     
             BaseDate += timedelta(days=1)
       
       # Saving the year/seasonal climatologies and their correspondent metadata
@@ -133,7 +158,7 @@ def rainfall_HRES(BaseDateS, BaseDateF, Acc, stn_lats, stn_lons, DirIN, DirOUT):
 ####################################################
 # Compute independent rainfall realizations from Reforecasts  # 
 ####################################################
-def rainfall_REFORECAST(BaseDateS, BaseDateF, Acc, stn_lats, stn_lons, DirIN, DirOUT):
+def rainfall_REFORECAST(BaseDateS, BaseDateF, Acc, DirIN_ClimateOBS, DirIN_FC, DirOUT):
 
       # Specific parameters for the considered forecasting system
       BaseTime = 0
@@ -141,9 +166,26 @@ def rainfall_REFORECAST(BaseDateS, BaseDateF, Acc, stn_lats, stn_lons, DirIN, Di
       StepF = 240
       NumEM = 1
 
-      # Initializing the variables that will contain the independent rainfall realizations
-      NumStations = len(stn_lats)
+      # Loading the stations for year and seasonal climatologies
+      stn_lats_year = np.load(DirIN_ClimateOBS + "/Stn_lats_Year.npy")
+      stn_lons_year = np.load(DirIN_ClimateOBS + "/Stn_lons_Year.npy")
+      stn_lats_DJF = np.load(DirIN_ClimateOBS + "/Stn_lats_DJF.npy")
+      stn_lons_DJF = np.load(DirIN_ClimateOBS + "/Stn_lons_DJF.npy")
+      stn_lats_MAM = np.load(DirIN_ClimateOBS + "/Stn_lats_MAM.npy")
+      stn_lons_MAM = np.load(DirIN_ClimateOBS + "/Stn_lons_MAM.npy")
+      stn_lats_JJA = np.load(DirIN_ClimateOBS + "/Stn_lats_JJA.npy")
+      stn_lons_JJA = np.load(DirIN_ClimateOBS + "/Stn_lons_JJA.npy")
+      stn_lats_SON = np.load(DirIN_ClimateOBS + "/Stn_lats_SON.npy")
+      stn_lons_SON = np.load(DirIN_ClimateOBS + "/Stn_lons_SON.npy")
 
+      # Defining the n. of stations in the year and seasonal climatologies
+      NumStn_year = len(stn_lats_year)
+      NumStn_DJF = len(stn_lats_DJF)
+      NumStn_MAM = len(stn_lats_MAM)
+      NumStn_JJA = len(stn_lats_JJA)
+      NumStn_SON = len(stn_lats_SON)
+
+      # Defining the n. of total realizations for year and seasonal climatologies
       NumRealizations_Day = int(((StepF - StepS) / Acc) * NumEM)
       NumDays_Year = (BaseDateF - BaseDateS).days + 1
       NumDays_DJF = monthrange(BaseDateS.year, 12)[1] + monthrange(BaseDateS.year, 1)[1] + monthrange(BaseDateS.year, 2)[1]
@@ -156,11 +198,12 @@ def rainfall_REFORECAST(BaseDateS, BaseDateF, Acc, stn_lats, stn_lons, DirIN, Di
       NumRealizations_JJA = int(NumDays_JJA * NumRealizations_Day * NumEM)
       NumRealizations_SON = int(NumDays_SON * NumRealizations_Day * NumEM)
       
-      tp_year = np.float16(np.empty([NumStations, NumRealizations_Year]) * np.nan)
-      tp_DJF = np.float16(np.empty([NumStations, NumRealizations_DJF]) * np.nan)
-      tp_MAM = np.float16(np.empty([NumStations, NumRealizations_MAM]) * np.nan)
-      tp_JJA = np.float16(np.empty([NumStations, NumRealizations_JJA]) * np.nan)
-      tp_SON = np.float16(np.empty([NumStations, NumRealizations_SON]) * np.nan)
+      # Initializing the variables that will store the indipendent rainfall realizations
+      tp_year = np.float16(np.empty([NumStn_year, NumRealizations_Year]) * np.nan)
+      tp_DJF = np.float16(np.empty([NumStn_DJF, NumRealizations_DJF]) * np.nan)
+      tp_MAM = np.float16(np.empty([NumStn_MAM, NumRealizations_MAM]) * np.nan)
+      tp_JJA = np.float16(np.empty([NumStn_JJA, NumRealizations_JJA]) * np.nan)
+      tp_SON = np.float16(np.empty([NumStn_SON, NumRealizations_SON]) * np.nan)
 
       # Computing the independent rainfall realizations for the year/seasonal climatologies
       print(" - Computing the independent rainfall realizations for the year/seasonal climatologies. Processing " + str(Acc) + "-hourly accumulation period ending on:")
@@ -170,6 +213,7 @@ def rainfall_REFORECAST(BaseDateS, BaseDateF, Acc, stn_lats, stn_lons, DirIN, Di
       ind_JJA = 0
       ind_SON = 0
       
+      # Extracting the independent rainfall realizations for year/seasonal climatologies
       BaseDate = BaseDateS
       while BaseDate <= BaseDateF:
 
@@ -178,7 +222,7 @@ def rainfall_REFORECAST(BaseDateS, BaseDateF, Acc, stn_lats, stn_lons, DirIN, Di
             for Step1 in np.arange( StepS, (StepF-Acc+1), Acc ):
                         
                   Step2 = Step1 + Acc
-                  DirIN_temp = DirIN + "/" + BaseDate.strftime("%Y") + "/" + BaseDate.strftime("%Y%m%d") + f'{BaseTime:02d}'
+                  DirIN_temp = DirIN_FC + "/" + BaseDate.strftime("%Y") + "/" + BaseDate.strftime("%Y%m%d") + f'{BaseTime:02d}'
                   FileIN_1 =  DirIN_temp + "/tp_" + BaseDate.strftime("%Y%m%d") + "_" + f'{BaseTime:02d}' + "_" + f'{Step1:03d}' + ".grib"
                   FileIN_2 =  DirIN_temp + "/tp_" + BaseDate.strftime("%Y%m%d") + "_" + f'{BaseTime:02d}' + "_" + f'{Step2:03d}' + ".grib"
 
@@ -189,27 +233,33 @@ def rainfall_REFORECAST(BaseDateS, BaseDateF, Acc, stn_lats, stn_lons, DirIN, Di
                         tp2 = mv.read(FileIN_2)
                         tp = (tp2 - tp1) * 1000
                         
-                        # Extracting the tp values for the considered day at the locations where point observational climatologies were computed
-                        tp_obs = np.round(np.float16(mv.nearest_gridpoint(tp, stn_lats, stn_lons)), decimals =1)
-
-                        # Populating the variable that contains the independent rainfall realizations for the year climatology
-                        tp_year[:, ind_year] = tp_obs
+                        # Extracting the independent rainfall realizations for the year climatology
+                        tp_obs_temp = np.round(np.float16(mv.nearest_gridpoint(tp, stn_lats_year, stn_lons_year)), decimals =1)
+                        tp_year[:, ind_year] = tp_obs_temp
                         ind_year += 1
                         
                         # Populating the variables that contains the independent rainfall realizations for the seasonal climatologies
                         if BaseDate.month == 12 or BaseDate.month == 1 or BaseDate.month == 2:
-                              tp_DJF[:, ind_DJF] = tp_obs
+                              tp_obs_temp = np.round(np.float16(mv.nearest_gridpoint(tp, stn_lats_DJF, stn_lons_DJF)), decimals =1)
+                              tp_DJF[:, ind_DJF] = tp_obs_temp
                               ind_DJF += 1
                         elif BaseDate.month == 3 or BaseDate.month == 4 or BaseDate.month == 5:
-                              tp_MAM[:, ind_MAM] = tp_obs
+                              tp_obs_temp = np.round(np.float16(mv.nearest_gridpoint(tp, stn_lats_MAM, stn_lons_MAM)), decimals =1)
+                              tp_MAM[:, ind_MAM] = tp_obs_temp
                               ind_MAM += 1
                         elif BaseDate.month == 6 or BaseDate.month == 7 or BaseDate.month == 8:
-                              tp_JJA[:, ind_JJA] = tp_obs
+                              tp_obs_temp = np.round(np.float16(mv.nearest_gridpoint(tp, stn_lats_JJA, stn_lons_JJA)), decimals =1)
+                              tp_JJA[:, ind_JJA] = tp_obs_temp
                               ind_JJA += 1
                         elif BaseDate.month == 9 or BaseDate.month == 10 or BaseDate.month == 11:
-                              tp_SON[:, ind_SON] = tp_obs
+                              tp_obs_temp = np.round(np.float16(mv.nearest_gridpoint(tp, stn_lats_SON, stn_lons_SON)), decimals =1)
+                              tp_SON[:, ind_SON] = tp_obs_temp
                               ind_SON += 1
-                        
+
+                  else:
+
+                        print("Forecast not availbale in the database.")
+     
             BaseDate += timedelta(days=1)
       
       # Saving the year/seasonal climatologies and their correspondent metadata
@@ -223,15 +273,32 @@ def rainfall_REFORECAST(BaseDateS, BaseDateF, Acc, stn_lats, stn_lons, DirIN, Di
 ########################################################
 # Compute independent rainfall realizations from short-range ERA5 # 
 ########################################################
-def rainfall_24h_ERA5_SR(BaseDateS, BaseDateF, stn_lats, stn_lons, DirIN, DirOUT):
+def rainfall_24h_ERA5_SR(BaseDateS, BaseDateF, Acc, DirIN_ClimateOBS, DirIN_FC, DirOUT):
 
       # Specific parameters for the considered forecasting system
       NumEM = 1
       NumRealizations_Day = 1
 
-      # Initializing the variables that will contain the independent rainfall realizations
-      NumStations = len(stn_lats)
+      # Loading the stations for year and seasonal climatologies
+      stn_lats_year = np.load(DirIN_ClimateOBS + "/Stn_lats_Year.npy")
+      stn_lons_year = np.load(DirIN_ClimateOBS + "/Stn_lons_Year.npy")
+      stn_lats_DJF = np.load(DirIN_ClimateOBS + "/Stn_lats_DJF.npy")
+      stn_lons_DJF = np.load(DirIN_ClimateOBS + "/Stn_lons_DJF.npy")
+      stn_lats_MAM = np.load(DirIN_ClimateOBS + "/Stn_lats_MAM.npy")
+      stn_lons_MAM = np.load(DirIN_ClimateOBS + "/Stn_lons_MAM.npy")
+      stn_lats_JJA = np.load(DirIN_ClimateOBS + "/Stn_lats_JJA.npy")
+      stn_lons_JJA = np.load(DirIN_ClimateOBS + "/Stn_lons_JJA.npy")
+      stn_lats_SON = np.load(DirIN_ClimateOBS + "/Stn_lats_SON.npy")
+      stn_lons_SON = np.load(DirIN_ClimateOBS + "/Stn_lons_SON.npy")
+
+      # Defining the n. of stations in the year and seasonal climatologies
+      NumStn_year = len(stn_lats_year)
+      NumStn_DJF = len(stn_lats_DJF)
+      NumStn_MAM = len(stn_lats_MAM)
+      NumStn_JJA = len(stn_lats_JJA)
+      NumStn_SON = len(stn_lats_SON)
       
+      # Defining the n. of total realizations for year and seasonal climatologies
       NumDays_Year = (BaseDateF - BaseDateS).days + 1
       NumDays_DJF = monthrange(BaseDateS.year, 12)[1] + monthrange(BaseDateS.year, 1)[1] + monthrange(BaseDateS.year, 2)[1]
       NumDays_MAM = monthrange(BaseDateS.year, 3)[1] + monthrange(BaseDateS.year, 4)[1] + monthrange(BaseDateS.year, 5)[1]
@@ -243,11 +310,12 @@ def rainfall_24h_ERA5_SR(BaseDateS, BaseDateF, stn_lats, stn_lons, DirIN, DirOUT
       NumRealizations_JJA = int(NumDays_JJA * NumRealizations_Day * NumEM)
       NumRealizations_SON = int(NumDays_SON * NumRealizations_Day * NumEM)
       
-      tp_year = np.float16(np.empty([NumStations, NumRealizations_Year]) * np.nan)
-      tp_DJF = np.float16(np.empty([NumStations, NumRealizations_DJF]) * np.nan)
-      tp_MAM = np.float16(np.empty([NumStations, NumRealizations_MAM]) * np.nan)
-      tp_JJA = np.float16(np.empty([NumStations, NumRealizations_JJA]) * np.nan)
-      tp_SON = np.float16(np.empty([NumStations, NumRealizations_SON]) * np.nan)
+      # Initializing the variables that will store the indipendent rainfall realizations
+      tp_year = np.float16(np.empty([NumStn_year, NumRealizations_Year]) * np.nan)
+      tp_DJF = np.float16(np.empty([NumStn_DJF, NumRealizations_DJF]) * np.nan)
+      tp_MAM = np.float16(np.empty([NumStn_MAM, NumRealizations_MAM]) * np.nan)
+      tp_JJA = np.float16(np.empty([NumStn_JJA, NumRealizations_JJA]) * np.nan)
+      tp_SON = np.float16(np.empty([NumStn_SON, NumRealizations_SON]) * np.nan)
       
       # Computing the independent rainfall realizations for the year/seasonal climatologies
       print(" - Computing the independent rainfall realizations for the year/seasonal climatologies. Processing " + str(Acc) + "-hourly accumulation period ending on:")
@@ -257,14 +325,15 @@ def rainfall_24h_ERA5_SR(BaseDateS, BaseDateF, stn_lats, stn_lons, DirIN, DirOUT
       ind_JJA = 0
       ind_SON = 0
       
-      BaseDate = BaseDateS + timedelta(days=1)
+      # Extracting the independent rainfall realizations for year/seasonal climatologies
+      BaseDate = BaseDateS
       while BaseDate <= BaseDateF:
             
             # Reading the forecasts for the considered day
-            BaseTime_0 = BaseDate - timedelta(days = 1)
-            BaseTime_1 = BaseDate
-            DirIN_temp0 = DirIN + "/" + BaseTime_0.strftime("%Y") + "/" + BaseTime_0.strftime("%Y%m%d") + "18"
-            DirIN_temp1 = DirIN + "/" + BaseTime_1.strftime("%Y") + "/" + BaseTime_1.strftime("%Y%m%d") + "06"
+            BaseTime_0 = BaseDate
+            BaseTime_1 = BaseDate + timedelta(days=1)
+            DirIN_temp0 = DirIN_FC + "/" + BaseTime_0.strftime("%Y") + "/" + BaseTime_0.strftime("%Y%m%d") + "18"
+            DirIN_temp1 = DirIN_FC + "/" + BaseTime_1.strftime("%Y") + "/" + BaseTime_1.strftime("%Y%m%d") + "06"
             tp = 0
             
             if exists(DirIN_temp0) and exists(DirIN_temp1): 
@@ -277,27 +346,33 @@ def rainfall_24h_ERA5_SR(BaseDateS, BaseDateF, stn_lats, stn_lons, DirIN, DirOUT
                         FileIN_1 =  DirIN_temp1 + "/tp_" + BaseTime_1.strftime("%Y%m%d") + "_06_" + f'{Step:03d}' + ".grib"
                         tp = tp + mv.read(FileIN_1)
                   tp = tp *1000
-
-                  # Extracting the tp values for the considered day at the locations where point observational climatologies were computed
-                  tp_obs = np.round(np.float16(mv.nearest_gridpoint(tp, stn_lats, stn_lons)), decimals =1)
-
-                  # Populating the variable that contains the independent rainfall realizations for the year climatology
-                  tp_year[:, ind_year] = tp_obs
+                  
+                  # Extracting the independent rainfall realizations for the year climatology
+                  tp_obs_temp = np.round(np.float16(mv.nearest_gridpoint(tp, stn_lats_year, stn_lons_year)), decimals =1)
+                  tp_year[:, ind_year] = tp_obs_temp
                   ind_year += 1
                               
                   # Populating the variables that contains the independent rainfall realizations for the seasonal climatologies
                   if BaseDate.month == 12 or BaseDate.month == 1 or BaseDate.month == 2:
-                        tp_DJF[:, ind_DJF] = tp_obs
+                        tp_obs_temp = np.round(np.float16(mv.nearest_gridpoint(tp, stn_lats_DJF, stn_lons_DJF)), decimals =1)
+                        tp_DJF[:, ind_DJF] = tp_obs_temp
                         ind_DJF += 1
                   elif BaseDate.month == 3 or BaseDate.month == 4 or BaseDate.month == 5:
-                        tp_MAM[:, ind_MAM] = tp_obs
+                        tp_obs_temp = np.round(np.float16(mv.nearest_gridpoint(tp, stn_lats_MAM, stn_lons_MAM)), decimals =1)
+                        tp_MAM[:, ind_MAM] = tp_obs_temp
                         ind_MAM += 1
                   elif BaseDate.month == 6 or BaseDate.month == 7 or BaseDate.month == 8:
-                        tp_JJA[:, ind_JJA] = tp_obs
+                        tp_obs_temp = np.round(np.float16(mv.nearest_gridpoint(tp, stn_lats_JJA, stn_lons_JJA)), decimals =1)
+                        tp_JJA[:, ind_JJA] = tp_obs_temp
                         ind_JJA += 1
                   elif BaseDate.month == 9 or BaseDate.month == 10 or BaseDate.month == 11:
-                        tp_SON[:, ind_SON] = tp_obs
+                        tp_obs_temp = np.round(np.float16(mv.nearest_gridpoint(tp, stn_lats_SON, stn_lons_SON)), decimals =1)
+                        tp_SON[:, ind_SON] = tp_obs_temp
                         ind_SON += 1
+            
+            else:
+
+                  print("Forecast not availbale in the database.")
 
             BaseDate += timedelta(days=1)
 
@@ -312,15 +387,32 @@ def rainfall_24h_ERA5_SR(BaseDateS, BaseDateF, stn_lats, stn_lons, DirIN, DirOUT
 #############################################################
 # Compute independent rainfall realizations from short-range ERA5_EDA  # 
 #############################################################
-def rainfall_24h_ERA5_EDA_SR(BaseDateS, BaseDateF, stn_lats, stn_lons, DirIN, DirOUT):
+def rainfall_24h_ERA5_EDA_SR(BaseDateS, BaseDateF, Acc, DirIN_ClimateOBS, DirIN_FC, DirOUT):
 
       # Specific parameters for the considered forecasting system
       NumEM = 10
       NumRealizations_Day = 1
 
-      # Initializing the variables that will contain the independent rainfall realizations
-      NumStations = len(stn_lats)
+      # Loading the stations for year and seasonal climatologies
+      stn_lats_year = np.load(DirIN_ClimateOBS + "/Stn_lats_Year.npy")
+      stn_lons_year = np.load(DirIN_ClimateOBS + "/Stn_lons_Year.npy")
+      stn_lats_DJF = np.load(DirIN_ClimateOBS + "/Stn_lats_DJF.npy")
+      stn_lons_DJF = np.load(DirIN_ClimateOBS + "/Stn_lons_DJF.npy")
+      stn_lats_MAM = np.load(DirIN_ClimateOBS + "/Stn_lats_MAM.npy")
+      stn_lons_MAM = np.load(DirIN_ClimateOBS + "/Stn_lons_MAM.npy")
+      stn_lats_JJA = np.load(DirIN_ClimateOBS + "/Stn_lats_JJA.npy")
+      stn_lons_JJA = np.load(DirIN_ClimateOBS + "/Stn_lons_JJA.npy")
+      stn_lats_SON = np.load(DirIN_ClimateOBS + "/Stn_lats_SON.npy")
+      stn_lons_SON = np.load(DirIN_ClimateOBS + "/Stn_lons_SON.npy")
       
+      # Defining the n. of stations in the year and seasonal climatologies
+      NumStn_year = len(stn_lats_year)
+      NumStn_DJF = len(stn_lats_DJF)
+      NumStn_MAM = len(stn_lats_MAM)
+      NumStn_JJA = len(stn_lats_JJA)
+      NumStn_SON = len(stn_lats_SON)
+
+      # Defining the n. of total realizations for year and seasonal climatologies
       NumDays_Year = (BaseDateF - BaseDateS).days + 1
       NumDays_DJF = monthrange(BaseDateS.year, 12)[1] + monthrange(BaseDateS.year, 1)[1] + monthrange(BaseDateS.year, 2)[1]
       NumDays_MAM = monthrange(BaseDateS.year, 3)[1] + monthrange(BaseDateS.year, 4)[1] + monthrange(BaseDateS.year, 5)[1]
@@ -332,11 +424,12 @@ def rainfall_24h_ERA5_EDA_SR(BaseDateS, BaseDateF, stn_lats, stn_lons, DirIN, Di
       NumRealizations_JJA = int(NumDays_JJA * NumRealizations_Day * NumEM)
       NumRealizations_SON = int(NumDays_SON * NumRealizations_Day * NumEM)
       
-      tp_year = np.float16(np.empty([NumStations, NumRealizations_Year]) * np.nan)
-      tp_DJF = np.float16(np.empty([NumStations, NumRealizations_DJF]) * np.nan)
-      tp_MAM = np.float16(np.empty([NumStations, NumRealizations_MAM]) * np.nan)
-      tp_JJA = np.float16(np.empty([NumStations, NumRealizations_JJA]) * np.nan)
-      tp_SON = np.float16(np.empty([NumStations, NumRealizations_SON]) * np.nan)
+      # Initializing the variables that will store the indipendent rainfall realizations
+      tp_year = np.float16(np.empty([NumStn_year, NumRealizations_Year]) * np.nan)
+      tp_DJF = np.float16(np.empty([NumStn_DJF, NumRealizations_DJF]) * np.nan)
+      tp_MAM = np.float16(np.empty([NumStn_MAM, NumRealizations_MAM]) * np.nan)
+      tp_JJA = np.float16(np.empty([NumStn_JJA, NumRealizations_JJA]) * np.nan)
+      tp_SON = np.float16(np.empty([NumStn_SON, NumRealizations_SON]) * np.nan)
       
       # Computing the independent rainfall realizations for the year/seasonal climatologies
       print(" - Computing the independent rainfall realizations for the year/seasonal climatologies. Processing " + str(Acc) + "-hourly accumulation period ending on:")
@@ -351,14 +444,15 @@ def rainfall_24h_ERA5_EDA_SR(BaseDateS, BaseDateF, stn_lats, stn_lons, DirIN, Di
       ind1_SON = 0
       ind2_SON = ind1_SON + (NumRealizations_Day * NumEM)
       
-      BaseDate = BaseDateS + timedelta(days=1)
+      # Extracting the independent rainfall realizations for year/seasonal climatologies
+      BaseDate = BaseDateS
       while BaseDate <= BaseDateF:
             
             # Reading the forecasts for the considered day
-            BaseTime_0 = BaseDate - timedelta(days = 1)
-            BaseTime_1 = BaseDate
-            DirIN_temp0 = DirIN + "/" + BaseTime_0.strftime("%Y") + "/" + BaseTime_0.strftime("%Y%m%d") + "18"
-            DirIN_temp1 = DirIN + "/" + BaseTime_1.strftime("%Y") + "/" + BaseTime_1.strftime("%Y%m%d") + "06"
+            BaseTime_0 = BaseDate
+            BaseTime_1 = BaseDate + timedelta(days = 1)
+            DirIN_temp0 = DirIN_FC + "/" + BaseTime_0.strftime("%Y") + "/" + BaseTime_0.strftime("%Y%m%d") + "18"
+            DirIN_temp1 = DirIN_FC + "/" + BaseTime_1.strftime("%Y") + "/" + BaseTime_1.strftime("%Y%m%d") + "06"
             tp = 0
             
             if exists(DirIN_temp0) and exists(DirIN_temp1): 
@@ -372,31 +466,37 @@ def rainfall_24h_ERA5_EDA_SR(BaseDateS, BaseDateF, stn_lats, stn_lons, DirIN, Di
                         tp = tp + mv.read(FileIN_1)
                   tp = tp *1000
 
-                  # Extracting the tp values for the considered day at the locations where point observational climatologies were computed
-                  tp_obs = np.transpose(np.round(np.float16(mv.nearest_gridpoint(tp, stn_lats, stn_lons)), decimals =1))
-
-                  # Populating the variable that contains the independent rainfall realizations for the year climatology
-                  tp_year[:, ind1_year:ind2_year] = tp_obs
+                  # Extracting the independent rainfall realizations for the year climatology
+                  tp_obs_temp = np.round(np.float16(mv.nearest_gridpoint(tp, stn_lats_year, stn_lons_year)), decimals =1).T
+                  tp_year[:, ind1_year:ind2_year] = tp_obs_temp
                   ind1_year = ind2_year
                   ind2_year = ind1_year + NumEM
                               
                   # Populating the variables that contains the independent rainfall realizations for the seasonal climatologies
                   if BaseDate.month == 12 or BaseDate.month == 1 or BaseDate.month == 2:
-                        tp_DJF[:, ind1_DJF:ind2_DJF] = tp_obs
+                        tp_obs_temp = np.round(np.float16(mv.nearest_gridpoint(tp, stn_lats_DJF, stn_lons_DJF)), decimals =1).T
+                        tp_DJF[:, ind1_DJF:ind2_DJF] = tp_obs_temp
                         ind1_DJF = ind2_DJF
                         ind2_DJF = ind1_DJF + NumEM
                   elif BaseDate.month == 3 or BaseDate.month == 4 or BaseDate.month == 5:
-                        tp_MAM[:, ind1_MAM:ind2_MAM] = tp_obs
+                        tp_obs_temp = np.round(np.float16(mv.nearest_gridpoint(tp, stn_lats_MAM, stn_lons_MAM)), decimals =1).T
+                        tp_MAM[:, ind1_MAM:ind2_MAM] = tp_obs_temp
                         ind1_MAM = ind2_MAM
                         ind2_MAM = ind1_MAM + NumEM
                   elif BaseDate.month == 6 or BaseDate.month == 7 or BaseDate.month == 8:
-                        tp_JJA[:, ind1_JJA:ind2_JJA] = tp_obs
+                        tp_obs_temp = np.round(np.float16(mv.nearest_gridpoint(tp, stn_lats_JJA, stn_lons_JJA)), decimals =1).T
+                        tp_JJA[:, ind1_JJA:ind2_JJA] = tp_obs_temp
                         ind1_JJA = ind2_JJA
                         ind2_JJA = ind1_JJA + NumEM
                   elif BaseDate.month == 9 or BaseDate.month == 10 or BaseDate.month == 11:
-                        tp_SON[:, ind1_SON:ind2_SON] = tp_obs
+                        tp_obs_temp = np.round(np.float16(mv.nearest_gridpoint(tp, stn_lats_SON, stn_lons_SON)), decimals =1).T
+                        tp_SON[:, ind1_SON:ind2_SON] = tp_obs_temp
                         ind1_SON = ind2_SON
                         ind2_SON = ind1_SON + NumEM
+
+            else:
+
+                  print("Forecast not availbale in the database.")
 
             BaseDate += timedelta(days=1)
 
@@ -411,7 +511,7 @@ def rainfall_24h_ERA5_EDA_SR(BaseDateS, BaseDateF, stn_lats, stn_lons, DirIN, Di
 #######################################################
 # Compute independent rainfall realizations from long-range ERA5 # 
 #######################################################
-def rainfall_ERA5_LR(BaseDateS, BaseDateF, Acc, stn_lats, stn_lons, DirIN, DirOUT):
+def rainfall_ERA5_LR(BaseDateS, BaseDateF, Acc, DirIN_ClimateOBS, DirIN_FC, DirOUT):
 
       # Specific parameters for the considered forecasting system
       BaseTime = 0
@@ -419,9 +519,26 @@ def rainfall_ERA5_LR(BaseDateS, BaseDateF, Acc, stn_lats, stn_lons, DirIN, DirOU
       StepF = 240
       NumEM = 1
 
-      # Initializing the variables that will contain the independent rainfall realizations
-      NumStations = len(stn_lats)
+      # Loading the stations for year and seasonal climatologies
+      stn_lats_year = np.load(DirIN_ClimateOBS + "/Stn_lats_Year.npy")
+      stn_lons_year = np.load(DirIN_ClimateOBS + "/Stn_lons_Year.npy")
+      stn_lats_DJF = np.load(DirIN_ClimateOBS + "/Stn_lats_DJF.npy")
+      stn_lons_DJF = np.load(DirIN_ClimateOBS + "/Stn_lons_DJF.npy")
+      stn_lats_MAM = np.load(DirIN_ClimateOBS + "/Stn_lats_MAM.npy")
+      stn_lons_MAM = np.load(DirIN_ClimateOBS + "/Stn_lons_MAM.npy")
+      stn_lats_JJA = np.load(DirIN_ClimateOBS + "/Stn_lats_JJA.npy")
+      stn_lons_JJA = np.load(DirIN_ClimateOBS + "/Stn_lons_JJA.npy")
+      stn_lats_SON = np.load(DirIN_ClimateOBS + "/Stn_lats_SON.npy")
+      stn_lons_SON = np.load(DirIN_ClimateOBS + "/Stn_lons_SON.npy")
 
+      # Defining the n. of stations in the year and seasonal climatologies
+      NumStn_year = len(stn_lats_year)
+      NumStn_DJF = len(stn_lats_DJF)
+      NumStn_MAM = len(stn_lats_MAM)
+      NumStn_JJA = len(stn_lats_JJA)
+      NumStn_SON = len(stn_lats_SON)
+
+      # Defining the n. of total realizations for year and seasonal climatologies
       NumRealizations_Day = int(((StepF - StepS) / Acc) * NumEM)
       NumDays_Year = (BaseDateF - BaseDateS).days + 1
       NumDays_DJF = monthrange(BaseDateS.year, 12)[1] + monthrange(BaseDateS.year, 1)[1] + monthrange(BaseDateS.year, 2)[1]
@@ -434,11 +551,12 @@ def rainfall_ERA5_LR(BaseDateS, BaseDateF, Acc, stn_lats, stn_lons, DirIN, DirOU
       NumRealizations_JJA = int(NumDays_JJA * NumRealizations_Day * NumEM)
       NumRealizations_SON = int(NumDays_SON * NumRealizations_Day * NumEM)
       
-      tp_year = np.float16(np.empty([NumStations, NumRealizations_Year]) * np.nan)
-      tp_DJF = np.float16(np.empty([NumStations, NumRealizations_DJF]) * np.nan)
-      tp_MAM = np.float16(np.empty([NumStations, NumRealizations_MAM]) * np.nan)
-      tp_JJA = np.float16(np.empty([NumStations, NumRealizations_JJA]) * np.nan)
-      tp_SON = np.float16(np.empty([NumStations, NumRealizations_SON]) * np.nan)
+      # Initializing the variables that will store the indipendent rainfall realizations
+      tp_year = np.float16(np.empty([NumStn_year, NumRealizations_Year]) * np.nan)
+      tp_DJF = np.float16(np.empty([NumStn_DJF, NumRealizations_DJF]) * np.nan)
+      tp_MAM = np.float16(np.empty([NumStn_MAM, NumRealizations_MAM]) * np.nan)
+      tp_JJA = np.float16(np.empty([NumStn_JJA, NumRealizations_JJA]) * np.nan)
+      tp_SON = np.float16(np.empty([NumStn_SON, NumRealizations_SON]) * np.nan)
 
       # Computing the independent rainfall realizations for the year/seasonal climatologies
       print(" - Computing the independent rainfall realizations for the year/seasonal climatologies. Processing " + str(Acc) + "-hourly accumulation period ending on:")
@@ -456,7 +574,7 @@ def rainfall_ERA5_LR(BaseDateS, BaseDateF, Acc, stn_lats, stn_lons, DirIN, DirOU
             for Step1 in np.arange( StepS, (StepF-Acc+1), Acc ):
                         
                   Step2 = Step1 + Acc
-                  DirIN_temp = DirIN + "/" + BaseDate.strftime("%Y")  + "/" + BaseDate.strftime("%Y%m%d") + f'{BaseTime:02d}'
+                  DirIN_temp = DirIN_FC + "/" + BaseDate.strftime("%Y")  + "/" + BaseDate.strftime("%Y%m%d") + f'{BaseTime:02d}'
                   FileIN_1 =  DirIN_temp + "/tp_" + BaseDate.strftime("%Y%m%d") + "_" + f'{BaseTime:02d}' + "_" + f'{Step1:03d}' + ".grib"
                   FileIN_2 =  DirIN_temp + "/tp_" + BaseDate.strftime("%Y%m%d") + "_" + f'{BaseTime:02d}' + "_" + f'{Step2:03d}' + ".grib"
 
@@ -467,27 +585,33 @@ def rainfall_ERA5_LR(BaseDateS, BaseDateF, Acc, stn_lats, stn_lons, DirIN, DirOU
                         tp2 = mv.read(FileIN_2)
                         tp = (tp2 - tp1) * 1000
                         
-                        # Extracting the tp values for the considered day at the locations where point observational climatologies were computed
-                        tp_obs = np.round(np.float16(mv.nearest_gridpoint(tp, stn_lats, stn_lons)), decimals =1)
-
-                        # Populating the variable that contains the independent rainfall realizations for the year climatology
-                        tp_year[:, ind_year] = tp_obs
+                        # Extracting the independent rainfall realizations for the year climatology
+                        tp_obs_temp = np.round(np.float16(mv.nearest_gridpoint(tp, stn_lats_year, stn_lons_year)), decimals =1)
+                        tp_year[:, ind_year] = tp_obs_temp
                         ind_year += 1
                         
                         # Populating the variables that contains the independent rainfall realizations for the seasonal climatologies
                         if BaseDate.month == 12 or BaseDate.month == 1 or BaseDate.month == 2:
-                              tp_DJF[:, ind_DJF] = tp_obs
+                              tp_obs_temp = np.round(np.float16(mv.nearest_gridpoint(tp, stn_lats_DJF, stn_lons_DJF)), decimals =1)
+                              tp_DJF[:, ind_DJF] = tp_obs_temp
                               ind_DJF += 1
                         elif BaseDate.month == 3 or BaseDate.month == 4 or BaseDate.month == 5:
-                              tp_MAM[:, ind_MAM] = tp_obs
+                              tp_obs_temp = np.round(np.float16(mv.nearest_gridpoint(tp, stn_lats_MAM, stn_lons_MAM)), decimals =1)
+                              tp_MAM[:, ind_MAM] = tp_obs_temp
                               ind_MAM += 1
                         elif BaseDate.month == 6 or BaseDate.month == 7 or BaseDate.month == 8:
-                              tp_JJA[:, ind_JJA] = tp_obs
+                              tp_obs_temp = np.round(np.float16(mv.nearest_gridpoint(tp, stn_lats_JJA, stn_lons_JJA)), decimals =1)
+                              tp_JJA[:, ind_JJA] = tp_obs_temp
                               ind_JJA += 1
                         elif BaseDate.month == 9 or BaseDate.month == 10 or BaseDate.month == 11:
-                              tp_SON[:, ind_SON] = tp_obs
+                              tp_obs_temp = np.round(np.float16(mv.nearest_gridpoint(tp, stn_lats_SON, stn_lons_SON)), decimals =1)
+                              tp_SON[:, ind_SON] = tp_obs_temp
                               ind_SON += 1
-                        
+
+                  else:
+
+                        print("Forecast not availbale in the database.")
+      
             BaseDate += timedelta(days=1)
 
       # Saving the year/seasonal climatologies and their correspondent metadata
@@ -501,7 +625,7 @@ def rainfall_ERA5_LR(BaseDateS, BaseDateF, Acc, stn_lats, stn_lons, DirIN, DirOU
 ############################################################
 # Compute independent rainfall realizations from long-range ERA5_EDA  # 
 ############################################################
-def rainfall_ERA5_EDA_LR(BaseDateS, BaseDateF, Acc, stn_lats, stn_lons, DirIN, DirOUT):
+def rainfall_ERA5_EDA_LR(BaseDateS, BaseDateF, Acc, DirIN_ClimateOBS, DirIN_FC, DirOUT):
 
       # Specific parameters for the considered forecasting system
       BaseTime = 0
@@ -509,9 +633,26 @@ def rainfall_ERA5_EDA_LR(BaseDateS, BaseDateF, Acc, stn_lats, stn_lons, DirIN, D
       StepF = 240
       NumEM = 1
 
-      # Initializing the variables that will contain the independent rainfall realizations
-      NumStations = len(stn_lats)
+      # Loading the stations for year and seasonal climatologies
+      stn_lats_year = np.load(DirIN_ClimateOBS + "/Stn_lats_Year.npy")
+      stn_lons_year = np.load(DirIN_ClimateOBS + "/Stn_lons_Year.npy")
+      stn_lats_DJF = np.load(DirIN_ClimateOBS + "/Stn_lats_DJF.npy")
+      stn_lons_DJF = np.load(DirIN_ClimateOBS + "/Stn_lons_DJF.npy")
+      stn_lats_MAM = np.load(DirIN_ClimateOBS + "/Stn_lats_MAM.npy")
+      stn_lons_MAM = np.load(DirIN_ClimateOBS + "/Stn_lons_MAM.npy")
+      stn_lats_JJA = np.load(DirIN_ClimateOBS + "/Stn_lats_JJA.npy")
+      stn_lons_JJA = np.load(DirIN_ClimateOBS + "/Stn_lons_JJA.npy")
+      stn_lats_SON = np.load(DirIN_ClimateOBS + "/Stn_lats_SON.npy")
+      stn_lons_SON = np.load(DirIN_ClimateOBS + "/Stn_lons_SON.npy")
 
+      # Defining the n. of stations in the year and seasonal climatologies
+      NumStn_year = len(stn_lats_year)
+      NumStn_DJF = len(stn_lats_DJF)
+      NumStn_MAM = len(stn_lats_MAM)
+      NumStn_JJA = len(stn_lats_JJA)
+      NumStn_SON = len(stn_lats_SON)
+
+      # Defining the n. of total realizations for year and seasonal climatologies
       NumRealizations_Day = int(((StepF - StepS) / Acc) * NumEM)
       NumDays_Year = (BaseDateF - BaseDateS).days + 1
       NumDays_DJF = monthrange(BaseDateS.year, 12)[1] + monthrange(BaseDateS.year, 1)[1] + monthrange(BaseDateS.year, 2)[1]
@@ -524,11 +665,12 @@ def rainfall_ERA5_EDA_LR(BaseDateS, BaseDateF, Acc, stn_lats, stn_lons, DirIN, D
       NumRealizations_JJA = int(NumDays_JJA * NumRealizations_Day * NumEM)
       NumRealizations_SON = int(NumDays_SON * NumRealizations_Day * NumEM)
       
-      tp_year = np.float16(np.empty([NumStations, NumRealizations_Year]) * np.nan)
-      tp_DJF = np.float16(np.empty([NumStations, NumRealizations_DJF]) * np.nan)
-      tp_MAM = np.float16(np.empty([NumStations, NumRealizations_MAM]) * np.nan)
-      tp_JJA = np.float16(np.empty([NumStations, NumRealizations_JJA]) * np.nan)
-      tp_SON = np.float16(np.empty([NumStations, NumRealizations_SON]) * np.nan)
+      # Initializing the variables that will store the indipendent rainfall realizations
+      tp_year = np.float16(np.empty([NumStn_year, NumRealizations_Year]) * np.nan)
+      tp_DJF = np.float16(np.empty([NumStn_DJF, NumRealizations_DJF]) * np.nan)
+      tp_MAM = np.float16(np.empty([NumStn_MAM, NumRealizations_MAM]) * np.nan)
+      tp_JJA = np.float16(np.empty([NumStn_JJA, NumRealizations_JJA]) * np.nan)
+      tp_SON = np.float16(np.empty([NumStn_SON, NumRealizations_SON]) * np.nan)
 
       # Computing the independent rainfall realizations for the year/seasonal climatologies
       print(" - Computing the independent rainfall realizations for the year/seasonal climatologies. Processing " + str(Acc) + "-hourly accumulation period ending on:")
@@ -546,7 +688,7 @@ def rainfall_ERA5_EDA_LR(BaseDateS, BaseDateF, Acc, stn_lats, stn_lons, DirIN, D
             for Step1 in np.arange( StepS, (StepF-Acc+1), Acc ):
                         
                   Step2 = Step1 + Acc
-                  DirIN_temp = DirIN + "/" + BaseDate.strftime("%Y")  + "/" + BaseDate.strftime("%Y%m%d") + f'{BaseTime:02d}'
+                  DirIN_temp = DirIN_FC + "/" + BaseDate.strftime("%Y")  + "/" + BaseDate.strftime("%Y%m%d") + f'{BaseTime:02d}'
                   FileIN_1 =  DirIN_temp + "/tp_" + BaseDate.strftime("%Y%m%d") + "_" + f'{BaseTime:02d}' + "_" + f'{Step1:03d}' + ".grib"
                   FileIN_2 =  DirIN_temp + "/tp_" + BaseDate.strftime("%Y%m%d") + "_" + f'{BaseTime:02d}' + "_" + f'{Step2:03d}' + ".grib"
 
@@ -557,27 +699,33 @@ def rainfall_ERA5_EDA_LR(BaseDateS, BaseDateF, Acc, stn_lats, stn_lons, DirIN, D
                         tp2 = mv.read(FileIN_2)
                         tp = (tp2 - tp1) * 1000
                         
-                        # Extracting the tp values for the considered day at the locations where point observational climatologies were computed
-                        tp_obs = np.round(np.float16(mv.nearest_gridpoint(tp, stn_lats, stn_lons)), decimals =1)
-
-                        # Populating the variable that contains the independent rainfall realizations for the year climatology
-                        tp_year[:, ind_year] = tp_obs
+                        # Extracting the independent rainfall realizations for the year climatology
+                        tp_obs_temp = np.round(np.float16(mv.nearest_gridpoint(tp, stn_lats_year, stn_lons_year)), decimals =1)
+                        tp_year[:, ind_year] = tp_obs_temp
                         ind_year += 1
                         
                         # Populating the variables that contains the independent rainfall realizations for the seasonal climatologies
                         if BaseDate.month == 12 or BaseDate.month == 1 or BaseDate.month == 2:
-                              tp_DJF[:, ind_DJF] = tp_obs
+                              tp_obs_temp = np.round(np.float16(mv.nearest_gridpoint(tp, stn_lats_DJF, stn_lons_DJF)), decimals =1)
+                              tp_DJF[:, ind_DJF] = tp_obs_temp
                               ind_DJF += 1
                         elif BaseDate.month == 3 or BaseDate.month == 4 or BaseDate.month == 5:
-                              tp_MAM[:, ind_MAM] = tp_obs
+                              tp_obs_temp = np.round(np.float16(mv.nearest_gridpoint(tp, stn_lats_MAM, stn_lons_MAM)), decimals =1)
+                              tp_MAM[:, ind_MAM] = tp_obs_temp
                               ind_MAM += 1
                         elif BaseDate.month == 6 or BaseDate.month == 7 or BaseDate.month == 8:
-                              tp_JJA[:, ind_JJA] = tp_obs
+                              tp_obs_temp = np.round(np.float16(mv.nearest_gridpoint(tp, stn_lats_JJA, stn_lons_JJA)), decimals =1)
+                              tp_JJA[:, ind_JJA] = tp_obs_temp
                               ind_JJA += 1
                         elif BaseDate.month == 9 or BaseDate.month == 10 or BaseDate.month == 11:
-                              tp_SON[:, ind_SON] = tp_obs
+                              tp_obs_temp = np.round(np.float16(mv.nearest_gridpoint(tp, stn_lats_SON, stn_lons_SON)), decimals =1)
+                              tp_SON[:, ind_SON] = tp_obs_temp
                               ind_SON += 1
-                        
+
+                  else:
+
+                        print("Forecast not availbale in the database.")
+      
             BaseDate += timedelta(days=1)
 
       # Saving the year/seasonal climatologies and their correspondent metadata
@@ -591,16 +739,33 @@ def rainfall_ERA5_EDA_LR(BaseDateS, BaseDateF, Acc, stn_lats, stn_lons, DirIN, D
 ############################################################################
 # Compute independent rainfall realizations from ERA5_ecPoint (grid-scale, bias corrected)   # 
 ############################################################################
-def rainfall_24h_ERA5_ecPoint_gridBC(BaseDateS, BaseDateF, stn_lats, stn_lons, DirIN, DirOUT):
+def rainfall_24h_ERA5_ecPoint_gridBC(BaseDateS, BaseDateF, Acc, DirIN_ClimateOBS, DirIN_FC, DirOUT):
 
       # Specific parameters for the considered forecasting system
-      ecPoint_Dataset = DirIN.split("/")[-1]
+      ecPoint_Dataset = DirIN_FC.split("/")[-1]
       NumEM = 1
       NumRealizations_Day = 1
       
-      # Initializing the variables that will contain the independent rainfall realizations
-      NumStations = len(stn_lats)
-      
+      # Loading the stations for year and seasonal climatologies
+      stn_lats_year = np.load(DirIN_ClimateOBS + "/Stn_lats_Year.npy")
+      stn_lons_year = np.load(DirIN_ClimateOBS + "/Stn_lons_Year.npy")
+      stn_lats_DJF = np.load(DirIN_ClimateOBS + "/Stn_lats_DJF.npy")
+      stn_lons_DJF = np.load(DirIN_ClimateOBS + "/Stn_lons_DJF.npy")
+      stn_lats_MAM = np.load(DirIN_ClimateOBS + "/Stn_lats_MAM.npy")
+      stn_lons_MAM = np.load(DirIN_ClimateOBS + "/Stn_lons_MAM.npy")
+      stn_lats_JJA = np.load(DirIN_ClimateOBS + "/Stn_lats_JJA.npy")
+      stn_lons_JJA = np.load(DirIN_ClimateOBS + "/Stn_lons_JJA.npy")
+      stn_lats_SON = np.load(DirIN_ClimateOBS + "/Stn_lats_SON.npy")
+      stn_lons_SON = np.load(DirIN_ClimateOBS + "/Stn_lons_SON.npy")
+
+      # Defining the n. of stations in the year and seasonal climatologies
+      NumStn_year = len(stn_lats_year)
+      NumStn_DJF = len(stn_lats_DJF)
+      NumStn_MAM = len(stn_lats_MAM)
+      NumStn_JJA = len(stn_lats_JJA)
+      NumStn_SON = len(stn_lats_SON)
+
+      # Defining the n. of total realizations for year and seasonal climatologies
       NumDays_Year = (BaseDateF - BaseDateS).days + 1 
       NumDays_DJF = monthrange(BaseDateS.year, 12)[1] + monthrange(BaseDateS.year, 1)[1] + monthrange(BaseDateS.year, 2)[1]
       NumDays_MAM = monthrange(BaseDateS.year, 3)[1] + monthrange(BaseDateS.year, 4)[1] + monthrange(BaseDateS.year, 5)[1]
@@ -612,11 +777,12 @@ def rainfall_24h_ERA5_ecPoint_gridBC(BaseDateS, BaseDateF, stn_lats, stn_lons, D
       NumRealizations_JJA = int(NumDays_JJA * NumRealizations_Day * NumEM)
       NumRealizations_SON = int(NumDays_SON * NumRealizations_Day * NumEM)
       
-      tp_year = np.float16(np.empty([NumStations, NumRealizations_Year]) * np.nan)
-      tp_DJF = np.float16(np.empty([NumStations, NumRealizations_DJF]) * np.nan)
-      tp_MAM = np.float16(np.empty([NumStations, NumRealizations_MAM]) * np.nan)
-      tp_JJA = np.float16(np.empty([NumStations, NumRealizations_JJA]) * np.nan)
-      tp_SON = np.float16(np.empty([NumStations, NumRealizations_SON]) * np.nan)
+      # Initializing the variables that will store the indipendent rainfall realizations
+      tp_year = np.float16(np.empty([NumStn_year, NumRealizations_Year]) * np.nan)
+      tp_DJF = np.float16(np.empty([NumStn_DJF, NumRealizations_DJF]) * np.nan)
+      tp_MAM = np.float16(np.empty([NumStn_MAM, NumRealizations_MAM]) * np.nan)
+      tp_JJA = np.float16(np.empty([NumStn_JJA, NumRealizations_JJA]) * np.nan)
+      tp_SON = np.float16(np.empty([NumStn_SON, NumRealizations_SON]) * np.nan)
       
       # Computing the independent rainfall realizations for the year/seasonal climatologies
       print(" - Computing the independent rainfall realizations for the year/seasonal climatologies. Processing " + str(Acc) + "-hourly accumulation period ending on:")
@@ -626,37 +792,43 @@ def rainfall_24h_ERA5_ecPoint_gridBC(BaseDateS, BaseDateF, stn_lats, stn_lons, D
       ind_JJA = 0
       ind_SON = 0
       
+      # Extracting the independent rainfall realizations for year/seasonal climatologies
       BaseDate = BaseDateS
       while BaseDate <= BaseDateF:
             
             print("     ", BaseDate) 
-            FileIN_temp = DirIN + "/" + BaseDate.strftime("%Y%m") + "/" + ecPoint_Dataset + "_" + BaseDate.strftime("%Y%m%d") + ".grib2"
+            FileIN_temp = DirIN_FC + "/" + BaseDate.strftime("%Y%m") + "/" + ecPoint_Dataset + "_" + BaseDate.strftime("%Y%m%d") + ".grib2"
 
             if exists(FileIN_temp):
                   
                   # Reading the forecasts for the considered day
                   tp = mv.read(FileIN_temp)
                   
-                  # Extracting the tp values for the considered day at the locations where point observational climatologies were computed
-                  tp_obs = np.around(np.float16(mv.nearest_gridpoint(tp, stn_lats, stn_lons)), decimals=1)
-
-                  # Populating the variable that contains the independent rainfall realizations for the year climatology
-                  tp_year[:, ind_year] = tp_obs
+                  # Extracting the independent rainfall realizations for the year climatology
+                  tp_obs_temp = np.round(np.float16(mv.nearest_gridpoint(tp, stn_lats_year, stn_lons_year)), decimals =1)
+                  tp_year[:, ind_year] = tp_obs_temp
                   ind_year += 1
 
                   # Populating the variables that contains the independent rainfall realizations for the seasonal climatologies
                   if BaseDate.month == 12 or BaseDate.month == 1 or BaseDate.month == 2:
-                        tp_DJF[:, ind_DJF] = tp_obs
+                        tp_obs_temp = np.round(np.float16(mv.nearest_gridpoint(tp, stn_lats_DJF, stn_lons_DJF)), decimals =1)
+                        tp_DJF[:, ind_DJF] = tp_obs_temp
                         ind_DJF += 1
                   elif BaseDate.month == 3 or BaseDate.month == 4 or BaseDate.month == 5:
-                        tp_MAM[:, ind_MAM] = tp_obs
+                        tp_obs_temp = np.round(np.float16(mv.nearest_gridpoint(tp, stn_lats_MAM, stn_lons_MAM)), decimals =1)
+                        tp_MAM[:, ind_MAM] = tp_obs_temp
                         ind_MAM += 1
                   elif BaseDate.month == 6 or BaseDate.month == 7 or BaseDate.month == 8:
-                        tp_JJA[:, ind_JJA] = tp_obs
+                        tp_obs_temp = np.round(np.float16(mv.nearest_gridpoint(tp, stn_lats_JJA, stn_lons_JJA)), decimals =1)
+                        tp_JJA[:, ind_JJA] = tp_obs_temp
                         ind_JJA += 1
                   elif BaseDate.month == 9 or BaseDate.month == 10 or BaseDate.month == 11:
-                        tp_SON[:, ind_SON] = tp_obs
+                        tp_obs_temp = np.round(np.float16(mv.nearest_gridpoint(tp, stn_lats_SON, stn_lons_SON)), decimals =1)
+                        tp_SON[:, ind_SON] = tp_obs_temp
                         ind_SON += 1
+            else:
+
+                  print("Forecast not availbale in the database.")
 
             BaseDate += timedelta(days=1)
 
@@ -671,16 +843,33 @@ def rainfall_24h_ERA5_ecPoint_gridBC(BaseDateS, BaseDateF, stn_lats, stn_lons, D
 #############################################################################
 # Compute independent rainfall realizations from ERA5_ecPoint (point-scale, bias corrected)   # 
 #############################################################################
-def rainfall_24h_ERA5_ecPoint_pointBC(BaseDateS, BaseDateF, stn_lats, stn_lons, DirIN, DirOUT):
+def rainfall_24h_ERA5_ecPoint_pointBC(BaseDateS, BaseDateF, Acc, DirIN_ClimateOBS, DirIN_FC, DirOUT):
 
       # Specific parameters for the considered forecasting system
-      ecPoint_Dataset = DirIN.split("/")[-1]
+      ecPoint_Dataset = DirIN_FC.split("/")[-1]
       NumEM = 99
       NumRealizations_Day = 1
       
-      # Initializing the variables that will contain the independent rainfall realizations
-      NumStations = len(stn_lats)
-      
+      # Loading the stations for year and seasonal climatologies
+      stn_lats_year = np.load(DirIN_ClimateOBS + "/Stn_lats_Year.npy")
+      stn_lons_year = np.load(DirIN_ClimateOBS + "/Stn_lons_Year.npy")
+      stn_lats_DJF = np.load(DirIN_ClimateOBS + "/Stn_lats_DJF.npy")
+      stn_lons_DJF = np.load(DirIN_ClimateOBS + "/Stn_lons_DJF.npy")
+      stn_lats_MAM = np.load(DirIN_ClimateOBS + "/Stn_lats_MAM.npy")
+      stn_lons_MAM = np.load(DirIN_ClimateOBS + "/Stn_lons_MAM.npy")
+      stn_lats_JJA = np.load(DirIN_ClimateOBS + "/Stn_lats_JJA.npy")
+      stn_lons_JJA = np.load(DirIN_ClimateOBS + "/Stn_lons_JJA.npy")
+      stn_lats_SON = np.load(DirIN_ClimateOBS + "/Stn_lats_SON.npy")
+      stn_lons_SON = np.load(DirIN_ClimateOBS + "/Stn_lons_SON.npy")
+
+      # Defining the n. of stations in the year and seasonal climatologies
+      NumStn_year = len(stn_lats_year)
+      NumStn_DJF = len(stn_lats_DJF)
+      NumStn_MAM = len(stn_lats_MAM)
+      NumStn_JJA = len(stn_lats_JJA)
+      NumStn_SON = len(stn_lats_SON)
+
+      # Defining the n. of total realizations for year and seasonal climatologies
       NumDays_Year = (BaseDateF - BaseDateS).days + 1 
       NumDays_DJF = monthrange(BaseDateS.year, 12)[1] + monthrange(BaseDateS.year, 1)[1] + monthrange(BaseDateS.year, 2)[1]
       NumDays_MAM = monthrange(BaseDateS.year, 3)[1] + monthrange(BaseDateS.year, 4)[1] + monthrange(BaseDateS.year, 5)[1]
@@ -692,11 +881,12 @@ def rainfall_24h_ERA5_ecPoint_pointBC(BaseDateS, BaseDateF, stn_lats, stn_lons, 
       NumRealizations_JJA = int(NumDays_JJA * NumRealizations_Day * NumEM)
       NumRealizations_SON = int(NumDays_SON * NumRealizations_Day * NumEM)
       
-      tp_year = np.float16(np.empty([NumStations, NumRealizations_Year]) * np.nan)
-      tp_DJF = np.float16(np.empty([NumStations, NumRealizations_DJF]) * np.nan)
-      tp_MAM = np.float16(np.empty([NumStations, NumRealizations_MAM]) * np.nan)
-      tp_JJA = np.float16(np.empty([NumStations, NumRealizations_JJA]) * np.nan)
-      tp_SON = np.float16(np.empty([NumStations, NumRealizations_SON]) * np.nan)
+      # Initializing the variables that will store the indipendent rainfall realizations
+      tp_year = np.float16(np.empty([NumStn_year, NumRealizations_Year]) * np.nan)
+      tp_DJF = np.float16(np.empty([NumStn_DJF, NumRealizations_DJF]) * np.nan)
+      tp_MAM = np.float16(np.empty([NumStn_MAM, NumRealizations_MAM]) * np.nan)
+      tp_JJA = np.float16(np.empty([NumStn_JJA, NumRealizations_JJA]) * np.nan)
+      tp_SON = np.float16(np.empty([NumStn_SON, NumRealizations_SON]) * np.nan)
       
       # Computing the independent rainfall realizations for the year/seasonal climatologies
       print(" - Computing the independent rainfall realizations for the year/seasonal climatologies. Processing " + str(Acc) + "-hourly accumulation period ending on:")
@@ -715,38 +905,44 @@ def rainfall_24h_ERA5_ecPoint_pointBC(BaseDateS, BaseDateF, stn_lats, stn_lons, 
       while BaseDate <= BaseDateF:
             
             print("     ", BaseDate) 
-            FileIN_temp = DirIN + "/" + BaseDate.strftime("%Y%m") + "/" + ecPoint_Dataset + "_" + BaseDate.strftime("%Y%m%d") + ".grib2"
+            FileIN_temp = DirIN_FC + "/" + BaseDate.strftime("%Y%m") + "/" + ecPoint_Dataset + "_" + BaseDate.strftime("%Y%m%d") + ".grib2"
 
             if exists(FileIN_temp):
                   
                   # Reading the forecasts for the considered day
                   tp = mv.read(FileIN_temp)
                   
-                  # Extracting the tp values for the considered day at the locations where point observational climatologies were computed
-                  tp_obs = np.transpose(np.around(np.float16(mv.nearest_gridpoint(tp, stn_lats, stn_lons)), decimals=1))
-
-                  # Populating the variable that contains the independent rainfall realizations for the year climatology
-                  tp_year[:, ind1_year:ind2_year] = tp_obs
+                  # Extracting the independent rainfall realizations for the year climatology
+                  tp_obs_temp = np.round(np.float16(mv.nearest_gridpoint(tp, stn_lats_year, stn_lons_year)), decimals =1).T
+                  tp_year[:, ind1_year:ind2_year] = tp_obs_temp
                   ind1_year = ind2_year
                   ind2_year = ind1_year + NumEM
 
                   # Populating the variables that contains the independent rainfall realizations for the seasonal climatologies
                   if BaseDate.month == 12 or BaseDate.month == 1 or BaseDate.month == 2:
-                        tp_DJF[:, ind1_DJF:ind2_DJF] = tp_obs
+                        tp_obs_temp = np.round(np.float16(mv.nearest_gridpoint(tp, stn_lats_DJF, stn_lons_DJF)), decimals =1).T
+                        tp_DJF[:, ind1_DJF:ind2_DJF] = tp_obs_temp
                         ind1_DJF = ind2_DJF
                         ind2_DJF = ind1_DJF + NumEM
                   elif BaseDate.month == 3 or BaseDate.month == 4 or BaseDate.month == 5:
-                        tp_MAM[:, ind1_MAM:ind2_MAM] = tp_obs
+                        tp_obs_temp = np.round(np.float16(mv.nearest_gridpoint(tp, stn_lats_MAM, stn_lons_MAM)), decimals =1).T
+                        tp_MAM[:, ind1_MAM:ind2_MAM] = tp_obs_temp
                         ind1_MAM = ind2_MAM
                         ind2_MAM = ind1_MAM + NumEM
                   elif BaseDate.month == 6 or BaseDate.month == 7 or BaseDate.month == 8:
-                        tp_JJA[:, ind1_JJA:ind2_JJA] = tp_obs
+                        tp_obs_temp = np.round(np.float16(mv.nearest_gridpoint(tp, stn_lats_JJA, stn_lons_JJA)), decimals =1).T
+                        tp_JJA[:, ind1_JJA:ind2_JJA] = tp_obs_temp
                         ind1_JJA = ind2_JJA
                         ind2_JJA = ind1_JJA + NumEM
                   elif BaseDate.month == 9 or BaseDate.month == 10 or BaseDate.month == 11:
-                        tp_SON[:, ind1_SON:ind2_SON] = tp_obs
+                        tp_obs_temp = np.round(np.float16(mv.nearest_gridpoint(tp, stn_lats_SON, stn_lons_SON)), decimals =1).T
+                        tp_SON[:, ind1_SON:ind2_SON] = tp_obs_temp
                         ind1_SON = ind2_SON
                         ind2_SON = ind1_SON + NumEM
+
+            else:
+
+                  print("Forecast not availbale in the database.")
 
             BaseDate += timedelta(days=1)
  
@@ -771,72 +967,74 @@ for MinDays_Perc in MinDays_Perc_list:
 
             if (NameOBS == "06_AlignOBS_Combine_Years_RawSTVL") or (NameOBS == "07_AlignOBS_Extract_GridCPC"):
 
-                  # Reading where the point observational climatologies were computed (i.e. stations lat/lon) 
+                  # Setting the input directory for the observational climatologies
                   MainDirIN_ClimateOBS = Git_repo + "/" + DirIN_ClimateOBS + "/MinDays_Perc" + str(int(MinDays_Perc*100)) + "/" + NameOBS
-                  stn_lats = np.load(MainDirIN_ClimateOBS + "/Stn_lats.npy")
-                  stn_lons = np.load(MainDirIN_ClimateOBS + "/Stn_lons.npy")
                   
                   for SystemFC in SystemFC_list:
                         
                         print(" ")
                         print("Computing modelled (" + SystemFC + ") climatologies at stations for "+ NameOBS + " with a minimum of " + str(int(MinDays_Perc*100)) + "% of days over the considered period with valid observations")
 
-                        # Computing the independent rainfall realizations for the considering forecasting system
+                        # Setting the input directory for the forecasts
                         MainDirIN_FC = Git_repo + "/" + DirIN_FC + "/" + SystemFC
+                        
+                        # Setting the output directory
                         MainDirOUT = Git_repo + "/" + DirOUT + "/" + SystemFC + "/MinDays_Perc" + str(int(MinDays_Perc*100)) + "/" + NameOBS
                         if not exists(MainDirOUT):
                                     os.makedirs(MainDirOUT)
 
+                        # Computing the independent rainfall realizations for the considering forecasting system
                         if SystemFC == "HRES_46r1":
-                              rainfall_HRES(BaseDateS, BaseDateF, Acc, stn_lats, stn_lons, MainDirIN_FC, MainDirOUT)
+                              rainfall_HRES(BaseDateS, BaseDateF, Acc, MainDirIN_ClimateOBS, MainDirIN_FC, MainDirOUT)
                         elif SystemFC == "Reforecasts_46r1":
-                              rainfall_REFORECAST(BaseDateS, BaseDateF, Acc, stn_lats, stn_lons, MainDirIN_FC, MainDirOUT)
+                              rainfall_REFORECAST(BaseDateS, BaseDateF, Acc, MainDirIN_ClimateOBS, MainDirIN_FC, MainDirOUT)
                         elif SystemFC == "ERA5_ShortRange":
-                              rainfall_24h_ERA5_SR(BaseDateS, BaseDateF, stn_lats, stn_lons, MainDirIN_FC, MainDirOUT)
+                              rainfall_24h_ERA5_SR(BaseDateS, BaseDateF, Acc, MainDirIN_ClimateOBS, MainDirIN_FC, MainDirOUT)
                         elif SystemFC == "ERA5_EDA_ShortRange":
-                              rainfall_24h_ERA5_EDA_SR(BaseDateS, BaseDateF, stn_lats, stn_lons, MainDirIN_FC, MainDirOUT)
+                              rainfall_24h_ERA5_EDA_SR(BaseDateS, BaseDateF, Acc, MainDirIN_ClimateOBS, MainDirIN_FC, MainDirOUT)
                         elif SystemFC == "ERA5_LongRange":
-                              rainfall_ERA5_LR(BaseDateS, BaseDateF, Acc, stn_lats, stn_lons, MainDirIN_FC, MainDirOUT)
+                              rainfall_ERA5_LR(BaseDateS, BaseDateF, Acc, MainDirIN_ClimateOBS, MainDirIN_FC, MainDirOUT)
                         elif SystemFC == "ERA5_EDA_LongRange":
-                              rainfall_ERA5_EDA_LR(BaseDateS, BaseDateF, Acc, stn_lats, stn_lons, MainDirIN_FC, MainDirOUT)
+                              rainfall_ERA5_EDA_LR(BaseDateS, BaseDateF, Acc, MainDirIN_ClimateOBS, MainDirIN_FC, MainDirOUT)
                         elif SystemFC == "ERA5_ecPoint/Grid_BC_VALS":
-                              rainfall_24h_ERA5_ecPoint_gridBC(BaseDateS, BaseDateF, stn_lats, stn_lons, MainDirIN_FC, MainDirOUT)
+                              rainfall_24h_ERA5_ecPoint_gridBC(BaseDateS, BaseDateF, Acc, MainDirIN_ClimateOBS, MainDirIN_FC, MainDirOUT)
                         elif SystemFC == "ERA5_ecPoint/Pt_BC_PERC":
-                              rainfall_24h_ERA5_ecPoint_pointBC(BaseDateS, BaseDateF, stn_lats, stn_lons, MainDirIN_FC, MainDirOUT)
+                              rainfall_24h_ERA5_ecPoint_pointBC(BaseDateS, BaseDateF, Acc, MainDirIN_ClimateOBS, MainDirIN_FC, MainDirOUT)
 
             elif NameOBS == "08_AlignOBS_CleanSTVL":
 
                   for Coeff_Grid2Point in Coeff_Grid2Point_list:
                         
-                        # Reading where the point observational climatologies were computed (i.e. stations lat/lon) 
+                        # Setting the input directory for the observational climatologies
                         MainDirIN_ClimateOBS = Git_repo + "/" + DirIN_ClimateOBS + "/MinDays_Perc" + str(int(MinDays_Perc*100)) + "/" + NameOBS + "/Coeff_Grid2Point_" + str(Coeff_Grid2Point)
-                        stn_lats = np.load(MainDirIN_ClimateOBS + "/Stn_lats.npy")
-                        stn_lons = np.load(MainDirIN_ClimateOBS + "/Stn_lons.npy")
                         
                         for SystemFC in SystemFC_list:
                               
                               print(" ")
                               print("Computing modelled (" + SystemFC + ") climatologies at stations for "+ NameOBS + " (Coeff_Grid2Point=" + str(Coeff_Grid2Point) + ") with a minimum of " + str(int(MinDays_Perc*100)) + "% of days over the considered period with valid observations")
 
-                              # Computing the independent rainfall realizations for the considering forecasting system
+                              # Setting the input directory for the forecasts
                               MainDirIN_FC = Git_repo + "/" + DirIN_FC + "/" + SystemFC
+
+                              # Setting the output directory
                               MainDirOUT = Git_repo + "/" + DirOUT + "/" + SystemFC + "/MinDays_Perc" + str(int(MinDays_Perc*100)) + "/" + NameOBS + "/Coeff_Grid2Point_" + str(Coeff_Grid2Point)
                               if not exists(MainDirOUT):
                                     os.makedirs(MainDirOUT)
                               
+                              # Computing the independent rainfall realizations for the considering forecasting system
                               if SystemFC == "HRES_46r1":
-                                    rainfall_HRES(BaseDateS, BaseDateF, Acc, stn_lats, stn_lons, MainDirIN_FC, MainDirOUT)
+                                    rainfall_HRES(BaseDateS, BaseDateF, Acc, MainDirIN_ClimateOBS, MainDirIN_FC, MainDirOUT)
                               elif SystemFC == "Reforecasts_46r1":
-                                    rainfall_REFORECAST(BaseDateS, BaseDateF, Acc, stn_lats, stn_lons, MainDirIN_FC, MainDirOUT)
+                                    rainfall_REFORECAST(BaseDateS, BaseDateF, Acc, MainDirIN_ClimateOBS, MainDirIN_FC, MainDirOUT)
                               elif SystemFC == "ERA5_ShortRange":
-                                    rainfall_24h_ERA5_SR(BaseDateS, BaseDateF, stn_lats, stn_lons, MainDirIN_FC, MainDirOUT)
+                                    rainfall_24h_ERA5_SR(BaseDateS, BaseDateF, Acc, MainDirIN_ClimateOBS, MainDirIN_FC, MainDirOUT)
                               elif SystemFC == "ERA5_EDA_ShortRange":
-                                    rainfall_24h_ERA5_EDA_SR(BaseDateS, BaseDateF, stn_lats, stn_lons, MainDirIN_FC, MainDirOUT)
+                                    rainfall_24h_ERA5_EDA_SR(BaseDateS, BaseDateF, Acc, MainDirIN_ClimateOBS, MainDirIN_FC, MainDirOUT)
                               elif SystemFC == "ERA5_LongRange":
-                                    rainfall_ERA5_LR(BaseDateS, BaseDateF, Acc, stn_lats, stn_lons, MainDirIN_FC, MainDirOUT)
+                                    rainfall_ERA5_LR(BaseDateS, BaseDateF, Acc, MainDirIN_ClimateOBS, MainDirIN_FC, MainDirOUT)
                               elif SystemFC == "ERA5_EDA_LongRange":
-                                    rainfall_ERA5_EDA_LR(BaseDateS, BaseDateF, Acc, stn_lats, stn_lons, MainDirIN_FC, MainDirOUT)
+                                    rainfall_ERA5_EDA_LR(BaseDateS, BaseDateF, Acc, MainDirIN_ClimateOBS, MainDirIN_FC, MainDirOUT)
                               elif SystemFC == "ERA5_ecPoint/Grid_BC_VALS":
-                                    rainfall_24h_ERA5_ecPoint_gridBC(BaseDateS, BaseDateF, stn_lats, stn_lons, MainDirIN_FC, MainDirOUT)
+                                    rainfall_24h_ERA5_ecPoint_gridBC(BaseDateS, BaseDateF, Acc, MainDirIN_ClimateOBS, MainDirIN_FC, MainDirOUT)
                               elif SystemFC == "ERA5_ecPoint/Pt_BC_PERC":
-                                    rainfall_24h_ERA5_ecPoint_pointBC(BaseDateS, BaseDateF, stn_lats, stn_lons, MainDirIN_FC, MainDirOUT)
+                                    rainfall_24h_ERA5_ecPoint_pointBC(BaseDateS, BaseDateF, Acc, MainDirIN_ClimateOBS, MainDirIN_FC, MainDirOUT)

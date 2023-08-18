@@ -1,0 +1,3040 @@
+[ECMWF-INFO -sbatch] - -------------------------------------------------------------------------------------
+[ECMWF-INFO -sbatch] -  This is the ECMWF jobfilter
+[ECMWF-INFO -sbatch] -  +++ Please report issues using the Support portal +++
+[ECMWF-INFO -sbatch] -  +++ https://support.ecmwf.int                     +++
+[ECMWF-INFO -sbatch] -  /usr/local/bin/ecsbatch: size: 48802, mtime: Mon Jul  3 10:31:21 2023
+[ECMWF-INFO -sbatch] - -------------------------------------------------------------------------------------
+[ECMWF-INFO -sbatch] - Time at submit: Fri Aug 18 16:14:50 2023 (1692375290.0332568) on ac6-100.bullx:/etc/ecmwf/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate/Scripts/Processed
+[ECMWF-INFO -sbatch] - --- SLURM VARIABLES ---
+[ECMWF-INFO -sbatch] - EC_CLUSTER=ac
+[ECMWF-INFO -sbatch] - SLURM_EXPORT_ENV=ALL
+[ECMWF-INFO -sbatch] - SBATCH_EXPORT=NONE
+[ECMWF-INFO -sbatch] - -----------------------
+[ECMWF-INFO -sbatch] - jobscript: /etc/ecmwf/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate/Scripts/Processed/10a_SubmitATOS_Extract_RainfallFC_atOBS.sh
+[ECMWF-INFO -sbatch] - --- SCRIPT OPTIONS ---
+[ECMWF-INFO -sbatch] - #SBATCH --job-name=Extract_RainfallFC_atOBS
+[ECMWF-INFO -sbatch] - #SBATCH --output=LogATOS/Extract_RainfallFC_atOBS-%J.out
+[ECMWF-INFO -sbatch] - #SBATCH --error=LogATOS/Extract_RainfallFC_atOBS-%J.out
+[ECMWF-INFO -sbatch] - #SBATCH --cpus-per-task=1
+[ECMWF-INFO -sbatch] - #SBATCH --mem=64G
+[ECMWF-INFO -sbatch] - #SBATCH --qos=nf
+[ECMWF-INFO -sbatch] - #SBATCH --mail-type=FAIL
+[ECMWF-INFO -sbatch] - #SBATCH --mail-user=fatima.pillosu@ecmwf.int
+[ECMWF-INFO -sbatch] - -----------------------
+[ECMWF-INFO -sbatch] - --- POST-PROCESSED OPTIONS ---
+[ECMWF-INFO -sbatch] - ARG --positional=['10a_SubmitATOS_Extract_RainfallFC_atOBS.sh', '2010', 'Reforecasts_46r1']
+[ECMWF-INFO -sbatch] - ARG --cpus_per_task=1
+[ECMWF-INFO -sbatch] - ARG --error=LogATOS/Extract_RainfallFC_atOBS-%J.out
+[ECMWF-INFO -sbatch] - ARG --job_name=Extract_RainfallFC_atOBS
+[ECMWF-INFO -sbatch] - ARG --mail_type=FAIL
+[ECMWF-INFO -sbatch] - ARG --mail_user=fatima.pillosu@ecmwf.int
+[ECMWF-INFO -sbatch] - ARG --output=LogATOS/Extract_RainfallFC_atOBS-%J.out
+[ECMWF-INFO -sbatch] - ARG --qos=nf
+[ECMWF-INFO -sbatch] - ARG --mem=64G
+[ECMWF-INFO -sbatch] - ------------------------------
+[ECMWF-INFO -sbatch] - jobtag: mofp-Extract_Ra_llFC_atOBS-1x2-/etc/ecmwf/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate/Scripts/Processed/LogATOS/Extract_RainfallFC_atOBS-_.out
+[ECMWF-INFO -sbatch] - ['/usr/bin/sbatch', '--cpus-per-task=1', '--error=LogATOS/Extract_RainfallFC_atOBS-%J.out', '--job-name=Extract_RainfallFC_atOBS', '--mail-type=FAIL', '--mail-user=fatima.pillosu@ecmwf.int', '--output=LogATOS/Extract_RainfallFC_atOBS-%J.out', '--qos=nf', '--mem=64G', '--licenses=h2resw01', '--time=1-00:00:00', '/etc/ecmwf/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate/Scripts/Processed/10a_SubmitATOS_Extract_RainfallFC_atOBS.sh', '2010', 'Reforecasts_46r1']
+[ECMWF-INFO -sbatch] - sbatch executed on ac
+[ECMWF-INFO -sbatch] - Job queued on ac using method local
+[ECMWF-INFO -sbatch] - Submitted batch job 34400763
+[ECMWF-INFO -ecprofile] /usr/bin/bash NON_INTERACTIVE on ac6-153 at 20230818_161506.079, PID: 2052012, JOBID: 34400763
+[ECMWF-INFO -ecprofile] $SCRATCH=/ec/res4/scratch/mofp
+[ECMWF-INFO -ecprofile] $PERM=/perm/mofp
+[ECMWF-INFO -ecprofile] $HPCPERM=/ec/res4/hpcperm/mofp
+[ECMWF-INFO -ecprofile] $TMPDIR=/etc/ecmwf/ssd/ssd1/tmpdirs/mofp.34400763
+[ECMWF-INFO -ecprofile] $SCRATCHDIR=/ec/res4/scratchdir/mofp/3/34400763
+ 
+Computing modelled (Reforecasts_46r1) climatologies at stations for 08_AlignOBS_CleanSTVL (Coeff_Grid2Point=20) with a minimum of 75% of days over the considered period with valid observations
+ - Computing the independent rainfall realizations for the year/seasonal climatologies. Processing 24-hourly accumulation period ending on:
+      2010-01-01
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-01-02
+      2010-01-03
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-01-04
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-01-05
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-01-06
+      2010-01-07
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-01-08
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-01-09
+      2010-01-10
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-01-11
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-01-12
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-01-13
+      2010-01-14
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-01-15
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-01-16
+      2010-01-17
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-01-18
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-01-19
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-01-20
+      2010-01-21
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-01-22
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-01-23
+      2010-01-24
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-01-25
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-01-26
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-01-27
+      2010-01-28
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-01-29
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-01-30
+      2010-01-31
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-02-01
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-02-02
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-02-03
+      2010-02-04
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-02-05
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-02-06
+      2010-02-07
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-02-08
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-02-09
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-02-10
+      2010-02-11
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-02-12
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-02-13
+      2010-02-14
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-02-15
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-02-16
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-02-17
+      2010-02-18
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-02-19
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-02-20
+      2010-02-21
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-02-22
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-02-23
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-02-24
+      2010-02-25
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-02-26
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-02-27
+      2010-02-28
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-03-01
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-03-02
+      2010-03-03
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-03-04
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-03-05
+      2010-03-06
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-03-07
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-03-08
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-03-09
+      2010-03-10
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-03-11
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-03-12
+      2010-03-13
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-03-14
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-03-15
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-03-16
+      2010-03-17
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-03-18
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-03-19
+      2010-03-20
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-03-21
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-03-22
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-03-23
+      2010-03-24
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-03-25
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-03-26
+      2010-03-27
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-03-28
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-03-29
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-03-30
+      2010-03-31
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-04-01
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-04-02
+      2010-04-03
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-04-04
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-04-05
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-04-06
+      2010-04-07
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-04-08
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-04-09
+      2010-04-10
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-04-11
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-04-12
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-04-13
+      2010-04-14
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-04-15
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-04-16
+      2010-04-17
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-04-18
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-04-19
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-04-20
+      2010-04-21
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-04-22
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-04-23
+      2010-04-24
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-04-25
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-04-26
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-04-27
+      2010-04-28
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-04-29
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-04-30
+      2010-05-01
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-05-02
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-05-03
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-05-04
+      2010-05-05
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-05-06
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-05-07
+      2010-05-08
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-05-09
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-05-10
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-05-11
+      2010-05-12
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-05-13
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-05-14
+      2010-05-15
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-05-16
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-05-17
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-05-18
+      2010-05-19
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-05-20
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-05-21
+      2010-05-22
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-05-23
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-05-24
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-05-25
+      2010-05-26
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-05-27
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-05-28
+      2010-05-29
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-05-30
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-05-31
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-06-01
+      2010-06-02
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-06-03
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-06-04
+      2010-06-05
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-06-06
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-06-07
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-06-08
+      2010-06-09
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-06-10
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-06-11
+      2010-06-12
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-06-13
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-06-14
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-06-15
+      2010-06-16
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-06-17
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-06-18
+      2010-06-19
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-06-20
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-06-21
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-06-22
+      2010-06-23
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-06-24
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-06-25
+      2010-06-26
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-06-27
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-06-28
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-06-29
+      2010-06-30
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-07-01
+      2010-07-02
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-07-03
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-07-04
+      2010-07-05
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-07-06
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-07-07
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-07-08
+      2010-07-09
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-07-10
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-07-11
+      2010-07-12
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-07-13
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-07-14
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-07-15
+      2010-07-16
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-07-17
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-07-18
+      2010-07-19
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-07-20
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-07-21
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-07-22
+      2010-07-23
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-07-24
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-07-25
+      2010-07-26
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-07-27
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-07-28
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-07-29
+      2010-07-30
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-07-31
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-08-01
+      2010-08-02
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-08-03
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-08-04
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-08-05
+      2010-08-06
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-08-07
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-08-08
+      2010-08-09
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-08-10
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-08-11
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-08-12
+      2010-08-13
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-08-14
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-08-15
+      2010-08-16
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-08-17
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-08-18
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-08-19
+      2010-08-20
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-08-21
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-08-22
+      2010-08-23
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-08-24
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-08-25
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-08-26
+      2010-08-27
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-08-28
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-08-29
+      2010-08-30
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-08-31
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-09-01
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-09-02
+      2010-09-03
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-09-04
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-09-05
+      2010-09-06
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-09-07
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-09-08
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-09-09
+      2010-09-10
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-09-11
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-09-12
+      2010-09-13
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-09-14
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-09-15
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-09-16
+      2010-09-17
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-09-18
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-09-19
+      2010-09-20
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-09-21
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-09-22
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-09-23
+      2010-09-24
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-09-25
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-09-26
+      2010-09-27
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-09-28
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-09-29
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-09-30
+      2010-10-01
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-10-02
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-10-03
+      2010-10-04
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-10-05
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-10-06
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-10-07
+      2010-10-08
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-10-09
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-10-10
+      2010-10-11
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-10-12
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-10-13
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-10-14
+      2010-10-15
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-10-16
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-10-17
+      2010-10-18
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-10-19
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-10-20
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-10-21
+      2010-10-22
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-10-23
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-10-24
+      2010-10-25
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-10-26
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-10-27
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-10-28
+      2010-10-29
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-10-30
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-10-31
+      2010-11-01
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-11-02
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-11-03
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-11-04
+      2010-11-05
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-11-06
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-11-07
+      2010-11-08
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-11-09
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-11-10
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-11-11
+      2010-11-12
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-11-13
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-11-14
+      2010-11-15
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-11-16
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-11-17
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-11-18
+      2010-11-19
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-11-20
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-11-21
+      2010-11-22
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-11-23
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-11-24
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-11-25
+      2010-11-26
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-11-27
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-11-28
+      2010-11-29
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-11-30
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-12-01
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-12-02
+      2010-12-03
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-12-04
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-12-05
+      2010-12-06
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-12-07
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-12-08
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-12-09
+      2010-12-10
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-12-11
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-12-12
+      2010-12-13
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-12-14
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-12-15
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-12-16
+      2010-12-17
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-12-18
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-12-19
+      2010-12-20
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-12-21
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-12-22
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-12-23
+      2010-12-24
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-12-25
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-12-26
+      2010-12-27
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-12-28
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-12-29
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+      2010-12-30
+      2010-12-31
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+Forecast not availbale in the database.
+ - Saving the year/seasonal rainfall realizations
+[ECMWF-INFO -ecepilog] ----------------------------------------------------------------------------------------------------
+[ECMWF-INFO -ecepilog] This is the ECMWF job Epilogue
+[ECMWF-INFO -ecepilog] +++ Please report issues using the Support portal +++
+[ECMWF-INFO -ecepilog] +++ https://support.ecmwf.int                     +++
+[ECMWF-INFO -ecepilog] ----------------------------------------------------------------------------------------------------
+[ECMWF-INFO -ecepilog] Run at 2023-08-18T16:21:15 on ac
+[ECMWF-INFO -ecepilog] JobName                   : Extract_RainfallFC_atOBS
+[ECMWF-INFO -ecepilog] JobID                     : 34400763
+[ECMWF-INFO -ecepilog] Submit                    : 2023-08-18T16:14:50
+[ECMWF-INFO -ecepilog] Start                     : 2023-08-18T16:15:02
+[ECMWF-INFO -ecepilog] End                       : 2023-08-18T16:21:15
+[ECMWF-INFO -ecepilog] QueuedTime                : 12.0
+[ECMWF-INFO -ecepilog] ElapsedRaw                : 373
+[ECMWF-INFO -ecepilog] ExitCode                  : 0:0
+[ECMWF-INFO -ecepilog] DerivedExitCode           : 0:0
+[ECMWF-INFO -ecepilog] State                     : COMPLETED
+[ECMWF-INFO -ecepilog] Account                   : ecodmdmo
+[ECMWF-INFO -ecepilog] QOS                       : nf
+[ECMWF-INFO -ecepilog] User                      : mofp
+[ECMWF-INFO -ecepilog] StdOut                    : /etc/ecmwf/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate/Scripts/Processed/LogATOS/Extract_RainfallFC_atOBS-34400763.out
+[ECMWF-INFO -ecepilog] StdErr                    : /etc/ecmwf/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate/Scripts/Processed/LogATOS/Extract_RainfallFC_atOBS-34400763.out
+[ECMWF-INFO -ecepilog] NNodes                    : 1
+[ECMWF-INFO -ecepilog] NCPUS                     : 2
+[ECMWF-INFO -ecepilog] SBU                       : 1.959
+[ECMWF-INFO -ecepilog] ----------------------------------------------------------------------------------------------------
+

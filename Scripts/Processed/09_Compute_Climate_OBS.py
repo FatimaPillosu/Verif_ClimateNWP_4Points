@@ -103,9 +103,9 @@ def compute_climate_obs(MinDays_Perc, Perc_year, Perc_season, DirIN, DirOUT):
             climate = np.transpose(np.round(np.float32(np.nanpercentile(obs_temp_MinNumDays_new, percs, axis=1, interpolation="linear").astype(float)), decimals=1))
             np.save(DirOUT + "/" + NamePercs + ".npy", percs)
             np.save(DirOUT + "/Climate_" + ClimateType + ".npy", climate)
-            np.save(DirOUT + "/" + "Stn_ids.npy", stnids_MinNumDays)
-            np.save(DirOUT + "/" + "Stn_lats.npy", lats_MinNumDays)
-            np.save(DirOUT + "/" + "Stn_lons.npy", lons_MinNumDays)
+            np.save(DirOUT + "/" + "Stn_ids_" + ClimateType + ".npy", stnids_MinNumDays)
+            np.save(DirOUT + "/" + "Stn_lats_" + ClimateType + ".npy", lats_MinNumDays)
+            np.save(DirOUT + "/" + "Stn_lons_" + ClimateType + ".npy", lons_MinNumDays)
 ###############################################################################################################
 
 # Computing the observational climatologies
