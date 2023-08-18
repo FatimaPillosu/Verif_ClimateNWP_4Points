@@ -28,7 +28,7 @@ Coeff_Grid2Point_list = [20]
 Git_repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate"
 DirIN_Climate_OBS = "Data/Compute/09_Climate_OBS"
 DirIN_Climate_FC = "Data/Compute/11_ClimateFC_atOBS"
-DirOUT = "Data/Compute/12_Statistic_AD"
+DirOUT = "Data/Compute/13_Statistic_AD"
 ############################################################################################################################################
 
 # Costum functions
@@ -47,21 +47,17 @@ def statisticAD(DirIN_OBS, DirIN_FC, DirOUT):
       #         Therefore, we would not reject the null hypothesis of the test.
       #         Thus, we don’t have sufficient evidence to say that the samples are not drawn from the same population.
 
-      Dataset_list = ["DJF", "MAM", "JJA", "SON"]
-      for Dataset in Dataset_list:
+      Season_list = ["Year", "DJF", "MAM", "JJA", "SON"]
+
+      for Season in Season_list:
             
-            print(" - Computing the Anderson-Darling statistic for k-samples for the " + Dataset + " climatology")
+            print(" - Computing the Anderson-Darling statistic for k-samples for the " + Season + " climatology")
 
-            # Reading the climatologies and their locations
-            print(DirIN_OBS + "/Climate_" + Dataset + ".npy")
-            climate_obs = np.load(DirIN_OBS + "/Climate_" + Dataset + ".npy")
-            climate_fc = np.load(DirIN_FC + "/Climate_" + Dataset + ".npy")
-            print(climate_obs.shape)
-            print(climate_fc.shape)
-            exit()
-
-            lats = np.load(DirIN_OBS + "/Stn_lats.npy")
-            lons = np.load(DirIN_OBS + "/Stn_lons.npy")
+            # Reading the observational/modelled climatologies and their locations in lat/lon coordinates
+            climate_obs = np.load(DirIN_OBS + "/Climate_" + Season + ".npy")
+            climate_fc = np.load(DirIN_FC + "/Climate_" + Season + ".npy")
+            lats = np.load(DirIN_OBS + "/Stn_lats_" + Season + ".npy")
+            lons = np.load(DirIN_OBS + "/Stn_lons_" + Season + ".npy")
             num_stn = climate_obs.shape[0]
             num_perc = climate_obs.shape[1]
             climate_fc = climate_fc[:,0:num_perc] # to match the number of percentiles between the observational and modelled climatologies
@@ -78,10 +74,10 @@ def statisticAD(DirIN_OBS, DirIN_FC, DirOUT):
                         CriticalVal[ind_stn] = TestAD[1][-1] # for significance level 0.1%.
 
             # Saving the Anderson-Darling statistic for k-samples
-            np.save(DirOUT + "/StatisticAD_" + Dataset + ".npy", StatisticAD)
-            np.save(DirOUT + "/CriticalVal_" + Dataset + ".npy", CriticalVal)
-            np.save(DirOUT + "/Stn_lats.npy", lats)      
-            np.save(DirOUT + "/Stn_lons.npy", lons)
+            np.save(DirOUT + "/StatisticAD_" + Season + ".npy", StatisticAD)
+            np.save(DirOUT + "/CriticalVal_" + Season + ".npy", CriticalVal)
+            np.save(DirOUT + "/Stn_lats_" + Season + ".npy", lats)      
+            np.save(DirOUT + "/Stn_lons_" + Season + ".npy", lons)
 
 ######################################################################################################################################################
 
