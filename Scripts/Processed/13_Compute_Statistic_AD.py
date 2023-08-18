@@ -6,7 +6,7 @@ from scipy.stats import anderson_ksamp
 ############################################################################################################################################
 # CODE DESCRIPTION
 # 13_Compute_Statistic_AD.py computes the Anderson-Darling statistic between the observational and modelled climatological distributions.
-# Code runtime: .
+# Code runtime: negligible.
 
 # DESCRIPTION OF INPUT PARAMETERS
 # Acc (number, in hours): rainfall accumulation period.
