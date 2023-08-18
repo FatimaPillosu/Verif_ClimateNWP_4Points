@@ -10,7 +10,8 @@ import metview as mv
 # CODE DESCRIPTION
 # 10_Compute_Extract_RainfallFC_atOBS.py extracts rainfall realizations from different forecasting systems, at the location of available point rainfall climatologies on a 
 # given year.
-# Code runtime: Depends on the number of datasets processed, but it is on the order of 1 hour per dataset.
+# Code runtime: Depends on the number of datasets processed, but it is on the order of 2 hour for all datasets.
+# Note: this script must be run on the HPC because it is memory demanding.
 
 # DESCRIPTION OF INPUT PARAMETERS
 # Year (number, in YYYY format): year to consider.

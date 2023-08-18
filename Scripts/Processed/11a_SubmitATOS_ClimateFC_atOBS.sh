@@ -10,7 +10,9 @@
 #SBATCH --mail-user=fatima.pillosu@ecmwf.int
 
 # INPUTS
-SystemFC_list=${1}
+YearS=${1}
+YearF=${2}
+SystemFC_list=${3}
 
 # CODE
-time python3 11_Compute_Climate_FC_atOBS.py ${SystemFC_list}
+time python3 11_Compute_ClimateFC_atOBS.py ${YearS} ${YearF} ${SystemFC_list}

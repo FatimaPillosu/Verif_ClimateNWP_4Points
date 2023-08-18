@@ -40,15 +40,15 @@ YearS = 2000
 YearF = 2019
 Acc = 24
 RunType = "Static"
-DatasetType_OBS_FC = "OBS"
-SystemFC_list = ["HRES_46r1", "Reforecasts_46r1", "ERA5_ShortRange", "ERA5_EDA_ShortRange", "ERA5_LongRange", "ERA5_EDA_LongRange", "ERA5_ecPoint/Grid_BC_VALS", "ERA5_ecPoint/Pt_BC_PERC"]
+DatasetType_OBS_FC = "FC"
+SystemFC_list = ["Reforecasts_46r1", "ERA5_ShortRange", "ERA5_EDA_ShortRange", "ERA5_LongRange", "ERA5_EDA_LongRange", "ERA5_ecPoint/Grid_BC_VALS", "ERA5_ecPoint/Pt_BC_PERC"]
 MinDays_Perc_list = [0.75]
 NameOBS_list = [ "08_AlignOBS_CleanSTVL"]
 Coeff_Grid2Point_list = [20]
-# ClimateType_list = ["DJF", "MAM", "JJA", "SON"]
-# Perc_list = [90, 95, 98, 99, 99.5, 99.8, 99.9]
-ClimateType_list = ["Year"]
-Perc_list = [90, 95, 98, 99, 99.5, 99.8,  99.9, 99.95, 99.98]
+ClimateType_list = ["DJF", "MAM", "JJA", "SON"]
+Perc_list = [90, 95, 98, 99, 99.5, 99.8, 99.9]
+#ClimateType_list = ["Year"]
+#Perc_list = [90, 95, 98, 99, 99.5, 99.8,  99.9, 99.95, 99.98]
 Git_repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate"
 DirIN = "Data/Compute"
 DirOUT= "Data/Plot/12_Climate_OBS_FC"
@@ -187,7 +187,7 @@ elif DatasetType_OBS_FC == "FC":
 
         # Setting generic parameters depending on whether observational or modelled climatologies are plotted
         Dataset_title = "modelled (" + SystemFC + ")"
-        DirIN_temp = DirIN + "/11_Climate_FC/" + SystemFC
+        DirIN_temp = DirIN + "/11_ClimateFC_atOBS/" + SystemFC
         DirOUT_temp = DirOUT + "/Climate_FC/" + SystemFC
 
         # Plotting modelled rainfall climatologies at points
@@ -203,8 +203,8 @@ elif DatasetType_OBS_FC == "FC":
                     Title_text_line_2 = Dataset_temp + " - Minum of " + str(int(MinDays_Perc*100)) + "% of days with valid observations" 
                     
                     # Setting main input/output directories
-                    MainDirIN = Git_repo + "/" + DirIN_temp + "/MinDays_Perc" + str(int(MinDays_Perc*100)) + "/" + NameOBS + "_" + str(Acc) + "h_" + str(YearS) + "_" + str(YearF)
-                    MainDirOUT = Git_repo + "/" + DirOUT_temp + "/MinDays_Perc" + str(int(MinDays_Perc*100)) + "/" + NameOBS + "_" + str(Acc) + "h_" + str(YearS) + "_" + str(YearF) 
+                    MainDirIN = Git_repo + "/" + DirIN_temp + "/MinDays_Perc" + str(int(MinDays_Perc*100)) + "/" + NameOBS
+                    MainDirOUT = Git_repo + "/" + DirOUT_temp + "/MinDays_Perc" + str(int(MinDays_Perc*100)) + "/" + NameOBS
                     if not exists(MainDirOUT):
                         os.makedirs(MainDirOUT)
 
@@ -225,8 +225,8 @@ elif DatasetType_OBS_FC == "FC":
                         Title_text_line_2 = Dataset_temp + " - Minum of " + str(int(MinDays_Perc*100)) + "% of days with valid observations" 
 
                         # Setting main input/output directories
-                        MainDirIN = Git_repo + "/" + DirIN_temp + "/MinDays_Perc" + str(int(MinDays_Perc*100)) + "/" + NameOBS + "_" + str(Acc) + "h_" + str(YearS) + "_" + str(YearF) + "/Coeff_Grid2Point_" + str(Coeff_Grid2Point)
-                        MainDirOUT = Git_repo + "/" + DirOUT_temp + "/MinDays_Perc" + str(int(MinDays_Perc*100)) + "/" + NameOBS + "_" + str(Acc) + "h_" + str(YearS) + "_" + str(YearF) + "/Coeff_Grid2Point_" + str(Coeff_Grid2Point)
+                        MainDirIN = Git_repo + "/" + DirIN_temp + "/MinDays_Perc" + str(int(MinDays_Perc*100)) + "/" + NameOBS + "/Coeff_Grid2Point_" + str(Coeff_Grid2Point)
+                        MainDirOUT = Git_repo + "/" + DirOUT_temp + "/MinDays_Perc" + str(int(MinDays_Perc*100)) + "/" + NameOBS + "/Coeff_Grid2Point_" + str(Coeff_Grid2Point)
                         if not exists(MainDirOUT):
                             os.makedirs(MainDirOUT)
 

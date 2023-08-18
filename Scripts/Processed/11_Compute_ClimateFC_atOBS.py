@@ -9,6 +9,8 @@ import numpy as np
 # a given period. The climatologies are computed in the form of a distribution of percentiles (using the method of linear interpolation), with the highest percentiles computed 
 # on the basis of how many realizations are provided by the modelled analysis/forecasts. Separate climatologies are computed for year and seasonal (i.e. DJF, MAM, JJA, 
 # SON) climatologies. 
+# Code runtime: Depends on the number of datasets processed, but it is on the order of 10 minutes for all datasets.
+# Note: this script must be run on the HPC because it is memory demanding.
 
 # DESCRIPTION OF INPUT PARAMETERS
 # YearS (number, in YYYY format): start year to consider.
@@ -24,10 +26,10 @@ import numpy as np
 # DirOUT_Climate_FC (string): relative path for the output directory containing the modelled climatologies.
 
 # INPUT PARAMETERS
-YearS = 2019
-YearF = 2020
+YearS = int(sys.argv[1])
+YearF = int(sys.argv[2])
 Acc = 24
-SystemFC_list = sys.argv[1].split(',')
+SystemFC_list = sys.argv[3].split(',')
 MinDays_Perc_list = [0.75]
 NameOBS_list = ["08_AlignOBS_CleanSTVL"]
 Coeff_Grid2Point_list = [20]
@@ -176,7 +178,7 @@ for MinDays_Perc in MinDays_Perc_list:
 
                               # Computing and saving the modelled rainfall climatologies (i.e. the distribution of percentiles computed from the independent rainfall realizations)
                               MainDirIN_FC = Git_repo + "/" + DirIN_FC + "/" + SystemFC + "/MinDays_Perc" + str(int(MinDays_Perc*100)) + "/" + NameOBS + "/Coeff_Grid2Point_" + str(Coeff_Grid2Point)
-                              MainDirOUT_Climate_FC = Git_repo + "/" + DirOUT_Climate_FC + "/" + SystemFC + "/MinDays_Perc" + str(int(MinDays_Perc*100)) + "/Coeff_Grid2Point_" + str(Coeff_Grid2Point)
+                              MainDirOUT_Climate_FC = Git_repo + "/" + DirOUT_Climate_FC + "/" + SystemFC + "/MinDays_Perc" + str(int(MinDays_Perc*100)) + "/" + NameOBS + "/Coeff_Grid2Point_" + str(Coeff_Grid2Point)
                               if not exists(MainDirOUT_Climate_FC):
                                     os.makedirs(MainDirOUT_Climate_FC)
                               distribution_percentiles(YearS, YearF, PercYear, PercSeason, MainDirIN_FC, MainDirOUT_Climate_FC)
