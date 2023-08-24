@@ -21,7 +21,7 @@ from scipy.stats import anderson_ksamp
 
 # INPUT PARAMETERS
 Acc = 24
-SystemFC_list = ["Reforecasts_46r1", "ERA5_ShortRange", "ERA5_EDA_ShortRange", "ERA5_LongRange", "ERA5_EDA_LongRange", "ERA5_ecPoint/Grid_BC_VALS", "ERA5_ecPoint/Pt_BC_PERC"]
+SystemFC_list = ["Reforecasts_46r1", "ERA5_ShortRange", "ERA5_EDA_ShortRange", "ERA5_LongRange", "ERA5_EDA_LongRange", "ERA5_ecPoint/Grid_BC_VALS",  "ERA5_ecPoint/Pt_BC_PERC"]
 MinDays_Perc_list = [0.75]
 NameOBS_list = ["08_AlignOBS_CleanSTVL"]
 Coeff_Grid2Point_list = [20]
@@ -59,8 +59,6 @@ def statisticAD(DirIN_OBS, DirIN_FC, DirOUT):
             lats = np.load(DirIN_OBS + "/Stn_lats_" + Season + ".npy")
             lons = np.load(DirIN_OBS + "/Stn_lons_" + Season + ".npy")
             num_stn = climate_obs.shape[0]
-            num_perc = climate_obs.shape[1]
-            climate_fc = climate_fc[:,0:num_perc] # to match the number of percentiles between the observational and modelled climatologies
             
             # Computing the Anderson-Darling statistic for k-samples
             StatisticAD = np.empty([num_stn,1]) * np.nan
@@ -120,4 +118,4 @@ for MinDays_Perc in MinDays_Perc_list:
                                     os.makedirs(MainDirOUT)
                               
                               # Computing the Anderson-Darling statistic for k-samples
-                              statisticAD(MainDirIN_OBS, MainDirIN_FC, MainDirOUT)
+                              StatisticAD,  CriticalVal = statisticAD(MainDirIN_OBS, MainDirIN_FC, MainDirOUT)
