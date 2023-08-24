@@ -6,7 +6,7 @@ from scipy.stats import anderson_ksamp
 ############################################################################################################################################
 # CODE DESCRIPTION
 # 13_Compute_Statistic_AD.py computes the Anderson-Darling statistic between the observational and modelled climatological distributions.
-# Code runtime: negligible.
+# Code runtime: up to 1 minute.
 
 # DESCRIPTION OF INPUT PARAMETERS
 # Acc (number, in hours): rainfall accumulation period.
@@ -21,7 +21,7 @@ from scipy.stats import anderson_ksamp
 
 # INPUT PARAMETERS
 Acc = 24
-SystemFC_list = ["Reforecasts_46r1", "ERA5_ShortRange", "ERA5_EDA_ShortRange", "ERA5_LongRange", "ERA5_EDA_LongRange", "ERA5_ecPoint/Grid_BC_VALS",  "ERA5_ecPoint/Pt_BC_PERC"]
+SystemFC_list = ["Reforecasts_46r1", "ERA5_ShortRange", "ERA5_EDA_ShortRange", "ERA5_LongRange", "ERA5_EDA_LongRange", "ERA5_ecPoint/Grid_BC_VALS", "ERA5_ecPoint/Pt_BC_PERC"]
 MinDays_Perc_list = [0.75]
 NameOBS_list = ["08_AlignOBS_CleanSTVL"]
 Coeff_Grid2Point_list = [20]
@@ -69,7 +69,7 @@ def statisticAD(DirIN_OBS, DirIN_FC, DirOUT):
                   if np.sum(climate_obs_temp) != 0 and np.sum(climate_fc_temp) != 0:
                         TestAD = anderson_ksamp([climate_obs_temp, climate_fc_temp])
                         StatisticAD[ind_stn] = TestAD[0]
-                        CriticalVal[ind_stn] = TestAD[1][-1] # for significance level 0.1%.
+                        CriticalVal[ind_stn] = TestAD[1][-1] # at the 0.1% significance level.
 
             # Saving the Anderson-Darling statistic for k-samples
             np.save(DirOUT + "/StatisticAD_" + Season + ".npy", StatisticAD)
@@ -118,4 +118,4 @@ for MinDays_Perc in MinDays_Perc_list:
                                     os.makedirs(MainDirOUT)
                               
                               # Computing the Anderson-Darling statistic for k-samples
-                              StatisticAD,  CriticalVal = statisticAD(MainDirIN_OBS, MainDirIN_FC, MainDirOUT)
+                              statisticAD(MainDirIN_OBS, MainDirIN_FC, MainDirOUT)
