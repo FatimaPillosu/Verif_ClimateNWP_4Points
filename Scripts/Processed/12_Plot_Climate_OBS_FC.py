@@ -45,10 +45,10 @@ SystemFC_list = ["Reforecasts_46r1", "ERA5_ShortRange", "ERA5_EDA_ShortRange", "
 MinDays_Perc_list = [0.75]
 NameOBS_list = [ "08_AlignOBS_CleanSTVL"]
 Coeff_Grid2Point_list = [20]
-#ClimateType_list = ["DJF", "MAM", "JJA", "SON"]
-#Perc_list = [90, 95, 98, 99, 99.5, 99.8, 99.9]
-ClimateType_list = ["Year"]
-Perc_list = [90, 95, 98, 99, 99.5, 99.8,  99.9, 99.95, 99.98]
+ClimateType_list = ["DJF", "MAM", "JJA", "SON"]
+Perc_list = [90, 95, 98, 99, 99.5, 99.8, 99.9]
+#ClimateType_list = ["Year"]
+#Perc_list = [90, 95, 98, 99, 99.5, 99.8,  99.9, 99.95, 99.98]
 Git_repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate"
 DirIN = "Data/Compute"
 DirOUT= "Data/Plot/12_Climate_OBS_FC"
@@ -81,14 +81,18 @@ def plot_climate(RunType, ClimateType, Perc, Title_text_line_1, Title_text_line_
 
     # Plotting the climatology
     coastlines = mv.mcoast(
-        map_coastline_thickness = 2,
-        map_coastline_resolution = "medium",
-        map_boundaries = "on",
-        map_boundaries_colour = "black",
-        map_boundaries_thickness = 1,
-        map_grid = "off",
-        map_label = "off"
-        )
+            map_coastline_thickness = 1,
+            map_coastline_colour = "rgb(0.4902,0.4902,0.4902)",
+            map_coastline_resolution = "low",
+            map_boundaries = "on",
+            map_boundaries_colour = "grey",
+            map_boundaries_thickness = 1,
+            map_grid = "on",
+            map_grid_colour              = "rgb(0.7686,0.7686,0.7686)",
+            map_grid_latitude_increment  = 30,
+            map_grid_longitude_increment = 60,
+            map_label = "on"
+            )
 
     markers = mv.psymb(
         symbol_type = "MARKER",
@@ -112,7 +116,7 @@ def plot_climate(RunType, ClimateType, Perc, Title_text_line_1, Title_text_line_
         text_line_1 = Title_text_line_1,
         text_line_2 =  Title_text_line_2,
         text_line_3 = " ",
-        text_colou ="purplish_blue",
+        text_colou ="charcoal",
         text_font ="courier",
         text_font_size = 0.4
         )
@@ -121,7 +125,7 @@ def plot_climate(RunType, ClimateType, Perc, Title_text_line_1, Title_text_line_
     if RunType == "Interactive":
         mv.plot(climate_perc_geo, coastlines, markers, legend, title)
     else:
-        svg = mv.png_output(output_name = DirOUT + "/" + ClimateType + "_" + str(Perc*100))
+        svg = mv.svg_output(output_name = DirOUT + "/" + ClimateType + "_" + str(Perc*100))
         mv.setoutput(svg)
         mv.plot(climate_perc_geo, coastlines, markers, legend, title)
 #######################################################################################################################
