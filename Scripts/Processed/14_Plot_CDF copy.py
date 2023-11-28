@@ -62,9 +62,7 @@ else:
       Perc_Dataset = "Season"
 
 # Setting up the figure where the CDFs will be plot
-fig, ax1 = plt.subplots(figsize=(15, 8))
-left, bottom, width, height = [0.25, 0.2, 0.4, 0.5]
-ax2 = fig.add_axes([left, bottom, width, height])
+plt.rcParams["figure.figsize"] = (15,8)
 
 # Indexing the location from where to extract the observational and modelled climatologies
 File_lats = Git_repo + "/" + DirIN + "/09_Climate_OBS/MinDays_Perc" + str(int(MinDays_Perc*100)) + "/" + NameOBS + "/Coeff_Grid2Point_" +  str(Coeff_Grid2Point) + "/Stn_lats_" + Season + ".npy"
@@ -84,8 +82,7 @@ for ind_SystemFC in range(len(SystemFC_list)):
       climate_FC = np.load(File_Climate_FC)[ind_point,:]
       perc_FC = np.load(File_Perc_FC)
       maxPerc = np.where(perc_FC <= MaxPer2Plot)[0]
-      ax1.plot(climate_FC[maxPerc], perc_FC[maxPerc], SystemFC_Colour, linewidth=2, label=SystemFC)
-      ax2.plot(climate_FC[maxPerc], perc_FC[maxPerc], SystemFC_Colour, linewidth=1)
+      plt.plot(climate_FC[maxPerc], perc_FC[maxPerc], SystemFC_Colour, linewidth=2, label=SystemFC)
 
 # Plotting the observational climatology as a CDF
 File_Climate_OBS = Git_repo + "/" + DirIN + "/09_Climate_OBS/MinDays_Perc" + str(int(MinDays_Perc*100)) + "/" + NameOBS + "/Coeff_Grid2Point_" +  str(Coeff_Grid2Point) + "/Climate_" + Season + ".npy"
@@ -93,22 +90,20 @@ File_Perc_OBS = Git_repo + "/" + DirIN + "/09_Climate_OBS/MinDays_Perc" + str(in
 climate_OBS = np.load(File_Climate_OBS)[ind_point,:]
 perc_OBS = np.load(File_Perc_OBS)
 maxPerc = np.where(perc_OBS <= MaxPer2Plot)[0]
-ax1.plot(climate_OBS[maxPerc], perc_OBS[maxPerc], "k.", label="Climate_OBS")
-ax2.plot(climate_OBS[maxPerc], perc_OBS[maxPerc], "k.")
+plt.plot(climate_OBS[maxPerc], perc_OBS[maxPerc], "k.", linewidth=2, label="Climate_OBS")
 
 # Completing the plot
-ax1.set_title("Observational and Modelled Climatologies\n " + NameFileOUT + " (lat=" + str(Loc_Coord[0]) + ", lon=" + str(Loc_Coord[1]) + "), Max Percentile = " + str(MaxPer2Plot) + "th", fontsize="24")
-ax1.set_xlabel("Rainfall [mm/" + str(Acc) + "h]", fontsize="18")
-ax1.set_ylabel("Percentiles", fontsize="18")
-ax1.xaxis.set_tick_params(labelsize=14)
-ax1.yaxis.set_tick_params(labelsize=14)
-handles, labels = ax1.get_legend_handles_labels()
-ax1.legend(handles, labels, fontsize="14")
-ax2.set_xlim([-5,20])
-ax2.set_ylim([50,95])
-ax2.xaxis.set_tick_params(labelsize=14)
-ax2.yaxis.set_tick_params(labelsize=14)
+plt.title("Observational and Modelled Climatologies\n " + NameFileOUT + " (lat=" + str(Loc_Coord[0]) + ", lon=" + str(Loc_Coord[1]) + "), Max Percentile = " + str(MaxPer2Plot) + "th", fontsize="24")
+plt.xlabel("Rainfall [mm/" + str(Acc) + "h]", fontsize="18")
+plt.ylabel("Percentiles", fontsize="18")
+plt.xticks(fontsize="14")
+plt.yticks(fontsize="14")
+plt.legend(fontsize="14")
+plt.xlim([-10,40])
+plt.ylim([40,100])
+plt.show()
 
-# Save the plot
-FileOUT = NameFileOUT + "_" + str(Loc_Coord[0]) + "_" + str(Loc_Coord[0]) + ".png"
-fig.savefig(MainDirOUT + "/" + FileOUT)
+#plt.savefig(DirOUT + "/Distr_tp" + str(Acc) + "h_" +str(a) + "mm_" + str(b) + "mm.png")
+#plt.close()
+
+
