@@ -37,13 +37,13 @@ import metview as mv
 
 # INPUT PARAMETERS
 Acc = 24
-RunType = "Static"
-SystemFC_list = ["Reforecasts_46r1", "ERA5_ShortRange", "ERA5_EDA_ShortRange", "ERA5_LongRange", "ERA5_EDA_LongRange", "ERA5_ecPoint/Grid_BC_VALS", "ERA5_ecPoint/Pt_BC_PERC"]
+RunType = "Interactive"
+SystemFC_list = ["ERA5_EDA_ShortRange"] # "Reforecasts_46r1", "ERA5_ShortRange", "ERA5_EDA_ShortRange", "ERA5_LongRange", "ERA5_EDA_LongRange", "ERA5_ecPoint/Grid_BC_VALS", "ERA5_ecPoint/Pt_BC_PERC"
 MinDays_Perc_list = [0.75]
 NameOBS_list = ["08_AlignOBS_CleanSTVL"]
 Coeff_Grid2Point_list = [20]
 Season_list = ["Year", "DJF", "MAM", "JJA", "SON"]
-Git_repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate"
+Git_repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/Verif_GridClimate_4Points"
 DirIN = "Data/Compute/13_Statistic_AD"
 DirOUT= "Data/Plot/13a_Statistic_AD" 
 #############################################################################################################################################################################

@@ -35,7 +35,7 @@ from matplotlib import pyplot as plt
 
 # INPUT PARAMETERS
 Acc = 24
-Loc_Coord = [-15.45,145.18]
+Loc_Coord = [52.88,5.35]
 MaxPer2Plot = 99.98
 NameOBS = "08_AlignOBS_CleanSTVL"
 Coeff_Grid2Point = 20
@@ -43,8 +43,8 @@ MinDays_Perc = 0.75
 Season = "Year"
 SystemFC_list = ["ERA5_ecPoint/Pt_BC_PERC", "Reforecasts_46r1", "ERA5_EDA_ShortRange", "ERA5_ShortRange"]
 SystemFC_Colour_list = ["orange", "cyan", "magenta", "lime"]
-Git_repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/ecPoint_Climate"
-NameFileOUT = "Australia"
+Git_repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/Verif_GridClimate_4Points"
+NameFileOUT = "Netherlands"
 DirIN = "Data/Compute"
 DirOUT= "Data/Plot/14_CDF"
 ###############################################################################################################################
@@ -105,10 +105,10 @@ ax1.yaxis.set_tick_params(labelsize=14)
 handles, labels = ax1.get_legend_handles_labels()
 ax1.legend(handles, labels, fontsize="14")
 ax2.set_xlim([-5,20])
-ax2.set_ylim([50,95])
+ax2.set_ylim([50,101])
 ax2.xaxis.set_tick_params(labelsize=14)
 ax2.yaxis.set_tick_params(labelsize=14)
 
 # Save the plot
-FileOUT = NameFileOUT + "_" + str(Loc_Coord[0]) + "_" + str(Loc_Coord[0]) + ".png"
+FileOUT = NameFileOUT + "_" + str(Loc_Coord[0]) + "_" + str(Loc_Coord[1]) + ".png"
 fig.savefig(MainDirOUT + "/" + FileOUT)
