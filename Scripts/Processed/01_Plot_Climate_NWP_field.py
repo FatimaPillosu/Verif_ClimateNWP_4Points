@@ -9,18 +9,24 @@ import metview as mv
 # Code runtime: negligible
 
 # DESCRIPTION OF INPUT PARAMETERS
-# RP_2_Plot_list (list of integers, in years): list of return periods to plot
+# YearS (number, in YYYY format): start year to consider.
+# YearF (number, in YYYY format): final year to consider.
+# Acc (number, in hours): rainfall accumulation period.
+# RP_2_Plot_list (list of integers, in years): list of return periods to plot.
 # Dataset_SystemFC (string): name of the dataset and forecasting system to consider.
 # Git_Repo (string): path of local github repository.
 # DirIN (string): relative path for the directory containing the NWP modelled climatology.
 # DirOUT (string): relative path for the directory containing the map plots.
 
 # INPUT PARAMETERS
+YearS = 2000
+YearF = 2019
+Acc = 24
 RP_2_Plot_list = [1, 2, 5, 10, 20, 50, 100, 200, 500, 1000]
 Dataset_SystemFC_list = ["Reforecasts/ECMWF_46r1", "Reanalysis/ERA5_EDA", "Reanalysis/ERA5", "Reanalysis/ERA5_ecPoint"]
 Git_Repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/Verif_ClimateNWP_4Points"
-DirIN = "Data/Raw/Climate_NWP/tp_24h_2000_2019"
-DirOUT = "Data/Plot/01_Climate_NWP_field/tp_24h_2000_2019"
+DirIN = "Data/Raw/Climate_NWP"
+DirOUT = "Data/Plot/01_Climate_NWP_field"
 ########################################################################################################
 
 
@@ -30,14 +36,15 @@ for Dataset_SystemFC in Dataset_SystemFC_list:
       print()
       print("Plotting NWP modelled rainfall climatology from " + Dataset_SystemFC)
 
-      # Setting output directory
-      DirOUT_temp = Git_Repo + "/" + DirOUT + "/" +  Dataset_SystemFC
-      if not os.path.exists(DirOUT_temp):
-            os.makedirs(DirOUT_temp)
+      # Setting main input/output directories
+      MainDirIN = Git_Repo + "/" + DirIN + "/tp_" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF)  + "/" +  Dataset_SystemFC  
+      MainDirOUT = Git_Repo + "/" + DirOUT + "/tp_" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF)  + "/" +  Dataset_SystemFC
+      if not os.path.exists(MainDirOUT):
+            os.makedirs(MainDirOUT)
 
       # Reading the computed climate field and correspondent return period values
-      climate = mv.read(Git_Repo + "/" + DirIN + "/" + Dataset_SystemFC + "/Climate.grib")
-      RP_list = np.load(Git_Repo + "/" + DirIN + "/" + Dataset_SystemFC + "/RP.npy")
+      climate = mv.read(MainDirIN + "/Climate.grib")
+      RP_list = np.load(MainDirIN + "/RP.npy")
 
       # Plotting the modelled climatologies 
       for ind_RP in range(len(RP_2_Plot_list)):
@@ -95,12 +102,12 @@ for Dataset_SystemFC in Dataset_SystemFC_list:
                         legend_automatic_poistion = "top",
                         )
 
-                  Acc = DirOUT.split("/")[-1].split("_")[1]
-                  YearS = DirOUT.split("/")[-1].split("_")[2]
-                  YearF = DirOUT.split("/")[-1].split("_")[3]
+                  Acc_STR = DirOUT.split("/")[-1].split("_")[1]
+                  YearS_STR = DirOUT.split("/")[-1].split("_")[2]
+                  YearF_STR = DirOUT.split("/")[-1].split("_")[3]
                   title = mv.mtext(
                         text_line_count = 2,
-                        text_line_1 = Acc + " rainfall climatology (" + str(RP) + " year return period) - " + Dataset_SystemFC + " - Period: " + YearS + " to " + YearF,
+                        text_line_1 = Acc_STR + " rainfall climatology (" + str(RP) + " year return period) - " + Dataset_SystemFC + " - Period: " + YearS_STR + " to " + YearF_STR,
                         text_line_2 = " ",
                         text_colour = "charcoal",
                         text_font = "arial",
@@ -109,6 +116,6 @@ for Dataset_SystemFC in Dataset_SystemFC_list:
 
                   # Saving the plot of the modelled climatology
                   FileOUT_temp = "Climate_" + str(RP) + "RP" + ".grib"
-                  png = mv.png_output(output_width = 5000, output_name = DirOUT_temp + "/" + FileOUT_temp)
+                  png = mv.png_output(output_width = 5000, output_name = MainDirOUT + "/" + FileOUT_temp)
                   mv.setoutput(png)
                   mv.plot(climate_RP, coastlines, contouring, title, legend)
