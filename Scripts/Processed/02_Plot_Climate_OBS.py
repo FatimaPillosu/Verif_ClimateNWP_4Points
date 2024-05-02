@@ -1,5 +1,4 @@
 import os
-from os.path import exists
 import numpy as np
 import metview as mv
 
@@ -31,7 +30,7 @@ DirOUT= "Data/Plot/02_Climate_OBS"
 # Setting the main input/output directories
 MainDirIN = Git_Repo + "/" + DirIN + "/tp_" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF)
 MainDirOUT = Git_Repo + "/" + DirOUT + "/tp_" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF)
-if not exists(MainDirOUT):
+if not os.path.exists(MainDirOUT):
     os.makedirs(MainDirOUT)
 
 # Reading the considered climatology and the correspondent percentiles, and the rainfall stations coordinates
