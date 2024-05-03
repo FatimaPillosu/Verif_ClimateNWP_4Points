@@ -65,18 +65,18 @@ for SystemNWP in SystemNWP_list:
 
       # Plotting the A-D statistic
       coastlines = mv.mcoast(
-            map_coastline_thickness = 2,
-            map_coastline_colour = "rgb(0.4902,0.4902,0.4902)",
+            map_coastline_thickness = 3,
+            map_coastline_colour = "charcoal",
             map_coastline_resolution = "low",
             map_boundaries = "on",
-            map_boundaries_colour = "rgb(0.4902,0.4902,0.4902)",
-            map_boundaries_thickness = 2,
+            map_boundaries_colour = "charcoal",
+            map_boundaries_thickness = 3,
             map_grid = "on",
             map_grid_colour = "rgb(0.7686,0.7686,0.7686)",
             map_grid_latitude_increment  = 30,
             map_grid_longitude_increment = 60,
             map_label = "on",
-            map_label_height = 1,
+            map_label_height = 3,
             map_label_top = "off",
             map_label_right = "off"
             )
@@ -89,8 +89,8 @@ for SystemNWP in SystemNWP_list:
             symbol_min_table = [-0.5,0.5], #only the 1s are plotted in the map
             symbol_max_table = [0.5,1.5],
             symbol_marker_table = [15,15],
-            symbol_colour_table = ["rgb(0.9182,0.5387,0.007263)","rgb(0.2525,0.2525,0.9789)"], 
-            symbol_height_table = [0.1,0.1]
+            symbol_colour_table = ["rgb(1,0.3098,0)","rgb(0.2525,0.2525,0.9789)"], 
+            symbol_height_table = [0.15,0.15]
             )
       
       Title_text_line_1 = "Anderson-Darling test for " + SystemNWP
@@ -100,7 +100,16 @@ for SystemNWP in SystemNWP_list:
             text_line_2 = " ",
             text_colou ="charcoal",
             text_font ="arial",
-            text_font_size = 3
+            text_font_size = 5
+            )
+
+      legend = mv.mlegend(
+            legend_text_colour = "charcoal",
+            legend_text_font_size = 0.5,
+            legend_display_type = "disjoint",
+            legend_text_composition = "user_text_only",
+            legend_user_lines = ["nwp clim NOT representative of obs clim","nwp clim REPESENTATIVE of obs clim"],
+            legend_entry_text_width = 50.00,
             )
 
       # Saving the map plots
@@ -109,4 +118,4 @@ for SystemNWP in SystemNWP_list:
             os.makedirs(MainDirOUT)
       png = mv.png_output(output_width = 5000, output_name = MainDirOUT + "/TestAD")
       mv.setoutput(png)
-      mv.plot(test_AD_geo, coastlines, markers, title)
+      mv.plot(test_AD_geo, coastlines, markers, legend, title)
