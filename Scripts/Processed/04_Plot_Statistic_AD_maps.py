@@ -4,7 +4,7 @@ import metview as mv
 
 ###################################################################################################
 # CODE DESCRIPTION
-# 04_Plot_Statistic_AD.py plots the Anderson-Darling statistic between the observational and the NWP modelled
+# 04_Plot_Statistic_AD_maps.py plots the Anderson-Darling statistic between the observational and the NWP modelled
 # climatology distributions.
 # Note:
 # The Anderson-Darling test for k-samples tests the null hypothesis that k-samples are drawn from the same population 
@@ -35,7 +35,7 @@ Acc = 24
 SystemNWP_list = ["Reforecasts/ECMWF_46r1", "Reanalysis/ERA5_EDA", "Reanalysis/ERA5", "Reanalysis/ERA5_ecPoint"]
 Git_Repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/Verif_ClimateNWP_4Points"
 DirIN = "Data/Compute/03_Statistic_AD"
-DirOUT = "Data/Plot/04_Statistic_AD"
+DirOUT = "Data/Plot/04_Statistic_AD_maps"
 ###################################################################################################
 
 # Plotting the Anderson-Darling statistic for different NWP modelled climatologies
@@ -89,7 +89,7 @@ for SystemNWP in SystemNWP_list:
             symbol_min_table = [-0.5,0.5], #only the 1s are plotted in the map
             symbol_max_table = [0.5,1.5],
             symbol_marker_table = [15,15],
-            symbol_colour_table = ["rgb(1,0.3098,0)","rgb(0.2525,0.2525,0.9789)"], 
+            symbol_colour_table = ["rgb(1,0,0.498)","rgb(0,0.498,1)"], 
             symbol_height_table = [0.15,0.15]
             )
       
