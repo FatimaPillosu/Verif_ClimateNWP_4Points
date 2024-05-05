@@ -34,7 +34,7 @@ YearS = 2000
 YearF = 2019
 Acc = 24
 SystemNWP_list = ["Reforecasts/ECMWF_46r1", "Reanalysis/ERA5_EDA", "Reanalysis/ERA5", "Reanalysis/ERA5_ecPoint"]
-Domain_Coord_list = [ [90,-169,14,-50], [14, -96, -60, -30], [90, -29, 30, 60], [30,-30,-40,60], [90, 60, 4.3, 180], [4.3, 60, -90, 180] ]
+Domain_Coord_list = [ [90,-170,15,-50], [15, -100, -60, -30], [90, -30, 30, 60], [30,-30,-40,60], [90, 60, 5, 180], [5, 60, -60, 180] ]
 Domain_Name_list = ["North_America", "South_America", "Europe_Mediterranean", "Africa", "Asia", "Oceania"]
 Git_Repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/Verif_ClimateNWP_4Points"
 DirIN = "Data/Compute/03_Statistic_AD"
@@ -59,7 +59,6 @@ for SystemNWP in SystemNWP_list:
       test_AD = (Stat_AD < Crit_Val) * 1 # the value of 1 is given to those locations where the modelled climatology is representative of the observational climatology
 
       #Computing the pie-charts for each considered domain
-      fig,ax = plt.subplots()
       for ind_domain in np.arange(len(Domain_Name_list)):
 
             Domain_Name = Domain_Name_list[ind_domain]
@@ -70,11 +69,12 @@ for SystemNWP in SystemNWP_list:
             test_AD_domain = test_AD[ind_gp_domain]
 
             # Creating the pie-charts
+            fig,ax = plt.subplots()
             repr = np.where(test_AD_domain == 1)[0].shape[0]
             no_repr = np.where(test_AD_domain == 0)[0].shape[0]
             sizes = [repr, no_repr]
             colors = ["dodgerblue", "deeppink"]
-            ax.pie(sizes, colors=colors, startangle=0)
+            ax.pie(sizes, colors=colors, startangle=0, autopct='%1.1f%%')
             plt.axis('equal')
 
             # Saving the pie-charts
@@ -83,3 +83,4 @@ for SystemNWP in SystemNWP_list:
                   os.makedirs(MainDirOUT)
             FileOUT = Domain_Name + ".png"
             fig.savefig(MainDirOUT + "/" + FileOUT)
+            plt.close()
