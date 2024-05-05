@@ -1,10 +1,10 @@
 import os
 import numpy as np
-import metview as mv
+import matplotlib.pyplot as plt
 
 ###################################################################################################
 # CODE DESCRIPTION
-# 04_Plot_Statistic_AD_maps.py plots the Anderson-Darling statistic between the observational and the NWP modelled
+# 05_Plot_Statistic_AD_piecharts.py plots the Anderson-Darling statistic between the observational and the NWP modelled
 # climatology distributions.
 # Note:
 # The Anderson-Darling test for k-samples tests the null hypothesis that k-samples are drawn from the same population 
@@ -22,7 +22,9 @@ import metview as mv
 # YearS (number, in YYYY format): start year to consider.
 # YearF (number, in YYYY format): final year to consider.
 # Acc (number, in hours): rainfall accumulation period.
-# SystemNWP_list (list of string): list of NWP model climatologies.
+# SystemNWP_list (list of strings): list of NWP model climatologies.
+# Domain_Coord_list (list of floats): list of coordinates of the domain of interest.
+# Domain_Name_list (list of strings): list of the names of the domain of interest.
 # Git_Repo (string): path of local github repository.
 # DirIN (string): relative path for the directory containing the values of the AD statistic.
 # DirOUT (string): relative path for the directory containing the AD statistic.
@@ -32,14 +34,16 @@ YearS = 2000
 YearF = 2019
 Acc = 24
 SystemNWP_list = ["Reforecasts/ECMWF_46r1", "Reanalysis/ERA5_EDA", "Reanalysis/ERA5", "Reanalysis/ERA5_ecPoint"]
+Domain_Coord_list = [ [90,-169,14,-50], [14, -96, -60, -30], [90, -29, 30, 60], [30,-30,-40,60], [90, 60, 4.3, 180], [4.3, 60, -90, 180] ]
+Domain_Name_list = ["North_America", "South_America", "Europe_Mediterranean", "Africa", "Asia", "Oceania"]
 Git_Repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/Verif_ClimateNWP_4Points"
 DirIN = "Data/Compute/03_Statistic_AD"
-DirOUT = "Data/Plot/04_Statistic_AD_maps"
+DirOUT = "Data/Plot/05_Statistic_AD_piecharts"
 ###################################################################################################
 
 # Plotting the Anderson-Darling statistic for different NWP modelled climatologies
 print()
-print("Plotting the Anderson-Darling statistic for the NWP modelled climatology: ")
+print("Plotting the pie-charts for the Anderson-Darling statistic for the NWP modelled climatology: ")
 for SystemNWP in SystemNWP_list:
       
       print(" - " + SystemNWP)
@@ -53,69 +57,29 @@ for SystemNWP in SystemNWP_list:
 
       # Defining when to reject or not-reject the null hypothesis of the Anderson-Darling test
       test_AD = (Stat_AD < Crit_Val) * 1 # the value of 1 is given to those locations where the modelled climatology is representative of the observational climatology
-      
-      # Converting the test A-D to geopoint
-      test_AD_geo = mv.create_geo(
-            type = 'xyv',
-            latitudes =  lats,
-            longitudes = lons,
-            values = test_AD
-            )
 
-      # Plotting the A-D statistic
-      coastlines = mv.mcoast(
-            map_coastline_thickness = 3,
-            map_coastline_colour = "charcoal",
-            map_coastline_resolution = "low",
-            map_boundaries = "on",
-            map_boundaries_colour = "charcoal",
-            map_boundaries_thickness = 3,
-            map_grid = "on",
-            map_grid_thickness = 3,
-            map_grid_colour = "charcoal",
-            map_grid_latitude_increment  = 30,
-            map_grid_longitude_increment = 60,
-            map_label = "on",
-            map_label_height = 3,
-            map_label_top = "off",
-            map_label_right = "off"
-            )
+      #Computing the pie-charts for each considered domain
+      fig,ax = plt.subplots()
+      for ind_domain in np.arange(len(Domain_Name_list)):
 
-      markers = mv.psymb(
-            symbol_type = "MARKER",
-            symbol_table_mode = "ON",
-            legend = "off",
-            symbol_quality = "HIGH",
-            symbol_min_table = [-0.5,0.5], #only the 1s are plotted in the map
-            symbol_max_table = [0.5,1.5],
-            symbol_marker_table = [15,15],
-            symbol_colour_table = ["rgb(1,0,0.498)","rgb(0,0.498,1)"], 
-            symbol_height_table = [0.15,0.15]
-            )
-      
-      Title_text_line_1 = "Anderson-Darling test for " + SystemNWP
-      title = mv.mtext(
-            text_line_count = 2,
-            text_line_1 = Title_text_line_1,
-            text_line_2 = " ",
-            text_colou ="charcoal",
-            text_font ="arial",
-            text_font_size = 5
-            )
+            Domain_Name = Domain_Name_list[ind_domain]
+            Domain_Coord = Domain_Coord_list[ind_domain]
+            
+            # Selecting the domain to consider
+            ind_gp_domain = np.where( (lats < Domain_Coord[0]) & (lats > Domain_Coord[2]) & (lons > Domain_Coord[1]) & (lons < Domain_Coord[3]) )
+            test_AD_domain = test_AD[ind_gp_domain]
 
-      legend = mv.mlegend(
-            legend_text_colour = "charcoal",
-            legend_text_font_size = 0.5,
-            legend_display_type = "disjoint",
-            legend_text_composition = "user_text_only",
-            legend_user_lines = ["nwp clim NOT representative of obs clim","nwp clim REPESENTATIVE of obs clim"],
-            legend_entry_text_width = 50.00,
-            )
+            # Creating the pie-charts
+            repr = np.where(test_AD_domain == 1)[0].shape[0]
+            no_repr = np.where(test_AD_domain == 0)[0].shape[0]
+            sizes = [repr, no_repr]
+            colors = ["dodgerblue", "deeppink"]
+            ax.pie(sizes, colors=colors, startangle=0)
+            plt.axis('equal')
 
-      # Saving the map plots
-      MainDirOUT = Git_Repo + "/" + DirOUT + "/tp_" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF) + "/" + SystemNWP
-      if not os.path.exists(MainDirOUT):
-            os.makedirs(MainDirOUT)
-      png = mv.png_output(output_width = 5000, output_name = MainDirOUT + "/TestAD")
-      mv.setoutput(png)
-      mv.plot(test_AD_geo, coastlines, markers, legend, title)
+            # Saving the pie-charts
+            MainDirOUT = Git_Repo + "/" + DirOUT + "/tp_" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF) + "/" + SystemNWP
+            if not os.path.exists(MainDirOUT):
+                  os.makedirs(MainDirOUT)
+            FileOUT = Domain_Name + ".png"
+            fig.savefig(MainDirOUT + "/" + FileOUT)
