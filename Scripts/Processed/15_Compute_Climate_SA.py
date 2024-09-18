@@ -6,18 +6,18 @@ import metview as mv
 
 ##################################################################################
 # CODE DESCRIPTION
-# 02_Compute_ClimateSA.py computes the modelled rainfall climatology for a specific sub-area.
+# 15_Compute_ClimateSA.py computes the modelled rainfall climatology for a specific sub-area.
 # Code runtime: the code takes up to 5 minutes to run in serial but for ERA5_ecPoint it takes up to 
 # 90 minutes.
 
 # DESCRIPTION OF INPUT PARAMETERS
-# YearS (date, in the format YYYY): start year to consider.
-# YearF (date, in the format YYYY): final year to consider.
+# YearS (integer, in the format YYYY): start year to consider.
+# YearF (integer, in the format YYYY): final year to consider.
 # Acc (integer, in hours): rainfall accumul
 # CodeSA (integer): sub-area to consider.ation period.
 # RP_list (list of integers, in years): list of return periods to compute.
 # Dataset_SystemFC (string): name of the dataset and forecasting system to consider.
-# Git_Repo (string): path of local github repository.
+# Git_Repo (string): path of local GitHub repository.
 # DirIN (string): relative path for the directory containing the rainfall realizations (sub-area).
 # DirOUT_Climate_SA (string): relative path for the directory containing the climatology (sub-area).
 # DirOUT_Climate_G (string): relative path for the directory containing the computed return periods.

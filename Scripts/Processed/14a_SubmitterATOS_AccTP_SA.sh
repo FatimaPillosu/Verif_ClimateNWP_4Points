@@ -19,4 +19,4 @@ Git_Repo=${5}
 DirIN=${6}
 DirOUT=${7}
 
-python3 01_Compute_AccTP_SA.py $Year $Acc $NumSA $SystemFC $Git_Repo $DirIN $DirOUT
+python3 14_Compute_AccTP_SA.py $Year $Acc $NumSA $SystemFC $Git_Repo $DirIN $DirOUT

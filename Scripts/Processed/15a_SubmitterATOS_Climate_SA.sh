@@ -22,4 +22,4 @@ DirIN=${8}
 DirOUT_Climate_SA=${9}
 DirOUT_Climate_G=${10}
 
-python3 02_Compute_Climate_SA.py ${YearS} ${YearF} ${Acc} ${CodeSA} ${RP_list} ${Dataset_SystemFC} ${Git_Repo} ${DirIN} ${DirOUT_Climate_SA} ${DirOUT_Climate_G}
+python3 15_Compute_Climate_SA.py ${YearS} ${YearF} ${Acc} ${CodeSA} ${RP_list} ${Dataset_SystemFC} ${Git_Repo} ${DirIN} ${DirOUT_Climate_SA} ${DirOUT_Climate_G}

@@ -7,11 +7,10 @@ import metview as mv
 ############################################################################
 
 # CODE DESCRIPTION
-# 01_Compute_AccTP_SA.py computes the indipendent accumulated rainfall realizations. It 
-# also saves the global field in the required number of sub-areas. The currently implemented 
-# functions compute rainfall realizations for:
+# 14_Compute_AccTP_SA.py computes indipendent accumulated rainfall realizations for the 
+# following datasets:
 #     -> 12-hourly ERA5
-#     -> 24-hourly ERA5
+#     -> 24-hourly ERA5 and ERA5-EDA
 #     -> 12-hourly ERA5_ecPoint
 #     -> 24-hourly ERA5_ecPoint
 #     -> multiple rainfall accumulations from Reforecasts
@@ -19,11 +18,11 @@ import metview as mv
 # substantially according to the considered dataset.
 
 # DESCRIPTION OF INPUT PARAMETERS
-# Year (date, in the format YYYY): year to consider.
+# Year (integer, in the format YYYY): year to consider.
 # Acc (integer, in hours): rainfall accumulation period.
 # NumSA (integer): number of sub-areas to consider.
 # Dataset_SystemFC (string): name of the dataset and forecasting system to consider.
-# Git_Repo (string): path of local github repository.
+# Git_Repo (string): path of local GitHub repository.
 # DirIN (string): relative path for the directory containing the modelled rainfall datasets.
 # DirOUT (string): relative path for the directory containing the rainfall realizations (sub-area).
 
@@ -152,7 +151,7 @@ def tp_ShortRange_ERA5_24h(BaseDateTime, DirIN):
       return tp
 
 ##################################################
-# 24-hourly rainfall realizations from short-range ERA5_EDA #
+# 24-hourly rainfall realizations from short-range ERA5-EDA #
 ##################################################
 
 def tp_ShortRange_ERA5_EDA_24h(BaseDateTime, DirIN):
