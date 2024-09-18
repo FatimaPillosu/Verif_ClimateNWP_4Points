@@ -1,26 +1,26 @@
 #!/bin/bash
 
-########################################################
+#####################################################################
 # CODE DESCRIPTION
-# Retrieve_Reforecasts.sh retrieves rainfall forecasts from ECMWF 
-# reforecasts (18 km spatial resolution). Only control forecasts are 
-# considered to use the member with the best physics 
-# representation of rainfall generation mechanisms.
+# Retrieve_Reforecasts.sh retrieves rainfall forecasts from ECMWF reforecasts (18 km 
+# spatial resolution). Only control forecasts are considered to use the member with 
+# the best physics representation of rainfall generation mechanisms.
+# Code runtime: up to 1 week.
 
 # DESCRIPTION OF INPUT PARAMETERS
-# BaseDateS (date, in format YYYYMMDD): start base date to retrieve
-# BaseDateF (date, in format YYYYMMDD): final base date to retrieve
+# BaseDateS (integer, in format YYYYMMDD): start base date to retrieve.
+# BaseDateF (integer, in format YYYYMMDD): final base date to retrieve.
 # NameFC (string): name of the forecasts to consider.
-# Git_Repo (string): path of local github repository
-# DirOUT (string): relative path for the output directory
+# Git_Repo (string): path of local GitHub repository.
+# DirOUT (string): relative path for the output directory.
 
 # INPUT PARAMETERS
 BaseDateS=20190701
 BaseDateF=20200630
 NameFC="ECMWF_46r1"
-Git_Repo="/ec/vol/ecpoint_dev/mofp/Compute/Climate_NWP_tp"
+Git_Repo="/ec/vol/ecpoint_dev/mofp/Papers_2_Write/Verif_ClimateNWP_4Points"
 DirOUT="Data/Raw/Reforecasts"
-########################################################
+#####################################################################
 
 # Setting main output directory
 MainDirOUT=${Git_Repo}/${DirOUT}/${NameFC}

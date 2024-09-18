@@ -1,28 +1,28 @@
 #!/bin/bash
 
-######################################################
+#####################################################################
 # CODE DESCRIPTION
-# Retrieve_OBS_STVL.sh retrieves rainfall observations from the 
-# STVL database @ECMWF. For a description of the available 
-# rainfall datasets in the database, go to: 
+# Retrieve_OBS_STVL.sh retrieves 24-hourly rainfall observations from the STVL 
+# database @ECMWF. Database description available here: 
 # https://confluence.ecmwf.int/display/VER/STVL+datasets
+# Code runtime: up to 1 hour.
 
 # DESCRIPTION OF INPUT PARAMETERS
-# Acc (number, in hours): accumulation period for rainfall
-# DateS (date, in YYYYMMDD format): start date to retrieve
-# DateF (date, in YYYYMMDD format): final date to retrieve
-# Dataset_array (array of strings): list of available datasets in stvl
-# Git_repo (string): path of local github repository
-# DirOUT (string): relative path for the output directory
+# Acc (number, in hours): accumulation period for rainfall.
+# DateS (integer, in YYYYMMDD format): start date to retrieve.
+# DateF (integer, in YYYYMMDD format): final date to retrieve.
+# Dataset_array (array of strings): list of available datasets in stvl.
+# Git_Repo (string): path of local GitHub repository.
+# DirOUT (string): relative path for the output directory.
 
 # INPUT PARAMETERS
 Acc=24
 DateS=20000101
 DateF=20200101
 Dataset_array=("synop" "hdobs" "bom" "india" "efas" "vnm")
-Git_repo="/ec/vol/ecpoint_dev/mofp/Compute/Climate_OBS_tp"
+Git_Repo="/ec/vol/ecpoint_dev/mofp/Papers_2_Write/Verif_ClimateNWP_4Points"
 DirOUT="Data/Raw/OBS/STVL"
-######################################################
+#####################################################################
 
 # Setting general parameters
 DateS=$(date -d $DateS +%Y%m%d)
@@ -32,7 +32,7 @@ DateF=$(date -d $DateF +%Y%m%d)
 for Dataset in ${Dataset_array[@]}; do 
 
     # Setting main directory
-    MainDir=${Git_repo}/${DirOUT}_${Acc}h/${Dataset}
+    MainDir=${Git_Repo}/${DirOUT}_${Acc}h/${Dataset}
     mkdir -p ${MainDir}
     
     TheDate=${DateS}

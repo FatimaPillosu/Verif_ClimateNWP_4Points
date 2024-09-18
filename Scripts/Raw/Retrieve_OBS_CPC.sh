@@ -1,26 +1,24 @@
 #!/bin/bash
 
-#######################################################
+######################################################################
 # CODE DESCRIPTION
-# Retrieve_OBS_CPC.sh retrieves rainfall observations from the 
-# "CPC Global Unified Gauge-Based Analysis of Daily Precipitation" 
-# dataset from NOAA. The data is downloaded and saved manually
-# in the relevant directory.
+# Retrieve_OBS_CPC.sh retrieves 24-hourly rainfall observations from the "CPC Global  
+# Unified Gauge-Based Analysis of Daily Precipitation" dataset from NOAA. The data is 
+# downloaded and saved manually and stored in the relevant directory.
+# Code runtime: up to 1 hour.
 
 # DESCRIPTION OF INPUT PARAMETERS
-# YearS (date, in YYYYMMDD format): start year to retrieve
-# YearF (date, in YYYYMMDD format): final year to retrieve
-# Acc (number, in hours): accumulation period for rainfall
-# Git_repo (string): path of local github repository
-# DirOUT (string): relative path for the output directory
+# YearS (integer): start year to retrieve.
+# YearF (integer): final year to retrieve.
+# Git_Repo (string): path of local GitHub repository.
+# DirOUT (string): relative path for the output directory.
 
 # INPUT PARAMETERS
 YearS=2000
 YearF=2019
-Acc = 24
-Git_repo="/ec/vol/ecpoint_dev/mofp/Compute/Climate_OBS_tp/"
-DirOUT="Data/Raw/OBS/CPC"
-#######################################################
+Git_Repo="/ec/vol/ecpoint_dev/mofp/Papers_2_Write/Verif_ClimateNWP_4Points"
+DirOUT="Data/Raw/OBS/CPC_24h"
+######################################################################
 
 # GENERAL
 
@@ -35,4 +33,4 @@ DirOUT="Data/Raw/OBS/CPC"
 # https://downloads.psl.noaa.gov/Datasets/cpc_global_precip/
 
 # The data is stored in the following directory:
-MainDirOUT = Git_repo + "/" + DirOUT + "_" + str(Acc) + "h"
+MainDirOUT = Git_Repo + "/" + DirOUT + "_" + str(Acc) + "h"

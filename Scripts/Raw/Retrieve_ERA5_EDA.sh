@@ -1,25 +1,26 @@
 #!/bin/bash
 
-#######################################################
+#####################################################################
 # CODE DESCRIPTION
-# Retrieve_ERA5_EDA.sh retrieves short-range ERA5_EDA rainfall 
-# analysis (63 km spatial resolution).
+# Retrieve_ERA5_EDA.sh retrieves short-range ERA5_EDA rainfall reanalysis (63 km 
+# spatial resolution).
+# Code runtime: up to 1 hour.
 
 # DESCRIPTION OF INPUT PARAMETERS
-# YearS (number): start year to retrieve
-# YearF (number): final year to retrieve
-# Git_Repo (string): path of local github repository
-# DirOUT (string): relative path for the output directory
+# YearS (integer): start year to retrieve.
+# YearF (integer): final year to retrieve.
+# Git_Repo (string): path of local GitHub repository.
+# DirOUT (string): relative path for the output directory.
 
 # INPUT PARAMETERS
 YearS=2000
 YearF=2019
-Git_Repo="/ec/vol/ecpoint_dev/mofp/Compute/Climate_NWP_tp"
-DirOUT="Data/Raw/Reanalysis/ERA5"
-#######################################################
+Git_Repo="/ec/vol/ecpoint_dev/mofp/Papers_2_Write/Verif_ClimateNWP_4Points"
+DirOUT="Data/Raw/NWP/Reanalysis/ERA5_EDA"
+#####################################################################
 
 # Setting main output directory
-MainDirOUT=${Git_repo}/${DirOUT}
+MainDirOUT=${Git_Repo}/${DirOUT}
 
 # Creating the database
 for Year in $(seq ${YearS} ${YearF}); do
