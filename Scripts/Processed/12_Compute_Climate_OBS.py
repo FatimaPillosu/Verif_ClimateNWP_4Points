@@ -1,6 +1,5 @@
 import os
 from os.path import exists
-from datetime import datetime
 import numpy as np
 
 ###########################################################################
@@ -9,12 +8,12 @@ import numpy as np
 # Code runtime: ~ 5 minutes.
 
 # DESCRIPTION OF INPUT PARAMETERS
-# YearS (number, in YYYY format): start year to consider.
-# YearF (number, in YYYY format): final year to consider.
-# Acc (number, in hours): rainfall accumulation period.
+# YearS (integer, in YYYY format): start year to consider.
+# YearF (integer, in YYYY format): final year to consider.
+# Acc (integer, in hours): rainfall accumulation period.
 # MinDays_Perc (float, from 0 to 1): % of min n. of days with valid obs at each location.
 # RP_list (list of integers, in years): list of return periods to compute.
-# Git_Repo (string): path of local github repository.
+# Git_Repo (string): path of local GitHub repository.
 # DirIN (string): relative path for the input directory.
 # DirOUT (string): relative path for the output directory.
 
@@ -22,14 +21,13 @@ import numpy as np
 YearS = 2000
 YearF = 2019
 Acc = 24
-MinDays_Perc = 0.75
+MinDays_Perc = 0.5
 RP_list = [1, 2, 5, 10, 20]
-Git_Repo = "/ec/vol/ecpoint_dev/mofp/Compute/Climate_OBS_tp"
+Git_Repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/Verif_ClimateNWP_4Points"
 DirIN = "Data/Compute/10_AlignOBS_CleanSTVL/Coeff_Grid2Point_20"
-DirOUT = "Data/Compute/12_Climate_OBS/10_AlignOBS_CleanSTVL/Coeff_Grid2Point_20"
+DirOUT = "Data/Compute/12_Climate_OBS/Coeff_Grid2Point_20"
 ###########################################################################
 
-#np.set_printoptions(threshold = np.inf, suppress=True, formatter={'float_kind':'{:0.6f}'.format})
 
 # Reading the rainfall observations and their metadata (i.e., ids/lats/lons/dates)
 print(" ")
@@ -82,7 +80,7 @@ climate = np.transpose(np.round(np.float32(np.nanpercentile(obs_MinNumDays_new, 
 # Saving the climatology and its metadata
 print(" ")
 print("Saving the climatology and its metadata")
-MainDirOUT = Git_Repo + "/" + DirOUT + "/" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF)
+MainDirOUT = Git_Repo + "/" + DirOUT + "/MinDays_Perc_" + str(MinDays_Perc*100) + "/" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF)
 if not exists(MainDirOUT):
       os.makedirs(MainDirOUT)
 np.save(MainDirOUT + "/Climate.npy", climate)

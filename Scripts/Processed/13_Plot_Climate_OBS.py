@@ -2,34 +2,36 @@ import os
 import numpy as np
 import metview as mv
 
-#####################################################################################################################################################
+######################################################################
 # CODE DESCRIPTION
 # 02_Plot_Climate_OBS.py plots the observational (point) rainfall climatologies.
 # Code runtime: negligible.
 
 # DESCRIPTION OF INPUT PARAMETERS
-# YearS (number, in YYYY format): start year to consider.
-# YearF (number, in YYYY format): final year to consider.
-# Acc (number, in hours): rainfall accumulation period.
+# YearS (integer, in YYYY format): start year to consider.
+# YearF (integer, in YYYY format): final year to consider.
+# Acc (integer, in hours): rainfall accumulation period.
+# MinDays_Perc (float, from 0 to 1): % of min n. of days with valid obs at each location.
 # RP_2_Plot_list (list of integers, in years): list of return periods to plot.
-# Git_Repo (string): path of local github repository.
+# Git_Repo (string): path of local GitHub repository.
 # DirIN (string): relative path for the input directory.
-# DirOUT (string): relative path for the output directory .
+# DirOUT (string): relative path for the output directory.
 
 # INPUT PARAMETERS
 YearS = 2000
 YearF = 2019
 Acc = 24
+MinDays_Perc = 0.5
 RP_2_Plot_list = [1, 2, 5, 10, 20, 50, 100, 200, 500, 1000]
 Git_Repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/Verif_ClimateNWP_4Points"
-DirIN = "Data/Raw/Climate_OBS"
-DirOUT= "Data/Plot/02_Climate_OBS"
-#####################################################################################################################################################
+DirIN = "Data/Compute/12_Climate_OBS/Coeff_Grid2Point_20"
+DirOUT= "Data/Plot/13_Climate_OBS"
+######################################################################
 
 
 # Setting the main input/output directories
-MainDirIN = Git_Repo + "/" + DirIN + "/tp_" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF)
-MainDirOUT = Git_Repo + "/" + DirOUT + "/tp_" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF)
+MainDirIN = Git_Repo + "/" + DirIN + "/MinDays_Perc_" + str(MinDays_Perc*100) + "/" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF)
+MainDirOUT = Git_Repo + "/" + DirOUT + "/MinDays_Perc_" + str(MinDays_Perc*100) + "/" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF)
 if not os.path.exists(MainDirOUT):
     os.makedirs(MainDirOUT)
 
@@ -106,7 +108,7 @@ for ind_RP in range(len(RP_2_Plot_list)):
 
         title = mv.mtext(
             text_line_count = 2,
-            text_line_1 = f'{Acc:02d}' + " rainfall climatology (" + str(RP) + " year return period) - Period: " + str(YearS) + " to " + str(YearF),
+            text_line_1 = f'{Acc:02d}' + " rainfall climatology (" + str(RP) + " year return period, with minimum " + str(MinDays_Perc*100) + "% of valid obs) - Period: " + str(YearS) + " to " + str(YearF),
             text_line_2 = " ",
             text_colour = "charcoal",
             text_font = "arial",

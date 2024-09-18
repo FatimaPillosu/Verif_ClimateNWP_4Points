@@ -11,10 +11,10 @@ import pandas as pd
 # Code runtime: negligible.
 
 # DESCRIPTION OF INPUT PARAMETERS
-# YearS (number, in YYYY format): start year to consider.
-# YearF (number, in YYYY format): final year to consider.
-# Acc (number, in hours): rainfall accumulation period.
-# Git_Repo (string): path of local github repository.
+# YearS (integer, in YYYY format): start year to consider.
+# YearF (integer, in YYYY format): final year to consider.
+# Acc (integer, in hours): rainfall accumulation period.
+# Git_Repo (string): path of local GitHub repository.
 # DirIN_UniqueStnids (string): relative path for the input directory containing the ids/lats/lons of the unique station over the period of interest.
 # DirIN_AlignOBS_Year (string): relative path for the input directory containing the aligned rainfall observations on a given year.
 # DirOUT (string): relative path for the output directory that will contain the aligned observations for the whole period of interest.
@@ -23,7 +23,7 @@ import pandas as pd
 YearS = 2000
 YearF = 2019
 Acc = 24
-Git_Repo = "/ec/vol/ecpoint_dev/mofp/Compute/Climate_OBS_tp"
+Git_Repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/Verif_ClimateNWP_4Points"
 DirIN_UniqueStnids = "Data/Compute/06_UniqueStnids_Combine_Years_RawSTVL"
 DirIN_AlignOBS_Year = "Data/Compute/07_AlignOBS_Extract_PerYear_RawSTVL"
 DirOUT = "Data/Compute/08_AlignOBS_Combine_Years_RawSTVL_RawSTVL"

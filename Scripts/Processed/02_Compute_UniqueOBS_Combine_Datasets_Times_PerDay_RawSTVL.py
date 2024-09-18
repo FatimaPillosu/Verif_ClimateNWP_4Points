@@ -11,11 +11,11 @@ import metview as mv
 # Code runtime: ~ 10 minutes.
 
 # DESCRIPTION OF INPUT PARAMETERS
-# YearS (number, in YYYY format): start year to consider.
-# YearF (number, in YYYY format): final year to consider.
-# Acc (number, in hours): rainfall accumulation period.
+# YearS (integer, in YYYY format): start year to consider.
+# YearF (integer, in YYYY format): final year to consider.
+# Acc (integer, in hours): rainfall accumulation period.
 # Dataset_list (string): name of datasets to consider.
-# Git_Repo (string): path of local github repository.
+# Git_Repo (string): path of local GitHub repository.
 # DirIN (string): relative path for the input directory.
 # DirOUT (string): relative path for the output directory.
 
@@ -24,7 +24,7 @@ YearS = 2000
 YearF = 2019
 Acc = 24
 Dataset_list = ["synop", "bom", "india", "vnm", "efas"]
-Git_Repo = "/ec/vol/ecpoint_dev/mofp/Compute/Climate_OBS_tp"
+Git_Repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/Verif_ClimateNWP_4Points"
 DirIN = "Data/Compute/01_UniqueOBS_Extract_FromReference_RawSTVL"
 DirOUT = "Data/Compute/02_UniqueOBS_Combine_Datasets_Times_PerDay_RawSTVL"
 ########################################################################

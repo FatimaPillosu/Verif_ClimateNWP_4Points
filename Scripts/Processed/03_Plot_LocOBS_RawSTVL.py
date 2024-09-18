@@ -3,22 +3,21 @@ from os.path import exists
 from datetime import date
 import metview as mv
 
-#############################################################
+######################################################################
 # CODE DESCRIPTION
-# 03_Plot_LocOBS_RawSTVL.py plots a map with an example of the
-# location of rainfall stations reporting observations at different times of 
-# the day.
+# 03_Plot_LocOBS_RawSTVL.py plots a map with an example of the location of rainfall 
+# stations reporting observations at different times of  the day.
 # Code runtime: negligible.
 
 # DESCRIPTION OF INPUT PARAMETERS
-# YearS (number, in YYYY format): start year to consider.
-# YearF (number, in YYYY format): final year to consider.
-# Acc (number, in hours): rainfall accumulation period.
-# Date (date, in YYYY-MM-DDformat): date to plot
+# YearS (integer, in YYYY format): start year to consider.
+# YearF (integer, in YYYY format): final year to consider.
+# Acc (integer, in hours): rainfall accumulation period.
+# Date (date, in YYYY-MM-DDformat): date to plot.
 # Dataset_list (list of strings): names of the considered datasets from stvl.
-# Git_Repo (string): path of local github repository
-# DirIN (string): relative path for the input directory
-# DirOUT (string): relative path for the output directory
+# Git_Repo (string): path of local GitHub repository.
+# DirIN (string): relative path for the input directory.
+# DirOUT (string): relative path for the output directory.
 
 # INPUT PARAMETERS
 YearS = 2000
@@ -26,10 +25,10 @@ YearF = 2019
 Acc = 24
 Date_2_Plot = date(2000,1,1)
 Dataset_list = ["synop", "hdobs", "bom", "india", "efas", "vnm"]
-Git_Repo = "/ec/vol/ecpoint_dev/mofp/Compute/Climate_OBS_tp"
+Git_Repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/Verif_ClimateNWP_4Points"
 DirIN = "Data/Compute/01_UniqueOBS_Extract_FromReference_RawSTVL"
 DirOUT = "Data/Plot/03_LocOBS_RawSTVL"
-##############################################################
+######################################################################
 
 
 # Initializing the variables that will contain the rainfall observations at different reporting times

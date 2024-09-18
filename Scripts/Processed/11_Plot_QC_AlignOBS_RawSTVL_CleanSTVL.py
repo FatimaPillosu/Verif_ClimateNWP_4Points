@@ -11,16 +11,16 @@ import metview as mv
 # Code runtime: ~ 20 minutes.
 
 # DESCRIPTION OF INPUT PARAMETERS
-# YearS (number, in YYYY format): start year to consider.
-# YearF (number, in YYYY format): final year to consider.
-# Acc (number, in hours): rainfall accumulation period.
+# YearS (integer, in YYYY format): start year to consider.
+# YearF (integer, in YYYY format): final year to consider.
+# Acc (integer, in hours): rainfall accumulation period.
 # DatasetSTVL_list (string): list of STVL's datasets considered to build the aligned observations.
 # ReportingTimeSTVL_list (string): list of observations' reporting times considered for each dataset to build the aligned observations.
 # NameOBS_list (list of strings): list of the observational datasets to quality check.
 # Coeff_Grid2Point_list (list of integer numbers): list of coefficients that make the CPC's gridded rainfall values comparable with the STVL's point observations. 
-# Git_Repo (string): path of local github repository
-# DirIN (string): relative path for the input directory
-# DirOUT (string): relative path for the output directory 
+# Git_Repo (string): path of local GitHub repository.
+# DirIN (string): relative path for the input directory.
+# DirOUT (string): relative path for the output directory.
 
 # INPUT PARAMETERS
 YearS = 2000
@@ -30,7 +30,7 @@ DatasetSTVL_list = "The aligned observations have been built considering the fol
 ReportingTimeSTVL_list = "The aligned observations have been built considering, for each dataset, reporting times from 00 to 23 UTC at hourly steps when available."
 NameOBS_list = ["08_AlignOBS_Combine_Years_RawSTVL", "10_AlignOBS_CleanSTVL"]
 Coeff_Grid2Point_list = [2,5,10,20,50,100]
-Git_Repo = "/ec/vol/ecpoint_dev/mofp/Compute/Climate_OBS_tp"
+Git_Repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/Verif_ClimateNWP_4Points"
 DirIN = "Data/Compute"
 DirOUT= "Data/Plot/11_QC_AlignOBS_RawSTVL_CleanSTVL"
 ######################################################################################################################################

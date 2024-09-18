@@ -4,21 +4,21 @@ from datetime import datetime, timedelta
 import matplotlib.pyplot as plt
 import metview as mv
 
-#############################################################
+######################################################################
 # CODE DESCRIPTION
-# 04_Plot_TempDistrOBS_RawSTVL.py plots the temporal distribution of 
-# the average number of rainfall observations per day, in a given year, in  
-# each considered rainfall dataset in stvl.
+# 04_Plot_TempDistrOBS_RawSTVL.py plots the temporal distribution of the average 
+# number of rainfall observations per day, in a given year, in each considered rainfall 
+# dataset in stvl.
 # Code runtime: ~ 30 minutes.
 
 # DESCRIPTION OF INPUT PARAMETERS
-# YearS (number, in YYYY format): start year to consider.
-# YearF (number, in YYYY format): final year to consider.
-# Acc (number, in hours): rainfall accumulation period.
+# YearS (integer, in YYYY format): start year to consider.
+# YearF (integer, in YYYY format): final year to consider.
+# Acc (integer, in hours): rainfall accumulation period.
 # Dataset_list (list of strings): name of the considered datasets.
-# Git_repo (string): path of local github repository
-# DirIN (string): relative path for the input directory
-# DirOUT (string): relative path for the output directory
+# Git_Repo (string): path of local github repository.
+# DirIN (string): relative path for the input directory.
+# DirOUT (string): relative path for the output directory.
 
 # INPUT PARAMETERS
 YearS = 2000
@@ -29,10 +29,10 @@ Plot_rows = 3
 Plot_cols = 2
 Plot_row_loc_list = [0,0,1,1,2,2]
 Plot_col_loc_list = [0,1,0,1,0,1]
-Git_repo = "/ec/vol/ecpoint_dev/mofp/Compute/Climate_OBS_tp"
+Git_Repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/Verif_ClimateNWP_4Points"
 DirIN = "Data/Compute/01_UniqueOBS_Extract_FromReference_RawSTVL"
 DirOUT = "Data/Plot/04_TempDistrOBS_RawSTVL"
-#############################################################
+######################################################################
 
 
 # Setting general parameters
@@ -71,7 +71,7 @@ for ind_Dataset in ind_Dataset_list:
                   TheTimeSTR = TheDateTime.strftime("%H")
 
                   # Reading the rainfall observations and counting how many observation are in each single day, in a given year
-                  FileIN_temp = Git_repo + "/" + DirIN + "/" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF) + "/" + Dataset + "/" + TheDateSTR + "/tp" + str(Acc) + "_obs_" + TheDateSTR + TheTimeSTR + ".geo"
+                  FileIN_temp = Git_Repo + "/" + DirIN + "/" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF) + "/" + Dataset + "/" + TheDateSTR + "/tp" + str(Acc) + "_obs_" + TheDateSTR + TheTimeSTR + ".geo"
                   if exists(FileIN_temp):
                         geo = mv.read(FileIN_temp)
                         count_obs = count_obs + mv.count(geo)
@@ -95,7 +95,7 @@ for ind_Dataset in ind_Dataset_list:
             ax.label_outer()
 
 # Saving the plot
-MainDirOUT = Git_repo + "/" + DirOUT + "/" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF)
+MainDirOUT = Git_Repo + "/" + DirOUT + "/" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF)
 if not exists(MainDirOUT):
       os.makedirs(MainDirOUT)
 FileOUT = MainDirOUT + "/TemDistrOBS.png"

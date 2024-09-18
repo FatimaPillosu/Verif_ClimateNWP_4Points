@@ -10,21 +10,21 @@ import numpy as np
 # Code runtime: ~ 2 minutes.
 
 # DESCRIPTION OF INPUT PARAMETERS
-# YearS (number, in YYYY format): start year to consider.
-# YearF (number, in YYYY format): final year to consider.
-# Acc (number, in hours): rainfall accumulation period.
-# Coeff_Grid2Point_list (list of integer number): list of coefficients that make the CPC's gridded rainfall values comparable with STVL's point rainfall observations
-# Git_Repo (string): path of local github repository
-# DirIN_STVL (string): relative path for the input directory containing STVL's point rainfall observations
-# DirIN_CPC (string): relative path for the input directory containing CPC's gridded rainfall values
-# DirOUT (string): relative path for the output directory containing the clean STVL's point rainfall observations
+# YearS (integer, in YYYY format): start year to consider.
+# YearF (integer, in YYYY format): final year to consider.
+# Acc (integer, in hours): rainfall accumulation period.
+# Coeff_Grid2Point_list (list of integer number): list of coefficients that make the CPC's gridded rainfall values comparable with STVL's point rainfall observations.
+# Git_Repo (string): path of local github repository.
+# DirIN_STVL (string): relative path for the input directory containing STVL's point rainfall observations.
+# DirIN_CPC (string): relative path for the input directory containing CPC's gridded rainfall values.
+# DirOUT (string): relative path for the output directory containing the clean STVL's point rainfall observations.
 
 # INPUT PARAMETERS
 YearS = 2000
 YearF = 2019
 Acc = 24
 Coeff_Grid2Point_list = [2,5,10,20,50,100]
-Git_Repo = "/ec/vol/ecpoint_dev/mofp/Compute/Climate_OBS_tp"
+Git_Repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/Verif_ClimateNWP_4Points"
 DirIN_STVL = "Data/Compute/08_AlignOBS_Combine_Years_RawSTVL"
 DirIN_CPC = "Data/Compute/09_AlignOBS_Extract_GridCPC"
 DirOUT = "Data/Compute/10_AlignOBS_CleanSTVL"

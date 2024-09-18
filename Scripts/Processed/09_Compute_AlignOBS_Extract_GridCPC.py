@@ -13,10 +13,10 @@ from mpl_toolkits.basemap import Basemap
 # Code runtime: negligible.
 
 # DESCRIPTION OF INPUT PARAMETERS
-# YearS (number, in YYYY format): start year to consider.
-# YearF (number, in YYYY format): final year to consider.
-# Acc (number, in hours): rainfall accumulation period.
-# Git_Repo (string): path of local github repository.
+# YearS (integer, in YYYY format): start year to consider.
+# YearF (integer, in YYYY format): final year to consider.
+# Acc (integer, in hours): rainfall accumulation period.
+# Git_Repo (string): path of local GitHub repository.
 # DirIN_CPC (string): relative path for the directory containing the gridded CPC rainfall observations.
 # DirIN_STVL (string): relative path for the directory containing the aligned point STVL rainfall observations.
 # DirOUT (string): relative path for the directory containing the gridded CPC rainfall values for the nearest grid point to the aligned STVL rain stations.
@@ -25,7 +25,7 @@ from mpl_toolkits.basemap import Basemap
 YearS = 2000
 YearF = 2019
 Acc = 24
-Git_Repo = "/ec/vol/ecpoint_dev/mofp/Compute/Climate_OBS_tp"
+Git_Repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/Verif_ClimateNWP_4Points"
 DirIN_CPC = "Data/Raw/OBS/CPC"
 DirIN_STVL = "Data/Compute/08_AlignOBS_Combine_Years_RawSTVL"
 DirOUT = "Data/Compute/09_AlignOBS_Extract_GridCPC"
