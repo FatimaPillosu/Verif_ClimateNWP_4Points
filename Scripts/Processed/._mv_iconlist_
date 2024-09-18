@@ -1,8 +1,0 @@
-18,8,PYTHON,01_Plot_Climate_NWP_field.py
-241,8,PYTHON,02_Plot_Climate_OBS.py
-434,8,PYTHON,03_Compute_Statistic_AD.py
-636,8,PYTHON,04_Plot_Statistic_AD_maps.py
-833,8,PYTHON,05_Plot_Statistic_AD_pycharts.py
-62,68,PYTHON,06_Plot_CDF.py
-287,68,FOLDER,LogATOS
-483,68,NOTE,README.md

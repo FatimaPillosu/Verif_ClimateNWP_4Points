@@ -8,6 +8,3 @@ The scripts' name in **"Scripts/Processed"** indicate the order which the script
 **02_Plot_[DirOUT]** -> This script is the _second one to run_ as the name starts with _"02"_ (preferibly, start the numbers with a leading zero to maintain the correct order which the scripts need to be run with). The term _"Plot"_ indicates that the outputs of the script are typically graphical (e.g. png, jpeg, ps, svg, etc.), so that they will be saved in the directory _"/Data/Plot/02_[DirOUT]"_.
 
 **03_ComputePlot_[DirOUT]** -> This script is the _third one to run_ as the name starts with _"03"_ (preferibly, start the numbers with a leading zero to maintain the correct order which the scripts need to be run with). The term _"ComputePlot"_ indicates that the outputs of the script are both numerical (e.g. csv tables, grib files, geopoints, etc) and graphical (e.g. png, jpeg, ps, svg, etc.), so that they will be saved in the directories _"/Data/Compute/[DirOUT]"_ and _"/Data/Plot/03_[DirOUT]"_ , respectively.
-
-### Workflow notes
-The computations regarding the observational rainfall climatologies (scripts from 01_* to 09_*) are splitted in small computational chunks because of memory issues.  
