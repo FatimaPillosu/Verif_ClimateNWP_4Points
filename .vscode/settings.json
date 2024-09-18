@@ -1,7 +1,0 @@
-{
-      "files.exclude": {
-            "**/_mv_iconlist_": true,
-            "**/._mv_viewinfo_": true,
-            "**/.git": false
-      }
-}
