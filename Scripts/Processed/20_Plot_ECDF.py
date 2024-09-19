@@ -16,8 +16,8 @@ from statsmodels.distributions.empirical_distribution import ECDF
 # MinDays_Perc (float, from 0 to 1): % of min n. of days with valid obs at each location.
 # SystemNWP_list (list of string): list of NWP model climatologies.
 # Git_Repo (string): path of local github repository.
-# DirIN_OBS (string): relative path for the directory containing the observational climatologies.
-# DirIN_NWP (string): relative path for the directory containing the NWP modelled climatologies.
+# DirIN_OBS (string): relative path for the directory containing the rainfall observational.
+# DirIN_NWP (string): relative path for the directory containing the NWP modelled rainfall realizations.
 # DirOUT (string): relative path for the directory containing the AD statistic.
 
 # INPUT PARAMETERS
