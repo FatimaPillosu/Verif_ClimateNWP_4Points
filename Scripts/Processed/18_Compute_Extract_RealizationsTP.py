@@ -151,7 +151,6 @@ MainDirIN_OBS = Git_Repo + "/" + DirIN_OBS + "/" + f'{Acc:02d}' + "h_" + str(Yea
 tp_obs = np.load(MainDirIN_OBS + "/obs.npy")
 lats_obs = np.load(MainDirIN_OBS + "/stn_lats.npy")
 lons_obs = np.load(MainDirIN_OBS + "/stn_lons.npy")
-num_stn = tp_obs.shape[0]
 
 # Selecting the stations with the required minimum number of days with valid observations
 print("Selecting the stations with the considered minimum number of days with valid observations...")
