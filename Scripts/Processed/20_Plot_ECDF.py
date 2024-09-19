@@ -51,8 +51,9 @@ ind_stns_MinNumDays = np.where(NumDays_NotNaN >= MinNumDays)[0]
 tp_obs_MinNumDays = tp_obs[ind_stns_MinNumDays]
 lats_obs_MinNumDays = lats_obs[ind_stns_MinNumDays]
 lons_obs_MinNumDays = lons_obs[ind_stns_MinNumDays]
+num_stn_MinNumDays = tp_obs_MinNumDays.shape[0]
 print(" - Total number of days between " + str(YearS) + " and " + str(YearF) + ": " + str(tp_obs.shape[1]))
-print(" - Totals number of stations with at least " + str(int(MinDays_Perc*100)) + "% of days (= " + str(int(MinNumDays)) + ") with valid observations: " + str(len(ind_stns_MinNumDays)) + "/" + str(str(tp_obs.shape[0])))
+print(" - Totals number of stations with at least " + str(int(MinDays_Perc*100)) + "% of days (= " + str(int(MinNumDays)) + ") with valid observations: " + str(num_stn_MinNumDays) + "/" + str(num_stn))
 
 # Reading the NWP modelled rainfall realizations
 print()
@@ -65,9 +66,9 @@ for SystemNWP in SystemNWP_list:
 # Plotting the ECDFs for the rainfall distribution from observations and NWP models
 print()
 print("Plotting the ECDFs for the rainfall distribution from observations and NWP models")
-for ind_stn in range(num_stn):
+for ind_stn in range(num_stn_MinNumDays):
 
-      print(" - Creating the ECDF plots for the rain gauge n." + str(ind_stn) + "/" + str(num_stn))
+      print(" - Creating the ECDF plots for the rain gauge n." + str(ind_stn) + "/" + str(num_stn_MinNumDays))
       tp_obs = tp_obs_MinNumDays[ind_stn,:]
       tp_obs_nonan = tp_obs[~np.isnan(tp_obs)] # eliminate all nan values from the calculation of the ECDF
       ecdf_obs = ECDF(tp_obs_nonan)
