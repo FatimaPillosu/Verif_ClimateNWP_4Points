@@ -148,21 +148,20 @@ def tp_ERA5_ecPoint_24h(BaseDateTime, DirIN):
 print()
 print("Reading the realizations from rainfall observations...")
 MainDirIN_OBS = Git_Repo + "/" + DirIN_OBS + "/" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF)
-vals_obs = np.load(MainDirIN_OBS + "/obs.npy")
+tp_obs = np.load(MainDirIN_OBS + "/obs.npy")
 lats_obs = np.load(MainDirIN_OBS + "/stn_lats.npy")
 lons_obs = np.load(MainDirIN_OBS + "/stn_lons.npy")
-num_stn = vals_obs.shape[0]
+num_stn = tp_obs.shape[0]
 
 # Selecting the stations with the required minimum number of days with valid observations
 print("Selecting the stations with the considered minimum number of days with valid observations...")
-MinNumDays = round(vals_obs.shape[1] * MinDays_Perc)
-NumDays_NotNaN = np.sum(~np.isnan(vals_obs), axis=1) # array containing the n. of days with observations for each rain gauge
+MinNumDays = round(tp_obs.shape[1] * MinDays_Perc)
+NumDays_NotNaN = np.sum(~np.isnan(tp_obs), axis=1) # array containing the n. of days with observations for each rain gauge
 ind_stns_MinNumDays = np.where(NumDays_NotNaN >= MinNumDays)[0]
-obs_MinNumDays = vals_obs[ind_stns_MinNumDays,:] # array containin only the stations that satisfied the minimum n. of days with observationss
 lats_MinNumDays = lats_obs[ind_stns_MinNumDays]
 lons_MinNumDays = lons_obs[ind_stns_MinNumDays]
-print(" - Total number of days between " + str(YearS) + " and " + str(YearF) + ": " + str(vals_obs.shape[1]))
-print(" - Totals number of stations with at least " + str(int(MinDays_Perc*100)) + "% of days (= " + str(int(MinNumDays)) + ") with valid observations: " + str(len(ind_stns_MinNumDays)) + "/" + str(str(vals_obs.shape[0])))
+print(" - Total number of days between " + str(YearS) + " and " + str(YearF) + ": " + str(tp_obs.shape[1]))
+print(" - Totals number of stations with at least " + str(int(MinDays_Perc*100)) + "% of days (= " + str(int(MinNumDays)) + ") with valid observations: " + str(len(ind_stns_MinNumDays)) + "/" + str(str(tp_obs.shape[0])))
 
 # Determining the range of dates to consider for the NWP models
 BaseDateS = datetime(YearS-1, 1, 1) # to include the dates from the reforecasts
@@ -182,29 +181,29 @@ for SystemNWP in SystemNWP_list:
       BaseDate = BaseDateS
       while BaseDate <= BaseDateF:
       
-            print("Computing the realizations for '" + SystemNWP + "', on " + BaseDate.strftime("%Y%m%d") + "...")
+            print("Extracting the tp realizations for '" + SystemNWP + "', on " + BaseDate.strftime("%Y%m%d") + "...")
 
             if SystemNWP == "Reforecasts/ECMWF_46r1":  
-                  tp_grib = tp_Reforecast(Acc, BaseDate, DirIN_temp)
+                  tp_nwp_grib = tp_Reforecast(Acc, BaseDate, DirIN_temp)
             elif SystemNWP == "Reanalysis/ERA5_EDA" and Acc == 24:
-                  tp_grib = tp_ShortRange_ERA5_EDA_24h(BaseDate, DirIN_temp)      
+                  tp_nwp_grib = tp_ShortRange_ERA5_EDA_24h(BaseDate, DirIN_temp)      
             elif SystemNWP == "Reanalysis/ERA5" and Acc == 24:
-                  tp_grib = tp_ShortRange_ERA5_24h(BaseDate, DirIN_temp)
+                  tp_nwp_grib = tp_ShortRange_ERA5_24h(BaseDate, DirIN_temp)
             elif SystemNWP == "Reanalysis/ERA5_ecPoint" and Acc == 24:
-                  tp_grib = tp_ERA5_ecPoint_24h(BaseDate, DirIN_temp)
+                  tp_nwp_grib = tp_ERA5_ecPoint_24h(BaseDate, DirIN_temp)
             else:
                   print("ERROR! Considered dataset not valid.")
 
-            if len(tp_grib) != 0:
+            if len(tp_nwp_grib) != 0:
                   
                   # Extracting the rainfall values at the location of the considered rainfall observations
-                  tp_obs = mv.nearest_gridpoint(tp_grib, lats_MinNumDays, lons_MinNumDays)
+                  tp_nwp_geo = mv.nearest_gridpoint(tp_nwp_grib, lats_MinNumDays, lons_MinNumDays)
 
                   # Saving the extracted sub-areas
                   DirOUT_temp = Git_Repo + "/" + DirOUT + "/MinDays_Perc_" + str(MinDays_Perc*100) + "/" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF) + "/" + SystemNWP + "/" + BaseDate.strftime("%Y")
                   if not os.path.exists(DirOUT_temp):
                         os.makedirs(DirOUT_temp)
                   FileOUT_temp = "tp_" + BaseDate.strftime("%Y%m%d") + ".npy"
-                  np.save(DirOUT_temp + "/" + FileOUT_temp, tp_obs) 
+                  np.save(DirOUT_temp + "/" + FileOUT_temp, tp_nwp_geo) 
 
             BaseDate = BaseDate + timedelta(days=1)
