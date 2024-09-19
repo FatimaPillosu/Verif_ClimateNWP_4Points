@@ -1,8 +1,6 @@
 import os
 import numpy as np
-import metview as mv
 import matplotlib.pyplot as plt
-import matplotlib.ticker as ticker
 from matplotlib.ticker import LogLocator
 from statsmodels.distributions.empirical_distribution import ECDF
 
