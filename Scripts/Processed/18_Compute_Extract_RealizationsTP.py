@@ -208,7 +208,7 @@ for SystemNWP in SystemNWP_list:
                   tp_obs = mv.nearest_gridpoint(tp_grib, lats_MinNumDays, lons_MinNumDays)
 
                   # Saving the extracted sub-areas
-                  DirOUT_temp = Git_Repo + "/" + DirOUT + "/" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF) + "/NWP/" +  SystemNWP + "/" + BaseDate.strftime("%Y")
+                  DirOUT_temp = Git_Repo + "/" + DirOUT + "/MinDays_Perc_" + str(MinDays_Perc*100) + "/" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF) + "/NWP/" +  SystemNWP + "/" + BaseDate.strftime("%Y")
                   if not os.path.exists(DirOUT_temp):
                         os.makedirs(DirOUT_temp)
                   FileOUT_temp = "tp_" + BaseDate.strftime("%Y%m%d") + ".npy"
