@@ -165,11 +165,13 @@ print(" - Total number of days between " + str(YearS) + " and " + str(YearF) + "
 print(" - Totals number of stations with at least " + str(int(MinDays_Perc*100)) + "% of days (= " + str(int(MinNumDays)) + ") with valid observations: " + str(len(ind_stns_MinNumDays)) + "/" + str(str(vals_obs.shape[0])))
 
 # Saving the extracted sub-areas
-DirOUT_temp = Git_Repo + "/" + DirOUT + "/" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF) + "/OBS"
+DirOUT_temp = Git_Repo + "/" + DirOUT + "/MinDays_Perc_" + str(MinDays_Perc*100) + "/" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF) + "/OBS"
 if not os.path.exists(DirOUT_temp):
       os.makedirs(DirOUT_temp)
-FileOUT_temp = "tp.npy"
-np.save(DirOUT_temp + "/" + FileOUT_temp, obs_MinNumDays) 
+np.save(DirOUT_temp + "/vals_obs.npy", obs_MinNumDays) 
+np.save(DirOUT_temp + "/lats_obs.npy", lats_MinNumDays) 
+np.save(DirOUT_temp + "/lons_obs.npy", lons_MinNumDays) 
+exit()
 
 # Determining the range of dates to consider for the NWP models
 BaseDateS = datetime(1999, 1, 1) # to include the dates from the reforecasts
