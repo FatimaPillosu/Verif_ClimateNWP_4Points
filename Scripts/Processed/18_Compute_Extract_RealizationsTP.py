@@ -5,7 +5,7 @@ import metview as mv
 
 ###################################################################################################
 # CODE DESCRIPTION
-# 18_Compute_Extract_tp_NWP.py extracts indipendent rainfall realizations from NWP models.
+# 18_Compute_Extract_tp_NWP.py extracts indipendent rainfall realizations from NWP models at rain gauge locations.
 # Code runtime: ~ 12 hours.
 
 # DESCRIPTION OF INPUT PARAMETERS
