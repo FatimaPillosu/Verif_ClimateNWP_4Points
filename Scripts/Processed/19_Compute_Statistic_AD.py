@@ -1,12 +1,12 @@
 import os
+from datetime import datetime, timedelta
 import numpy as np
-import metview as mv
-from scipy.stats import anderson_ksamp
+from scipy.stats import anderson_ksamp, PermutationMethod
 
 ###################################################################################################
 # CODE DESCRIPTION
-# 03_Compute_Statistic_AD.py computes the Anderson-Darling statistic between the observational and the NWP
-# modelled climatology distributions.
+# 19_Compute_Statistic_AD.py computes the Anderson-Darling statistic between the observational and the NWP
+# modelled climatology.
 # Note:
 # The Anderson-Darling test for k-samples tests the null hypothesis that k-samples are drawn from the same population 
 # without having to specify the distribution function of that population. 
@@ -23,70 +23,80 @@ from scipy.stats import anderson_ksamp
 # YearS (number, in YYYY format): start year to consider.
 # YearF (number, in YYYY format): final year to consider.
 # Acc (number, in hours): rainfall accumulation period.
+# MinDays_Perc (float, from 0 to 1): % of min n. of days with valid obs at each location.
 # SystemNWP_list (list of string): list of NWP model climatologies.
 # Git_Repo (string): path of local github repository.
-# DirIN_OBS (string): relative path for the directory containing the observational climatologies.
-# DirIN_NWP (string): relative path for the directory containing the NWP modelled climatologies.
+# DirIN (string): relative path for the directory containing the rainfall realizations.
 # DirOUT (string): relative path for the directory containing the AD statistic.
 
 # INPUT PARAMETERS
 YearS = 2000
 YearF = 2019
 Acc = 24
-SystemNWP_list = ["Reforecasts/ECMWF_46r1", "Reanalysis/ERA5_EDA", "Reanalysis/ERA5", "Reanalysis/ERA5_ecPoint"]
+MinDays_Perc = 0.75
+SystemNWP_list = ["Reanalysis/ERA5_EDA", "Reanalysis/ERA5", "Reforecasts/ECMWF_46r1", "Reanalysis/ERA5_ecPoint"]
 Git_Repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/Verif_ClimateNWP_4Points"
-DirIN_OBS = "Data/Raw/Climate_OBS"
-DirIN_NWP = "Data/Raw/Climate_NWP"
-DirOUT = "Data/Compute/03_Statistic_AD"
+DirIN = "Data/Compute/18_Extract_RealizationsTP"
+DirOUT = "Data/Compute/19_Statistic_AD"
 ###################################################################################################
 
 
-# Reading the observational climatology
+# Reading the rainfall realizations from observations
 print()
-print("Reading the observational climatology...")
-MainDirIN_OBS = Git_Repo + "/" + DirIN_OBS + "/tp_" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF)
-climate_OBS = np.load(MainDirIN_OBS + "/Climate.npy")
-lats_OBS = np.load(MainDirIN_OBS + "/Stn_lats.npy")
-lons_OBS = np.load(MainDirIN_OBS + "/Stn_lons.npy")
-rp_OBS = np.load(MainDirIN_OBS + "/RP.npy")
-rp_OBS = (np.round(rp_OBS, decimals = 5)).astype('float64')
-num_stn = climate_OBS.shape[0]
+print("Reading the rainfall realizations from observations...")
+DirIN_temp = Git_Repo + "/" + DirIN + "/MinDays_Perc_" + str(MinDays_Perc*100) + "/" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF) + "/OBS" 
+tp_obs = np.load(DirIN_temp + "/vals_obs.npy")
+lat_obs = np.load(DirIN_temp + "/lats_obs.npy")
+lon_obs = np.load(DirIN_temp + "/lons_obs.npy")
+num_stn = tp_obs.shape[0]
 
-# Computing the Anderson-Darling statistic for different NWP modelled climatologies
-print()
-print("Computing the Anderson-Darling statistic for the NWP modelled climatology: ")
+# Determining the range of dates to consider for the NWP models
+BaseDateS = datetime(YearS-1, 1, 1) # to include the dates from the reforecasts
+BaseDateF = datetime(YearF, 12, 31)
+
+# Running  the Anderson-Darling statistic for rainfall realizations from different NWP models
 for SystemNWP in SystemNWP_list:
       
-      print(" - " + SystemNWP)
+      print()
+      print("Reading the rainfall realizations from NWP models...")
 
-      # Reading the considered NWP modelled climatology
-      MainDirIN_NWP = Git_Repo + "/" + DirIN_NWP + "/tp_" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF) + "/" + SystemNWP
-      climate_NWP = mv.read(MainDirIN_NWP + "/Climate.grib")
-      rp_NWP = np.load(MainDirIN_NWP + "/RP.npy")
+      # Reading the rainfall realizations
+      tp_nwp = None # initializing the variable that will contain the rainfall realizations for a specific NWP model, for the whole considered period
+      BaseDate = BaseDateS
+      while BaseDate <= BaseDateF:
 
-      # Select the nearest grid-point to the rain gauge locations
-      climate_NWP_OBS = mv.nearest_gridpoint(climate_NWP, lats_OBS, lons_OBS).T
+            DirIN_temp = Git_Repo + "/" + DirIN + "/MinDays_Perc_" + str(MinDays_Perc*100) + "/" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF) + "/NWP/" + SystemNWP + "/" + BaseDate.strftime("%Y")
+            FileIN_temp = "tp_" + BaseDate.strftime("%Y%m%d") + ".npy"
+            if os.path.exists(DirIN_temp + "/" + FileIN_temp):
+                  print(" - Reading the realizations for '" + SystemNWP + "', on " + BaseDate.strftime("%Y%m%d") + "...")
+                  tp_nwp_temp = np.load(DirIN_temp + "/" + FileIN_temp)
+                  if tp_nwp is None:
+                        tp_nwp = tp_nwp_temp
+                  else:
+                        tp_nwp = np.vstack((tp_nwp, tp_nwp_temp))
 
-      # Selecting the return-periods that were also computed for the observational climatologies
-      ind_rp = np.isin(rp_NWP, rp_OBS)
-      climate_NWP_OBS = climate_NWP_OBS[:, ind_rp]
-
-      # Running the Anderson-Darling test for k-samples
+            BaseDate = BaseDate + timedelta(days=1)
+      
+      tp_nwp = tp_nwp.T # to convert it with the same dimensions of the rainfall realizations from observations
+      
+      # Computing the Anderson-Darling test for k-samples
+      print("Computing the Anderson-Darling test for k-samples between observations and " + SystemNWP + "...")
       StatisticAD = np.empty([num_stn,1]) * np.nan
       CriticalVal = np.empty([num_stn,1]) * np.nan
+      Pvalue = np.empty([num_stn,1]) * np.nan
       for ind_stn in range(num_stn):
-            climate_OBS_temp = climate_OBS[ind_stn,:]
-            climate_NWP_OBS_temp = climate_NWP_OBS[ind_stn,:]
-            if np.sum(climate_OBS_temp) != np.sum(climate_NWP_OBS_temp): # to eliminate all those cases where the values are only zeros
-                  TestAD = anderson_ksamp([climate_OBS_temp, climate_NWP_OBS_temp])
-                  StatisticAD[ind_stn] = TestAD[0]
-                  CriticalVal[ind_stn] = TestAD[1][-1] # at the 0.1% significance level
+            TestAD = anderson_ksamp([tp_obs[ind_stn,:], tp_nwp[ind_stn,:]], method=PermutationMethod(n_resamples=100))
+            StatisticAD[ind_stn] = TestAD[0]
+            CriticalVal[ind_stn] = TestAD[1][-1] # critical values for significance levels at the 0.1% (= 0.001)
+            Pvalue[ind_stn] = TestAD[2]
 
       # Saving the outcomes Anderson-Darling test
-      MainDirOUT = Git_Repo + "/" + DirOUT + "/tp_" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF) + "/" + SystemNWP
+      print("Saving the outcomes of the Anderson-Darling test...")
+      MainDirOUT = Git_Repo + "/" + DirOUT + "/MinDays_Perc_" + str(MinDays_Perc*100) + "/" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF) + "/" + SystemNWP
       if not os.path.exists(MainDirOUT):
             os.makedirs(MainDirOUT)
       np.save(MainDirOUT + "/StatisticAD.npy", StatisticAD)
       np.save(MainDirOUT + "/CriticalVal.npy", CriticalVal)
-      np.save(MainDirOUT + "/Stn_lats.npy", lats_OBS)      
-      np.save(MainDirOUT + "/Stn_lons.npy", lons_OBS)
+      np.save(MainDirOUT + "/Pvalue.npy", Pvalue)
+      np.save(MainDirOUT + "/Stn_lats.npy", lat_obs)      
+      np.save(MainDirOUT + "/Stn_lons.npy", lon_obs)
