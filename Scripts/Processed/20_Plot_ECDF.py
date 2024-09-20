@@ -7,7 +7,7 @@ from statsmodels.distributions.empirical_distribution import ECDF
 ###################################################################################################
 # CODE DESCRIPTION
 # 20_Plot_ECDF.py plots the ECDFs for the observational and the NWP modelled rainfall realizations.
-# Code runtime: ~ 30 minutes.
+# Code runtime: ~ 2 hours.
 
 # DESCRIPTION OF INPUT PARAMETERS
 # YearS (number, in YYYY format): start year to consider.
@@ -112,7 +112,7 @@ for ind_stn in range(num_stn_MinNumDays):
       ax.spines['right'].set_visible(False)
       
       # Save the plot
-      MainDirOUT = Git_Repo + "/" + DirOUT + "/MinDays_Perc_" + str(MinDays_Perc*100) + "/" +f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF)
+      MainDirOUT = Git_Repo + "/" + DirOUT + "/MinDays_Perc_" + str(MinDays_Perc*100) + "/" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF)
       if not os.path.exists(MainDirOUT):
             os.makedirs(MainDirOUT)
       FileOUT = "ecdf_" + str(lats_obs_MinNumDays[ind_stn]) + "_" + str(lons_obs_MinNumDays[ind_stn]) + ".png"

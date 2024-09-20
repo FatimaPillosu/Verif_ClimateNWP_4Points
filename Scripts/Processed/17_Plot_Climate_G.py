@@ -9,31 +9,31 @@ import metview as mv
 
 # DESCRIPTION OF INPUT PARAMETERS
 # RP_2_Plot_list (list of integers, in years): list of return periods to plot
-# Dataset_SystemFC_list (string): list containing the names of the considered forecasting systems.
+# SystemNWP_list (string): list containing the names of the considered forecasting systems.
 # Git_Repo (string): path of local GitHub repository.
 # DirIN (string): relative path for the directory containing the NWP modelled climatology.
 # DirOUT (string): relative path for the directory containing the map plots.
 
 # INPUT PARAMETERS
 RP_2_Plot_list = [1, 2, 5, 10, 20, 50, 100, 200, 500, 1000]
-Dataset_SystemFC_list = ["Reanalysis/ERA5_EDA", "Reanalysis/ERA5", "Reforecasts/ECMWF_46r1", "Reanalysis/ERA5_ecPoint"]
+SystemNWP_list = ["Reanalysis/ERA5_EDA", "Reanalysis/ERA5", "Reforecasts/ECMWF_46r1", "Reanalysis/ERA5_ecPoint"]
 Git_Repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/Verif_ClimateNWP_4Points"
 DirIN = "Data/Compute/16_Climate_G/24h_2000_2019"
 DirOUT = "Data/Plot/17_Climate_G/24h_2000_2019"
 #########################################################################################################
 
-for Dataset_SystemFC in Dataset_SystemFC_list:
+for SystemNWP in SystemNWP_list:
 
     print(" ")
 
     # Setting output directory
-    DirOUT_temp = Git_Repo + "/" + DirOUT + "/" +  Dataset_SystemFC
+    DirOUT_temp = Git_Repo + "/" + DirOUT + "/" +  SystemNWP
     if not os.path.exists(DirOUT_temp):
         os.makedirs(DirOUT_temp)
 
     # Reading the computed climate field and correspondent return period values
-    climate = mv.read(Git_Repo + "/" + DirIN + "/" + Dataset_SystemFC + "/Climate.grib")
-    RP_list = np.load(Git_Repo + "/" + DirIN + "/" + Dataset_SystemFC + "/RP.npy")
+    climate = mv.read(Git_Repo + "/" + DirIN + "/" + SystemNWP + "/Climate.grib")
+    RP_list = np.load(Git_Repo + "/" + DirIN + "/" + SystemNWP + "/RP.npy")
 
     # Plotting the modelled climatologies 
     for ind_RP in range(len(RP_2_Plot_list)):
@@ -43,11 +43,11 @@ for Dataset_SystemFC in Dataset_SystemFC_list:
 
         if len(index) == 0: 
             
-            print("The " + str(RP) + "-year return period is not available for " + Dataset_SystemFC) 
+            print("The " + str(RP) + "-year return period is not available for " + SystemNWP) 
         
         else:
             
-            print("Plotting the modelled rainfall climatology for " + Dataset_SystemFC + " for the " + str(RP) + "-year retun period")
+            print("Plotting the modelled rainfall climatology for " + SystemNWP + " for the " + str(RP) + "-year retun period")
             climate_RP = climate[index]
             
             # Plotting the modelled climatology
@@ -96,7 +96,7 @@ for Dataset_SystemFC in Dataset_SystemFC_list:
             YearF = DirOUT.split("/")[-1].split("_")[2]
             title = mv.mtext(
                 text_line_count = 2,
-                text_line_1 = Acc + " rainfall climatology (" + str(RP) + " year return period) - " + Dataset_SystemFC + " - Period: " + YearS + " to " + YearF,
+                text_line_1 = Acc + " rainfall climatology (" + str(RP) + " year return period) - " + SystemNWP + " - Period: " + YearS + " to " + YearF,
                 text_line_2 = " ",
                 text_colour = "charcoal",
                 text_font = "arial",

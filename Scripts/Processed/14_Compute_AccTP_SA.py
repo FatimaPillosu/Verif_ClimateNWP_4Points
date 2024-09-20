@@ -197,13 +197,13 @@ def tp_ERA5_ecPoint_12h(BaseDateTime, DirIN):
       tp_00 = 0
 
       # Extracting the accumulated rainfall values for the accumulation period 00-12 UTC
-      DirIN_12 = DirIN + "/Pt_BC_PERC/" + BaseDateTime.strftime("%Y%m")
+      DirIN_12 = DirIN + BaseDateTime.strftime("%Y%m")
       FileIN_12 =  "Pt_BC_PERC_" + BaseDateTime.strftime("%Y%m%d") + "_12.grib2"
       if os.path.exists(DirIN_12 + "/" + FileIN_12):
             tp_12 = mv.read(DirIN_12 + "/" + FileIN_12)
       
       # Extracting the accumulated rainfall values for the accumulation period 12-00 UTC
-      DirIN_00 = DirIN + "/Pt_BC_PERC/" + BaseDateTime.strftime("%Y%m")
+      DirIN_00 = DirIN + BaseDateTime.strftime("%Y%m")
       FileIN_00 =  "Pt_BC_PERC_" + BaseDateTime.strftime("%Y%m%d") + "_24.grib2"
       if os.path.exists(DirIN_00 + "/" + FileIN_00):
             tp_00 = mv.read(DirIN_00 + "/" + FileIN_00)
@@ -225,7 +225,7 @@ def tp_ERA5_ecPoint_12h(BaseDateTime, DirIN):
 def tp_ERA5_ecPoint_24h(BaseDateTime, DirIN):
 
       # Reading the accumulated rainfall values, and converting the fieldset into a 16-byte float numpy array (to reduce memory consumption)
-      DirIN = DirIN + "/Pt_BC_PERC/" + BaseDateTime.strftime("%Y%m")
+      DirIN = DirIN + BaseDateTime.strftime("%Y%m")
       FileIN =  "Pt_BC_PERC_" + BaseDateTime.strftime("%Y%m%d") + ".grib2"
       if os.path.exists(DirIN + "/" + FileIN):
             tp = mv.read(DirIN + "/" + FileIN)

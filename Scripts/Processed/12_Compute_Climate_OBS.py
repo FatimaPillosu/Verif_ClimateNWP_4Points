@@ -21,7 +21,7 @@ import numpy as np
 YearS = 2000
 YearF = 2019
 Acc = 24
-MinDays_Perc = 0.5
+MinDays_Perc = 0.75
 RP_list = [1, 2, 5, 10, 20]
 Git_Repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/Verif_ClimateNWP_4Points"
 DirIN = "Data/Compute/10_AlignOBS_CleanSTVL/Coeff_Grid2Point_20"
