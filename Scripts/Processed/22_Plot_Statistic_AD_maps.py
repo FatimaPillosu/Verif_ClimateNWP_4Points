@@ -48,18 +48,12 @@ for SystemNWP in SystemNWP_list:
 
       # Reading the considered NWP modelled climatology
       MainDirIN = Git_Repo + "/" + DirIN + "/MinDays_Perc_" + str(MinDays_Perc*100) + "/" + "NumPer_" + f'{NumPer:03d}' + "/" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF) + "/" + SystemNWP
-      #MainDirIN = Git_Repo + "/" + DirIN + "/tp_" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF) + "/" + SystemNWP
       Stat_AD = np.load(MainDirIN + "/StatisticAD.npy")
       Crit_Val = np.load(MainDirIN + "/CriticalVal.npy")
-      #Pvalue = np.load(MainDirIN + "/Pvalue.npy")
       lats = np.load(MainDirIN + "/" + "Stn_lats.npy")
       lons = np.load(MainDirIN + "/" + "Stn_lons.npy")
 
       # Defining when to reject or not-reject the null hypothesis of the Anderson-Darling test
-      # ind = np.where(Pvalue < 0.1)
-#       test_AD = 0 * Stat_AD
-#       test_AD[ind] = 1
-      
       test_AD = (Stat_AD < Crit_Val) * 1 # the value of 1 is given to those locations where the modelled climatology is representative of the observational climatology
       
       # Converting the test A-D to geopoint
@@ -121,9 +115,9 @@ for SystemNWP in SystemNWP_list:
             )
 
       # Saving the map plots
-      # MainDirOUT = Git_Repo + "/" + DirOUT + "/tp_" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF) + "/" + SystemNWP
-#       if not os.path.exists(MainDirOUT):
-#             os.makedirs(MainDirOUT)
-#       png = mv.png_output(output_width = 5000, output_name = MainDirOUT + "/TestAD")
-#       mv.setoutput(png)
+      MainDirOUT = Git_Repo + "/" + DirOUT + "/MinDays_Perc_" + str(MinDays_Perc*100) + "/" + "NumPer_" + f'{NumPer:03d}' + "/" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF) + "/" + SystemNWP
+      if not os.path.exists(MainDirOUT):
+            os.makedirs(MainDirOUT)
+      png = mv.png_output(output_width = 5000, output_name = MainDirOUT + "/TestAD")
+      mv.setoutput(png)
       mv.plot(test_AD_geo, coastlines, markers, legend, title)
