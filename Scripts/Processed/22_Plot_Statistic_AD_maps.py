@@ -22,6 +22,8 @@ import metview as mv
 # YearS (number, in YYYY format): start year to consider.
 # YearF (number, in YYYY format): final year to consider.
 # Acc (number, in hours): rainfall accumulation period.
+# MinDays_Perc (float, from 0 to 1): % of min n. of days with valid obs at each location.
+# NumPer (integer): number of permutations for the Anderson-Darling test statistic.
 # SystemNWP_list (list of string): list of NWP model climatologies.
 # Git_Repo (string): path of local github repository.
 # DirIN (string): relative path for the directory containing the values of the AD statistic.

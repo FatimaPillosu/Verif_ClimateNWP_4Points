@@ -22,6 +22,8 @@ import matplotlib.pyplot as plt
 # YearS (number, in YYYY format): start year to consider.
 # YearF (number, in YYYY format): final year to consider.
 # Acc (number, in hours): rainfall accumulation period.
+# MinDays_Perc (float, from 0 to 1): % of min n. of days with valid obs at each location.
+# NumPer (integer): number of permutations for the Anderson-Darling test statistic.
 # SystemNWP_list (list of strings): list of NWP model climatologies.
 # Domain_Coord_list (list of floats): list of coordinates of the domain of interest.
 # Domain_Name_list (list of strings): list of the names of the domain of interest.
@@ -33,12 +35,14 @@ import matplotlib.pyplot as plt
 YearS = 2000
 YearF = 2019
 Acc = 24
+MinDays_Perc = 0.75
+NumPer = 0
 SystemNWP_list = ["Reforecasts/ECMWF_46r1", "Reanalysis/ERA5_EDA", "Reanalysis/ERA5", "Reanalysis/ERA5_ecPoint"]
 Domain_Coord_list = [ [90,-170,15,-50], [15, -100, -60, -30], [90, -30, 30, 60], [30,-30,-40,60], [90, 60, 5, 180], [5, 60, -60, 180] ]
 Domain_Name_list = ["North_America", "South_America", "Europe_Mediterranean", "Africa", "Asia", "Oceania"]
 Git_Repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/Verif_ClimateNWP_4Points"
-DirIN = "Data/Compute/03_Statistic_AD"
-DirOUT = "Data/Plot/05_Statistic_AD_piecharts"
+DirIN = "Data/Compute/21_Statistic_AD"
+DirOUT = "Data/Plot/23_Statistic_AD_piecharts"
 #######################################################################################################
 
 # Plotting the Anderson-Darling statistic for different NWP modelled climatologies
@@ -49,7 +53,7 @@ for SystemNWP in SystemNWP_list:
       print(" - " + SystemNWP)
 
       # Reading the considered NWP modelled climatology
-      MainDirIN = Git_Repo + "/" + DirIN + "/tp_" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF) + "/" + SystemNWP
+      MainDirIN = Git_Repo + "/" + DirIN + "/MinDays_Perc_" + str(MinDays_Perc*100) + "/" + "NumPer_" + f'{NumPer:03d}' + "/" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF) + "/" + SystemNWP
       Stat_AD = np.load(MainDirIN + "/StatisticAD.npy")
       Crit_Val = np.load(MainDirIN + "/CriticalVal.npy")
       lats = np.load(MainDirIN + "/" + "Stn_lats.npy")
@@ -78,7 +82,7 @@ for SystemNWP in SystemNWP_list:
             plt.axis('equal')
 
             # Saving the pie-charts
-            MainDirOUT = Git_Repo + "/" + DirOUT + "/tp_" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF) + "/" + SystemNWP
+            MainDirOUT = Git_Repo + "/" + DirOUT + "/MinDays_Perc_" + str(MinDays_Perc*100) + "/" + "NumPer_" + f'{NumPer:03d}' + "/" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF) + "/" + SystemNWP
             if not os.path.exists(MainDirOUT):
                   os.makedirs(MainDirOUT)
             FileOUT = Domain_Name + ".png"
