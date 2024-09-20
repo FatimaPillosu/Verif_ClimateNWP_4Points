@@ -16,7 +16,7 @@ from scipy.stats import anderson_ksamp, PermutationMethod
 #     2. If the Anderson-Darling statistic is smaller than the critical values, this means that the test results are not 
 #         significant at any significance level. Therefore, we would not reject the null hypothesis of the test. Thus, we don’t 
 #         have sufficient evidence to say that the samples are not drawn from the same population.
-# Code runtime: from 3 hours in serial without permutations to 24 hours with 100 permutations.
+# Code runtime: from 5 minutes in serial without permutations to 2 hours with 100 permutations.
 
 # DESCRIPTION OF INPUT PARAMETERS
 # YearS (number, in YYYY format): start year to consider.
@@ -87,17 +87,24 @@ for SystemNWP in SystemNWP_list:
 
             # Reading the rainfall realizations (from observations and NWP) for a single rain gauge station
             tp_obs_temp = tp_obs_MinNumDays[ind_stn,:]
-            tp_obs_nonan_temp = tp_obs[~np.isnan(tp_obs)] # eliminate all nan values from the calculation of the ECDF
+            tp_obs_nonan_temp = tp_obs_temp[~np.isnan(tp_obs_temp)] # eliminate all nan values from the calculation of the ECDF
             tp_nwp_temp = tp_nwp[ind_stn,:]
-            
+
+            # Sampling the rainfall realizations from observations and NWP models
+            # NOTE: this is done to avoid that different size datasets might influence negatively the results of the study
+            perc_obs = np.percentile(tp_obs_nonan_temp, np.arange(1,100))
+            perc_nwp = np.percentile(tp_nwp_temp, np.arange(1,100))
+
             # Running the Anderson-Darling test for k-samples
-            if NumPer == 0:
-                  TestAD = anderson_ksamp([tp_obs[ind_stn,:], tp_nwp[ind_stn,:]])
-            else:
-                  TestAD = anderson_ksamp([tp_obs[ind_stn,:], tp_nwp[ind_stn,:]], method=PermutationMethod(n_resamples=NumPer))
-            StatisticAD[ind_stn] = TestAD[0]
-            CriticalVal[ind_stn] = TestAD[1][-1] # critical values for significance levels at the 0.1% (= 0.001)
-            Pvalue[ind_stn] = TestAD[2]
+            if np.sum(perc_obs) != 0 and np.sum(perc_nwp) != 0: # the A-D test need arrays with at least one value different from zero
+
+                  if NumPer == 0:
+                        TestAD = anderson_ksamp([perc_obs, perc_nwp])
+                  else:
+                        TestAD = anderson_ksamp([perc_obs, perc_nwp], method=PermutationMethod(n_resamples=NumPer))
+                  StatisticAD[ind_stn] = TestAD[0]
+                  CriticalVal[ind_stn] = TestAD[1][-1] # critical values for significance levels at the 0.1% (= 0.001)
+                  Pvalue[ind_stn] = TestAD[2]
 
       # Saving the outcomes Anderson-Darling test
       print()

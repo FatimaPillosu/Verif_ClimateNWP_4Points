@@ -32,12 +32,11 @@ YearS = 2000
 YearF = 2019
 Acc = 24
 MinDays_Perc = 0.75
-NumPer = 100
-SystemNWP_list = ["Reforecasts/ECMWF_46r1"]
-#SystemNWP_list = ["Reforecasts/ECMWF_46r1", "Reanalysis/ERA5_EDA", "Reanalysis/ERA5", "Reanalysis/ERA5_ecPoint"]
+NumPer = 0
+SystemNWP_list = ["Reforecasts/ECMWF_46r1", "Reanalysis/ERA5_EDA", "Reanalysis/ERA5", "Reanalysis/ERA5_ecPoint"]
 Git_Repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/Verif_ClimateNWP_4Points"
-DirIN = "Data/Compute/19_Statistic_AD"
-DirOUT = "Data/Plot/20_Statistic_AD_maps"
+DirIN = "Data/Compute/21_Statistic_AD"
+DirOUT = "Data/Plot/22_Statistic_AD_maps"
 ###################################################################################################
 
 # Plotting the Anderson-Darling statistic for different NWP modelled climatologies
@@ -48,7 +47,7 @@ for SystemNWP in SystemNWP_list:
       print(" - " + SystemNWP)
 
       # Reading the considered NWP modelled climatology
-      MainDirIN = Git_Repo + "/" + DirIN + "/MinDays_Perc_" + str(MinDays_Perc*100) + "/" + "NumPer_" + f'{NumPer:03d}' +  + "/" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF) + "/" + SystemNWP
+      MainDirIN = Git_Repo + "/" + DirIN + "/MinDays_Perc_" + str(MinDays_Perc*100) + "/" + "NumPer_" + f'{NumPer:03d}' + "/" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF) + "/" + SystemNWP
       #MainDirIN = Git_Repo + "/" + DirIN + "/tp_" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF) + "/" + SystemNWP
       Stat_AD = np.load(MainDirIN + "/StatisticAD.npy")
       Crit_Val = np.load(MainDirIN + "/CriticalVal.npy")
