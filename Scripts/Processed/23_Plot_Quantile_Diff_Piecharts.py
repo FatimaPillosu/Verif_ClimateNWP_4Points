@@ -1,0 +1,112 @@
+import os
+import numpy as np
+import matplotlib.pyplot as plt
+
+################################################################################################################
+# CODE DESCRIPTION
+# 23_Plot_Quantile_Diff_Piecharts.py plots the piecharts for the quantile differences in different geographical regions. 
+# Code runtime: ~ 1 minute.
+
+# DESCRIPTION OF INPUT PARAMETERS
+# YearS (number, in YYYY format): start year to consider.
+# YearF (number, in YYYY format): final year to consider.
+# Acc (number, in hours): rainfall accumulation period.
+# MinDays_Perc (float, from 0 to 1): % of min n. of days with valid obs at each location.
+# MaxPerc (integer or float, from 0 to 100 - not included): max percentile considered when sampling the obs and nwp rainfall realization
+# SystemNWP_list (list of strings): list of NWP model climatologies.
+# Domain_Coord_list (list of floats): list of coordinates of the domain of interest.
+# Domain_Name_list (list of strings): list of the names of the domain of interest.
+# Git_Repo (string): path of local github repository.
+# DirIN (string): relative path for the directory containing the quantile differences for the NWP modelled rainfall realizations.
+# DirOUT (string): relative path for the directory containing piecharts for different NWP modelled rainfall realizations.
+
+# INPUT PARAMETERS
+YearS = 2000
+YearF = 2019
+Acc = 24
+MinDays_Perc = 0.75
+MaxPerc = 99.97
+SystemNWP_list = ["Reforecasts/ECMWF_46r1", "Reanalysis/ERA5_EDA", "Reanalysis/ERA5", "Reanalysis/ERA5_ecPoint"]
+Domain_Coord_list = [ [90,-170,15,-50], [15, -100, -60, -30], [90, -30, 30, 60], [30,-30,-40,60], [90, 60, 5, 180], [5, 60, -60, 180] ]
+Domain_Name_list = ["North_America", "South_America", "Europe_Mediterranean", "Africa", "Asia", "Oceania"]
+Git_Repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/Verif_ClimateNWP_4Points"
+DirIN = "Data/Compute/21_Empirical_Quantile_Analysis"
+DirOUT = "Data/Plot/23_Statistic_Qdiff_piecharts"
+################################################################################################################
+
+# Plotting the piecharts for different NWP modelled rainfall realizations
+for SystemNWP in SystemNWP_list:
+      
+      print()
+      print("Plotting the piecharts for different NWP modelled rainfall realizations for " + SystemNWP)
+      
+      # Reading the considered NWP modelled climatology
+      MainDirIN = Git_Repo + "/" + DirIN + "/MinDays_Perc_" + str(MinDays_Perc*100) + "/MaxPerc_" + str(MaxPerc) + "/" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF) + "/" + SystemNWP
+      perc_diff = np.load(MainDirIN + "/Perc_Diff.npy")
+      perc_list = np.load(MainDirIN + "/Perc_List.npy")
+      lats = np.load(MainDirIN + "/" + "Stn_lats.npy")
+      lons = np.load(MainDirIN + "/" + "Stn_lons.npy")
+
+      # Computing the median for the whole quantile difference distribution
+      perc_diff_median = np.nanmedian(perc_diff, axis=1)
+      
+      # Computing the median for the quantile difference in the tail's distribution
+      perc_diff_tail = perc_diff[:, np.where(perc_list>90)[0]]
+      perc_diff_tail_median = np.median(perc_diff_tail, axis=1)
+
+      #Computing the pie-charts for each considered domains
+      for ind_domain in np.arange(len(Domain_Name_list)):
+
+            Domain_Name = Domain_Name_list[ind_domain]
+            Domain_Coord = Domain_Coord_list[ind_domain]
+            
+            # Selecting the domain to consider
+            ind_gp_domain = np.where( (lats < Domain_Coord[0]) & (lats > Domain_Coord[2]) & (lons > Domain_Coord[1]) & (lons < Domain_Coord[3]) )
+            perc_diff_median_domain = perc_diff_median[ind_gp_domain]
+            perc_diff_tail_median_domain = perc_diff_tail_median[ind_gp_domain]
+
+            # Creating the pie-charts for the median
+            Thr_zero = 0.1
+            fig,ax = plt.subplots()
+            over_est = np.where(perc_diff_median_domain < -Thr_zero)[0].shape[0]
+            similar_est = np.where( (perc_diff_median_domain >= -Thr_zero) & (perc_diff_median_domain <= Thr_zero) )[0].shape[0]
+            under_est = np.where(perc_diff_median_domain > Thr_zero)[0].shape[0]
+            sizes = [over_est, similar_est, under_est]
+            colors = ["#220abe", "#b3b3b3", "#ff007f"]
+            ax.pie(sizes, colors=colors, startangle=0)
+            plt.axis("equal")
+
+            # Print on screen the percentages of over-, similar-, and under-estimations for the distribution's median
+            print(" - Percentages for the quantile differences for the whole distribution:")
+            print("     Over-Estimation: " + str(over_est/perc_diff_median_domain.shape[0] * 100))
+            print("     Similar-Estimation: " + str(similar_est/perc_diff_median_domain.shape[0] * 100))
+            print("     Under-Estimation: " + str(under_est/perc_diff_median_domain.shape[0] * 100))
+
+            # Saving the pie-charts for the median
+            MainDirOUT = Git_Repo + "/" + DirOUT + "/MinDays_Perc_" + str(MinDays_Perc*100) + "/MaxPerc_" + str(MaxPerc) + "/" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF) + "/" + SystemNWP
+            if not os.path.exists(MainDirOUT):
+                  os.makedirs(MainDirOUT)
+            FileOUT = "Median_" + Domain_Name + ".png"
+            fig.savefig(MainDirOUT + "/" + FileOUT)
+            plt.close()
+
+            # Creating the pie-charts for the tail median
+            fig,ax = plt.subplots()
+            over_est = np.where(perc_diff_tail_median_domain < -Thr_zero)[0].shape[0]
+            similar_est = np.where( (perc_diff_tail_median_domain >= -Thr_zero) & (perc_diff_tail_median_domain <= Thr_zero) )[0].shape[0]
+            under_est = np.where(perc_diff_tail_median_domain > Thr_zero)[0].shape[0]
+            sizes = [over_est, similar_est, under_est]
+            colors = ["#220abe", "#b3b3b3", "#ff007f"]
+            ax.pie(sizes, colors=colors, startangle=0)
+            plt.axis("equal")
+
+            # Print on screen the percentages of over-, similar-, and under-estimations for the tail's median
+            print(" - Percentages for the quantile differences in the tail's distribution:")
+            print("     Over-Estimation: " + str(over_est/perc_diff_tail_median_domain.shape[0] * 100))
+            print("     Similar-Estimation: " + str(similar_est/perc_diff_tail_median_domain.shape[0] * 100))
+            print("     Under-Estimation: " + str(under_est/perc_diff_tail_median_domain.shape[0] * 100))
+
+            # Saving the pie-charts for the tail mean
+            FileOUT = "Tail_Median_" + Domain_Name + ".png"
+            fig.savefig(MainDirOUT + "/" + FileOUT)
+            plt.close()

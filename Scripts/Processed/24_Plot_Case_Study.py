@@ -219,7 +219,6 @@ png = mv.png_output(output_width = 5000, output_name = DirOUT_temp + "/tp")
 mv.setoutput(png)
 mv.plot(geo_view, markers, coastlines, legend, title, obs)
 
-
 # Extracting the rainfall realizations from the NWP models
 DirIN_temp = Git_Repo + "/" + DirIN_NWP + "/" + SystemNWP
 if SystemNWP == "Reanalysis/ERA5_ecPoint":
