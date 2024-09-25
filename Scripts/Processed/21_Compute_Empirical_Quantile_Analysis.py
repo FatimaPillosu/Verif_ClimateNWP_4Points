@@ -54,6 +54,9 @@ num_stn_MinNumDays = tp_obs_MinNumDays.shape[0]
 print(" - Total number of days between " + str(YearS) + " and " + str(YearF) + ": " + str(tp_obs.shape[1]))
 print(" - Totals number of stations with at least " + str(int(MinDays_Perc*100)) + "% of days (= " + str(int(MinNumDays)) + ") with valid observations: " + str(num_stn_MinNumDays) + "/" + str(num_stn))
 
+# Computing the average rainfall per station
+tp_obs_mean = np.nanmean(tp_obs_MinNumDays, axis = 1)
+
 # Computing the percentiles for the obs rainfall realizations
 print()
 print("Computing the percentiles for the obs rainfall realizations...")
@@ -78,11 +81,12 @@ for SystemNWP in SystemNWP_list:
       print(" - Determining the difference between the obs and the nwp percentiles")
       perc_diff = perc_obs - perc_nwp
 
-      # Saving the the difference between the obs and the nwp percentilesst
-      print(" - Saving the the difference between the obs and the nwp percentiles...")
+      # Saving the the difference between the obs and the nwp percentil and the average observed rainfall
+      print(" - Saving the the difference between the obs and the nwp percentiles and the average observed rainfall...")
       MainDirOUT = Git_Repo + "/" + DirOUT + "/MinDays_Perc_" + str(MinDays_Perc*100) + "/MaxPerc_" + str(np.max(Perc_list)) + "/" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF) + "/" + SystemNWP
       if not os.path.exists(MainDirOUT):
             os.makedirs(MainDirOUT)
+      np.save(MainDirOUT + "/tp_obs_mean.npy", tp_obs_mean)
       np.save(MainDirOUT + "/Perc_Diff.npy", perc_diff)
       np.save(MainDirOUT + "/Perc_List.npy", Perc_list)
       np.save(MainDirOUT + "/Stn_lats.npy", lats_obs_MinNumDays)      
