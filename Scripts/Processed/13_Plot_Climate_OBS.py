@@ -69,9 +69,7 @@ for ind_RP in range(len(RP_2_Plot_list)):
         coastlines = mv.mcoast(
             map_coastline_colour = "charcoal",
             map_coastline_thickness = 5,
-            map_coastline_resolution = "low",
-            map_coastline_sea_shade = "on", # comments this line to see the rainfall totals over the sea
-            map_coastline_sea_shade_colour = "white", # # comments this line to see the rainfall totals over the sea
+            map_coastline_resolution = "medium",
             map_boundaries = "on",
             map_boundaries_colour = "charcoal",
             map_boundaries_thickness = 5,
@@ -86,16 +84,136 @@ for ind_RP in range(len(RP_2_Plot_list)):
             map_label_height = 3
             )
 
-        markers = mv.psymb(
+        markers_small = mv.psymb(
             symbol_type = "MARKER",
             symbol_table_mode = "ON",
             legend = "ON",
             symbol_quality = "HIGH",
-            symbol_min_table = [ 0,0.5,2,5,10,20,30,40,50,60,80,100,125,150,200,300,500, 1000],
-            symbol_max_table = [ 0.5,2,5,10,20,30,40,50,60,80,100,125,150,200,300,500,1000, 50000],
-            symbol_marker_table = [ 15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15,15],
-            symbol_colour_table = ["black","RGB(0.75,0.95,0.93)","RGB(0.45,0.93,0.78)","RGB(0.07,0.85,0.61)","RGB(0.53,0.8,0.13)","RGB(0.6,0.91,0.057)","RGB(0.9,1,0.4)","RGB(0.89,0.89,0.066)","RGB(1,0.73,0.0039)","RGB(1,0.49,0.0039)","red","RGB(0.85,0.0039,1)","RGB(0.63,0.0073,0.92)","RGB(0.37,0.29,0.91)","RGB(0.04,0.04,0.84)","RGB(0.042,0.042,0.43)","RGB(0.8,0.8,0.8)","RGB(0.4,0.4,0.4)"],
-            symbol_height_table = [ 0.1,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2]
+            symbol_min_table = [0,0.5,2,5,10,20,30,40],
+            symbol_max_table = [0.5,2,5,10,20,30,40,50],
+            symbol_marker_table = [15,15,15,15,15,15,15,15],
+            symbol_colour_table = ["black","RGB(0.75,0.95,0.93)","RGB(0.45,0.93,0.78)","RGB(0.07,0.85,0.61)","RGB(0.53,0.8,0.13)","RGB(0.6,0.91,0.057)","RGB(0.9,1,0.4)","RGB(0.89,0.89,0.066)"],
+            symbol_height_table = [ 0.3,0.3,0.3,0.3,0.3,0.3,0.3,0.3]
+            )
+        
+        markers_50 = mv.psymb( # we want to make sure that the biggest totals are plot on top
+            symbol_type = "MARKER",
+            symbol_table_mode = "ON",
+            legend = "ON",
+            symbol_quality = "HIGH",
+            symbol_min_table = [50],
+            symbol_max_table = [60],
+            symbol_marker_table = [15],
+            symbol_colour_table = ["RGB(1,0.73,0.0039)"],
+            symbol_height_table = [0.3]
+            )
+        
+        markers_60 = mv.psymb(
+            symbol_type = "MARKER",
+            symbol_table_mode = "ON",
+            legend = "ON",
+            symbol_quality = "HIGH",
+            symbol_min_table = [60],
+            symbol_max_table = [80],
+            symbol_marker_table = [15],
+            symbol_colour_table = ["RGB(1,0.49,0.0039)"],
+            symbol_height_table = [0.3]
+            )
+        
+        markers_80 = mv.psymb(
+            symbol_type = "MARKER",
+            symbol_table_mode = "ON",
+            legend = "ON",
+            symbol_quality = "HIGH",
+            symbol_min_table = [80],
+            symbol_max_table = [100],
+            symbol_marker_table = [15],
+            symbol_colour_table = ["red"],
+            symbol_height_table = [0.3]
+            )
+        
+        markers_100 = mv.psymb(
+            symbol_type = "MARKER",
+            symbol_table_mode = "ON",
+            legend = "ON",
+            symbol_quality = "HIGH",
+            symbol_min_table = [100],
+            symbol_max_table = [125],
+            symbol_marker_table = [15],
+            symbol_colour_table = ["RGB(0.85,0.0039,1)"],
+            symbol_height_table = [0.3]
+            )
+        
+        markers_125 = mv.psymb(
+            symbol_type = "MARKER",
+            symbol_table_mode = "ON",
+            legend = "ON",
+            symbol_quality = "HIGH",
+            symbol_min_table = [125],
+            symbol_max_table = [150],
+            symbol_marker_table = [15],
+            symbol_colour_table = ["RGB(0.63,0.0073,0.92)"],
+            symbol_height_table = [0.3]
+            )
+        
+        markers_150 = mv.psymb(
+            symbol_type = "MARKER",
+            symbol_table_mode = "ON",
+            legend = "ON",
+            symbol_quality = "HIGH",
+            symbol_min_table = [150],
+            symbol_max_table = [200],
+            symbol_marker_table = [15],
+            symbol_colour_table = ["RGB(0.37,0.29,0.91)"],
+            symbol_height_table = [0.3]
+            )
+        
+        markers_200 = mv.psymb(
+            symbol_type = "MARKER",
+            symbol_table_mode = "ON",
+            legend = "ON",
+            symbol_quality = "HIGH",
+            symbol_min_table = [200],
+            symbol_max_table = [300],
+            symbol_marker_table = [15],
+            symbol_colour_table = ["RGB(0.04,0.04,0.84)"],
+            symbol_height_table = [0.3]
+            )
+        
+        markers_300 = mv.psymb(
+            symbol_type = "MARKER",
+            symbol_table_mode = "ON",
+            legend = "ON",
+            symbol_quality = "HIGH",
+            symbol_min_table = [300],
+            symbol_max_table = [500],
+            symbol_marker_table = [15],
+            symbol_colour_table = ["RGB(0.042,0.042,0.43)"],
+            symbol_height_table = [0.3]
+            )
+        
+        markers_500 = mv.psymb(
+            symbol_type = "MARKER",
+            symbol_table_mode = "ON",
+            legend = "ON",
+            symbol_quality = "HIGH",
+            symbol_min_table = [500],
+            symbol_max_table = [1000],
+            symbol_marker_table = [15],
+            symbol_colour_table = ["RGB(0.8,0.8,0.8)"],
+            symbol_height_table = [0.3]
+            )
+        
+        markers_1000 = mv.psymb(
+            symbol_type = "MARKER",
+            symbol_table_mode = "ON",
+            legend = "ON",
+            symbol_quality = "HIGH",
+            symbol_min_table = [1000],
+            symbol_max_table = [50000],
+            symbol_marker_table = [15],
+            symbol_colour_table = ["RGB(0.4,0.4,0.4)"],
+            symbol_height_table = [0.3]
             )
 
         legend = mv.mlegend(
@@ -118,4 +236,4 @@ for ind_RP in range(len(RP_2_Plot_list)):
         # Create plots
         png = mv.png_output(output_width = 5000, output_name = MainDirOUT + "/Climate_" + str(RP) + "RP")
         mv.setoutput(png)
-        mv.plot(climate_RP_geo, coastlines, markers, legend, title)
+        mv.plot(climate_RP_geo, coastlines, markers_small, markers_50, markers_60,markers_80, markers_100, markers_125,  markers_150, markers_200, markers_300, markers_500, markers_1000, legend, title)
