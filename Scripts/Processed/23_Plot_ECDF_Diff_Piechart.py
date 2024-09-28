@@ -70,17 +70,17 @@ for SystemNWP in SystemNWP_list:
             d = np.where( (ECDF_diff_mean_domain >= 50) & (ECDF_diff_mean_domain < 100) )[0].shape[0]
             e = np.where(ECDF_diff_mean_domain >= 100)[0].shape[0]
             sizes = [a, b, c, d, e]
-            colors = ["#000000", "#f9df4d", "#6b6bf7", "#ff007f", "#7fff00"]
+            colors = ["#000000", "#8585f5", "#88c34d", "#f9dc4d", "#ff007f"]
             ax.pie(sizes, colors=colors, startangle=0)
             plt.axis("equal")
 
             # Print on screen the percentage for each area category
             print(" - Percentage for each area category in " + Domain_Name)
-            print("     a: " + str(a/ECDF_diff_mean.shape[0] * 100))
-            print("     b: " + str(b/ECDF_diff_mean.shape[0] * 100))
-            print("     c: " + str(c/ECDF_diff_mean.shape[0] * 100))
-            print("     d: " + str(d/ECDF_diff_mean.shape[0] * 100))
-            print("     e: " + str(e/ECDF_diff_mean.shape[0] * 100))
+            print("     a: " + str(a/ECDF_diff_mean_domain.shape[0] * 100))
+            print("     b: " + str(b/ECDF_diff_mean_domain.shape[0] * 100))
+            print("     c: " + str(c/ECDF_diff_mean_domain.shape[0] * 100))
+            print("     d: " + str(d/ECDF_diff_mean_domain.shape[0] * 100))
+            print("     e: " + str(e/ECDF_diff_mean_domain.shape[0] * 100))
 
             # Saving the piecharts
             MainDirOUT = Git_Repo + "/" + DirOUT + "/MinDays_Perc_" + str(MinDays_Perc*100) + "/MaxPerc_" + str(MaxPerc) + "/" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF) + "/" + SystemNWP
