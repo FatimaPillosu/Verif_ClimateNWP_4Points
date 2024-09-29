@@ -26,7 +26,7 @@ YearF = 2019
 Acc = 24
 MinDays_Perc = 0.75
 SystemNWP_list = ["Reanalysis/ERA5_EDA", "Reanalysis/ERA5", "Reforecasts/ECMWF_46r1", "Reanalysis/ERA5_ecPoint"]
-SystemNWP_Colour_list = ["#ffc001", "#1cb8a6", "#ff007f", "ra rain only                          rain gauges                                                                                                                                           with ar"]
+SystemNWP_Colour_list = ["#CBE676", "#CDA590", "#6EB0C6", "#E25862"]
 Git_Repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/Verif_ClimateNWP_4Points"
 DirIN_OBS = "Data/Compute/10_AlignOBS_CleanSTVL/Coeff_Grid2Point_20"
 DirIN_NWP = "Data/Compute/19_Merged_tp_NWP"
@@ -86,11 +86,11 @@ for ind_stn in range(num_stn_MinNumDays):
             SystemNWP_Colour = SystemNWP_Colour_list[ind_nwp]
             perc_nwp = perc_nwp_all[ind_nwp]
             
-            ax_real.plot(perc_nwp[ind_stn,:], percs, marker = ".", color = SystemNWP_Colour, label = SystemNWP)
-            ax_log.plot(perc_nwp[ind_stn,:], percs, marker = ".", color = SystemNWP_Colour, label = SystemNWP)
+            ax_real.plot(perc_nwp[ind_stn,:], percs, marker = "o", markersize = 3, color = SystemNWP_Colour, label = SystemNWP)
+            ax_log.plot(perc_nwp[ind_stn,:], percs, marker = "o", markersize = 3, color = SystemNWP_Colour, label = SystemNWP)
 
       # Completing the nwp ECDF plots with the obs ECDF and metadata
-      ax_real.plot(perc_obs[ind_stn,:], percs, marker = ".", color = "black", label = "obs")
+      ax_real.plot(perc_obs[ind_stn,:], percs, marker = "o", markersize = 3, color = "black", label = "obs")
       ax_real.set_xlabel("Rainfall [mm/" + str(Acc) + "h]", fontsize="14")
       ax_real.set_ylabel("Percentiles", fontsize="14")
       ax_real.xaxis.set_tick_params(labelsize=14)
@@ -100,7 +100,7 @@ for ind_stn in range(num_stn_MinNumDays):
       ax_real.spines['right'].set_visible(False)
       
       linthresh = 0.1
-      ax_log.plot(perc_obs[ind_stn,:], percs, marker = ".", color = "black", label = "obs")
+      ax_log.plot(perc_obs[ind_stn,:], percs, marker = "o", markersize = 3, color = "black", label = "obs")
       ax_log.set_xlabel("Rainfall [mm/" + str(Acc) + "h]", fontsize="14")
       ax_log.set_ylabel("Percentiles", fontsize="14")
       ax_log.set_xscale('symlog', linthresh=linthresh, linscale=0.03)
