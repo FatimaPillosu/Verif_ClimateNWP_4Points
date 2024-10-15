@@ -52,6 +52,8 @@ stnids_MinNumDays = stnids[ind_stns_MinNumDays]
 print(" - Total number of days between " + str(YearS) + " and " + str(YearF) + ": " + str(obs.shape[1]))
 print(" - Totals number of stations with at least " + str(int(MinDays_Perc*100)) + "% of days (= " + str(int(MinNumDays)) + ") with valid observations: " + str(len(ind_stns_MinNumDays)) + "/" + str(str(obs.shape[0])))
 
+exit()
+
 # Defining the return periods that can be computed given the number of realizations available
 RP_list = np.array(RP_list)
 Min_Num_Realizations_RP = 365 * np.array(RP_list)
