@@ -28,7 +28,7 @@ MinDays_Perc = 0.75
 SystemNWP_list = ["Reanalysis/ERA5_EDA", "Reanalysis/ERA5", "Reforecasts/ECMWF_46r1", "Reanalysis/ERA5_ecPoint"]
 SystemNWP_Colour_list = ["#CBE676", "#CDA590", "#6EB0C6", "#E25862"]
 Git_Repo = "/ec/vol/ecpoint_dev/mofp/papers_2_write/Verif_ClimateNWP_4Points"
-DirIN_OBS = "Data/Compute/10_AlignOBS_CleanSTVL/Coeff_Grid2Point_20"
+DirIN_OBS = "Data/Compute/10_AlignOBS_CleanSTVL/Coeff_Grid2Point_1000"
 DirIN_NWP = "Data/Compute/19_Merged_tp_NWP"
 DirOUT = "Data/Plot/20_ECDF"
 ###################################################################################################

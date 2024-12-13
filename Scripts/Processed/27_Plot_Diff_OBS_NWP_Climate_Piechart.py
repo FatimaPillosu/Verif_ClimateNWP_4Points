@@ -25,9 +25,9 @@ Domain_Coord_list = [ [90,-170,15,-50], [15, -100, -60, -30], [90, -30, 30, 60],
 Domain_Name_list = ["North_America", "South_America", "Europe_Mediterranean", "Africa", "Asia", "Oceania"]
 SystemNWP_list = ["Reanalysis/ERA5_EDA", "Reanalysis/ERA5", "Reforecasts/ECMWF_46r1", "Reanalysis/ERA5_ecPoint"]
 Git_Repo = "/ec/vol/ecpoint_dev/mofp/papers_2_write/Verif_ClimateNWP_4Points"
-DirIN_obs = "Data/Compute/12_Climate_OBS/08_AlignOBS_Combine_Years_RawSTVL/MinDays_Perc_75.0/24h_2000_2019"
+DirIN_obs = "Data/Compute/12_Climate_OBS/10_AlignOBS_CleanSTVL/Coeff_Grid2Point_500/MinDays_Perc_75.0/24h_2000_2019"
 DirIN_nwp = "Data/Compute/16_Climate_G/24h_2000_2019"
-DirOUT = "Data/Plot/27_Diff_OBS_NWP_Climate_Piechart/08_AlignOBS_Combine_Years_RawSTVL/MinDays_Perc_75.0/24h_2000_2019"
+DirOUT = "Data/Plot/27_Diff_OBS_NWP_Climate_Piechart/10_AlignOBS_CleanSTVL/Coeff_Grid2Point_500/MinDays_Perc_75.0/24h_2000_2019"
 ##############################################################################################################
 
 
@@ -71,7 +71,7 @@ for SystemNWP in SystemNWP_list:
                 nwp_below_obs = 100 - nwp_above_obs
                 print(" - % of NWP above OBS climate in " + Domain_Name + ": " + str(np.round(nwp_above_obs, decimals = 2)))
                 sizes = [nwp_above_obs, nwp_below_obs]
-                colors = ["#00008B", "gainsboro"]
+                colors = ["dodgerblue", "gainsboro"]
                 ax.pie(sizes, colors=colors, startangle=0)
                 plt.axis("equal")
 
