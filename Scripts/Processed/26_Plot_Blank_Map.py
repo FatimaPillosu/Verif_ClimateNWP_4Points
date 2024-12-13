@@ -12,7 +12,7 @@ import metview as mv
 # DirOUT (string): relative path for the directory containing the map plots for the observed and modelled rainfall totals.
 
 # INPUT PARAMETERS
-Git_Repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/Verif_ClimateNWP_4Points"
+Git_Repo = "/ec/vol/ecpoint_dev/mofp/papers_2_write/Verif_ClimateNWP_4Points"
 DirOUT = "Data/Plot/25_Blank_Map"
 #################################################################################################
 

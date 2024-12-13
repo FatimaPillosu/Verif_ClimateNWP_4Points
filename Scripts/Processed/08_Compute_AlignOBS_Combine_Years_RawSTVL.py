@@ -23,7 +23,7 @@ import pandas as pd
 YearS = 2000
 YearF = 2019
 Acc = 24
-Git_Repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/Verif_ClimateNWP_4Points"
+Git_Repo = "/ec/vol/ecpoint_dev/mofp/papers_2_write/Verif_ClimateNWP_4Points"
 DirIN_UniqueStnids = "Data/Compute/06_UniqueStnids_Combine_Years_RawSTVL"
 DirIN_AlignOBS_Year = "Data/Compute/07_AlignOBS_Extract_PerYear_RawSTVL"
 DirOUT = "Data/Compute/08_AlignOBS_Combine_Years_RawSTVL_RawSTVL"

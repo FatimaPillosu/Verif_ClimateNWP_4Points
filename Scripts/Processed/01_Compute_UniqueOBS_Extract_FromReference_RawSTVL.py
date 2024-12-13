@@ -32,7 +32,7 @@ Acc = 24
 Dataset_ref = "synop"
 Time_ref = 0
 Dataset_extra_list = ["synop","hdobs", "bom", "india", "efas", "vnm"]
-Git_Repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/Verif_ClimateNWP_4Points"
+Git_Repo = "/ec/vol/ecpoint_dev/mofp/papers_2_write/Verif_ClimateNWP_4Points"
 DirIN = "Data/Raw/OBS/STVL"
 DirOUT = "Data/Compute/01_UniqueOBS_Extract_FromReference_RawSTVL"
 ###########################################################################

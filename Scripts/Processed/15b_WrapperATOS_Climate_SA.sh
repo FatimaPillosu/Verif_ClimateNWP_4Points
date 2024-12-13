@@ -5,7 +5,7 @@
 # General Inputs
 Acc=24
 RP_list="1,2,5,10,20,50,100,200,500,1000,2000,5000,10000"
-Git_Repo="/ec/vol/ecpoint_dev/mofp/Papers_2_Write/Verif_ClimateNWP_4Points"
+Git_Repo = "/ec/vol/ecpoint_dev/mofp/papers_2_write/Verif_ClimateNWP_4Points"
 DirIN="Data/Compute/14_AccTP_SA"
 DirOUT_Climate_SA="Data/Compute/15_Climate_SA"
 DirOUT_Climate_G="Data/Compute/16_Climate_G"

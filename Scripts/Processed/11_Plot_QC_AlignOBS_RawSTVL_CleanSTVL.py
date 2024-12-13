@@ -29,8 +29,8 @@ Acc = 24
 DatasetSTVL_list = "The aligned observations have been built considering the following STVL datasets: 'synop', 'bom', 'india', 'vnm', and, 'efas'."
 ReportingTimeSTVL_list = "The aligned observations have been built considering, for each dataset, reporting times from 00 to 23 UTC at hourly steps when available."
 NameOBS_list = ["08_AlignOBS_Combine_Years_RawSTVL", "10_AlignOBS_CleanSTVL"]
-Coeff_Grid2Point_list = [2,5,10,20,50,100]
-Git_Repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/Verif_ClimateNWP_4Points"
+Coeff_Grid2Point_list = [2, 5, 10, 20, 50, 100, 200, 500, 1000]
+Git_Repo = "/ec/vol/ecpoint_dev/mofp/papers_2_write/Verif_ClimateNWP_4Points"
 DirIN = "Data/Compute"
 DirOUT= "Data/Plot/11_QC_AlignOBS_RawSTVL_CleanSTVL"
 ######################################################################################################################################
@@ -946,8 +946,8 @@ for NameOBS in NameOBS_list:
             print("Running quality checks for "+ NameOBS)
             
             # Setting main input/output directories
-            MainDirIN = Git_Repo + "/" + DirIN + "/" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF) + "/" + NameOBS
-            MainDirOUT = Git_Repo + "/" + DirOUT + "/" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF) + "/" + NameOBS
+            MainDirIN = Git_Repo + "/" + DirIN + "/" + NameOBS + "/" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF)
+            MainDirOUT = Git_Repo + "/" + DirOUT + "/" + NameOBS + "/" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF)
             if not exists(MainDirOUT):
                   os.makedirs(MainDirOUT)
             
@@ -962,8 +962,8 @@ for NameOBS in NameOBS_list:
                   print("Running quality checks for "+ NameOBS + " considering a Coeff_Grid2Point=" + str(Coeff_Grid2Point))
                   
                   # Setting main input/output directories
-                  MainDirIN = Git_Repo + "/" + DirIN + "/" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF) + "/" + NameOBS + "/Coeff_Grid2Point_" + str(Coeff_Grid2Point)
-                  MainDirOUT = Git_Repo + "/" + DirOUT + "/" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF) + "/" + NameOBS + "/Coeff_Grid2Point_" + str(Coeff_Grid2Point)
+                  MainDirIN = Git_Repo + "/" + DirIN + "/" + NameOBS + "/Coeff_Grid2Point_" + str(Coeff_Grid2Point) + "/" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF)
+                  MainDirOUT = Git_Repo + "/" + DirOUT + "/" + NameOBS + "/Coeff_Grid2Point_" + str(Coeff_Grid2Point) + "/" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF)
                   if not exists(MainDirOUT):
                         os.makedirs(MainDirOUT)
 

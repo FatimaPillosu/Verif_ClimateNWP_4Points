@@ -29,7 +29,7 @@ Plot_rows = 3
 Plot_cols = 2
 Plot_row_loc_list = [0,0,1,1,2,2]
 Plot_col_loc_list = [0,1,0,1,0,1]
-Git_Repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/Verif_ClimateNWP_4Points"
+Git_Repo = "/ec/vol/ecpoint_dev/mofp/papers_2_write/Verif_ClimateNWP_4Points"
 DirIN = "Data/Compute/01_UniqueOBS_Extract_FromReference_RawSTVL"
 DirOUT = "Data/Plot/04_TempDistrOBS_RawSTVL"
 ######################################################################

@@ -15,7 +15,7 @@
 # INPUT PARAMETERS
 YearS=2000
 YearF=2019
-Git_Repo="/ec/vol/ecpoint_dev/mofp/Papers_2_Write/Verif_ClimateNWP_4Points"
+Git_Repo = "/ec/vol/ecpoint_dev/mofp/papers_2_write/Verif_ClimateNWP_4Points"
 DirOUT="Data/Raw/NWP/Reanalysis/ERA5_EDA"
 #####################################################################
 

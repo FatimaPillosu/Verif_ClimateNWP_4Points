@@ -2,7 +2,7 @@
 
 # General Inputs
 Acc=24
-Git_Repo="/ec/vol/ecpoint_dev/mofp/Papers_2_Write/Verif_ClimateNWP_4Points"
+Git_Repo = "/ec/vol/ecpoint_dev/mofp/papers_2_write/Verif_ClimateNWP_4Points"
 DirIN="Data/Raw/NWP"
 DirOUT="Data/Compute/01_AccTP_SA"
 

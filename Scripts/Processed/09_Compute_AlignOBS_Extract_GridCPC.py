@@ -25,7 +25,7 @@ from mpl_toolkits.basemap import Basemap
 YearS = 2000
 YearF = 2019
 Acc = 24
-Git_Repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/Verif_ClimateNWP_4Points"
+Git_Repo = "/ec/vol/ecpoint_dev/mofp/papers_2_write/Verif_ClimateNWP_4Points"
 DirIN_CPC = "Data/Raw/OBS/CPC"
 DirIN_STVL = "Data/Compute/08_AlignOBS_Combine_Years_RawSTVL"
 DirOUT = "Data/Compute/09_AlignOBS_Extract_GridCPC"

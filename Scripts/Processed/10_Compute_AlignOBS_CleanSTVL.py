@@ -13,7 +13,7 @@ import numpy as np
 # YearS (integer, in YYYY format): start year to consider.
 # YearF (integer, in YYYY format): final year to consider.
 # Acc (integer, in hours): rainfall accumulation period.
-# Coeff_Grid2Point_list (list of integer number): list of coefficients that make the CPC's gridded rainfall values comparable with STVL's point rainfall observations.
+# Coeff_Grid2Point_list (list of integers): list of coefficients that make the CPC's gridded rainfall values comparable with STVL's point rainfall observations.
 # Git_Repo (string): path of local github repository.
 # DirIN_STVL (string): relative path for the input directory containing STVL's point rainfall observations.
 # DirIN_CPC (string): relative path for the input directory containing CPC's gridded rainfall values.
@@ -23,8 +23,8 @@ import numpy as np
 YearS = 2000
 YearF = 2019
 Acc = 24
-Coeff_Grid2Point_list = [2,5,10,20,50,100]
-Git_Repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/Verif_ClimateNWP_4Points"
+Coeff_Grid2Point_list = [2, 5, 10, 20, 50, 100, 200, 500, 1000]
+Git_Repo = "/ec/vol/ecpoint_dev/mofp/papers_2_write/Verif_ClimateNWP_4Points"
 DirIN_STVL = "Data/Compute/08_AlignOBS_Combine_Years_RawSTVL"
 DirIN_CPC = "Data/Compute/09_AlignOBS_Extract_GridCPC"
 DirOUT = "Data/Compute/10_AlignOBS_CleanSTVL"
@@ -38,7 +38,7 @@ print("Cleaning STVL observations")
 for Coeff_Grid2Point in Coeff_Grid2Point_list:
 
       # Setting temporary output directory
-      MainDirOUT_temp = Git_Repo + "/" + DirOUT + "/" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF) + "/Coeff_Grid2Point_" + str(Coeff_Grid2Point)
+      MainDirOUT_temp = Git_Repo + "/" + DirOUT + "/Coeff_Grid2Point_" + str(Coeff_Grid2Point) + "/" + f'{Acc:02d}' + "h_" + str(YearS) + "_" + str(YearF) 
       if not exists(MainDirOUT_temp):
             os.makedirs(MainDirOUT_temp)
 
@@ -63,8 +63,12 @@ for Coeff_Grid2Point in Coeff_Grid2Point_list:
       print(" - Automatic corrections using CPC dataset (coefficient to compare gridded rainfall values with point rainfall observations = " + str(Coeff_Grid2Point) + ")")
       stvl_obs_clean = stvl_obs
       cpc_obs_point = cpc_obs * Coeff_Grid2Point
-      ind = np.less(cpc_obs_point,stvl_obs)
+      ind = np.less(cpc_obs_point, stvl_obs)
       stvl_obs_clean[ind] = np.nan
+
+      # Number of observations removed
+      a = np.sum( (ind == 1), axis = 1)
+      print( "    - Number of observations removed: " + str(np.sum(a)) )
 
       # Manual corrections of rainfall values that are known to be wrong
       print(" - Manual corrections of rainfall values that are known to be wrong")

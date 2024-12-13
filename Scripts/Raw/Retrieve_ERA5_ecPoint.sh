@@ -12,7 +12,7 @@
 # DirOUT (string): relative path of the output directory.
 
 # INPUT PARAMETERS
-Git_Repo="/ec/vol/ecpoint_dev/mofp/Papers_2_Write/Verif_ClimateNWP_4Points"
+Git_Repo = "/ec/vol/ecpoint_dev/mofp/papers_2_write/Verif_ClimateNWP_4Points"
 DirIN_full="/ec/vol/ecpoint/mofp/reanalysis/ERA5_ecPoint/SemiOper/ECMWF_ERA5/0001/Rainfall/024/Code2.0.0_Cal1.0.0/Pt_BC_PERC"
 DirOUT="Data/Raw/NWP/Reanalysis/ERA5_ecPoint_24h"
 ##################################################################################################################

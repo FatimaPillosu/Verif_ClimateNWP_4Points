@@ -25,7 +25,7 @@ YearF = 2019
 Acc = 24
 Date_2_Plot = date(2000,1,1)
 Dataset_list = ["synop", "hdobs", "bom", "india", "efas", "vnm"]
-Git_Repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/Verif_ClimateNWP_4Points"
+Git_Repo = "/ec/vol/ecpoint_dev/mofp/papers_2_write/Verif_ClimateNWP_4Points"
 DirIN = "Data/Compute/01_UniqueOBS_Extract_FromReference_RawSTVL"
 DirOUT = "Data/Plot/03_LocOBS_RawSTVL"
 ######################################################################

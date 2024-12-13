@@ -25,7 +25,7 @@ Acc = 24
 MinDays_Perc = 0.75
 MaxPerc = 99
 SystemNWP_list = ["Reanalysis/ERA5_ecPoint", "Reanalysis/ERA5_EDA", "Reanalysis/ERA5", "Reforecasts/ECMWF_46r1"]
-Git_Repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/Verif_ClimateNWP_4Points"
+Git_Repo = "/ec/vol/ecpoint_dev/mofp/papers_2_write/Verif_ClimateNWP_4Points"
 DirIN = "Data/Compute/21_ECDF_diff"
 DirOUT = "Data/Plot/22_ECDF_Diff_Map"
 ###########################################################################################################

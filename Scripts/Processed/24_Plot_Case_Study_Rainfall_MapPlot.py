@@ -26,7 +26,7 @@ import metview as mv
 BaseDate = datetime(2018, 10, 28)
 Acc = 24
 SystemNWP = "Reanalysis/ERA5_ecPoint"
-Git_Repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/Verif_ClimateNWP_4Points"
+Git_Repo = "/ec/vol/ecpoint_dev/mofp/papers_2_write/Verif_ClimateNWP_4Points"
 DirIN_OBS = "Data/Raw/OBS"
 DirIN_NWP = "Data/Raw/NWP"
 DirOUT = "Data/Plot/24_Case_Study_Rainfall_MapPlot"

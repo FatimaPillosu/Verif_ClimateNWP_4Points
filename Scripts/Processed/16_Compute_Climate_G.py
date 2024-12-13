@@ -17,7 +17,7 @@ import metview as mv
 # INPUT PARAMETERS
 NumSA_list = [34, 160, 160, 220]
 SystemNWP_list = ["Reanalysis/ERA5_EDA", "Reanalysis/ERA5", "Reforecasts/ECMWF_46r1", "Reanalysis/ERA5_ecPoint"]
-Git_Repo = "/ec/vol/ecpoint_dev/mofp/Papers_2_Write/Verif_ClimateNWP_4Points"
+Git_Repo = "/ec/vol/ecpoint_dev/mofp/papers_2_write/Verif_ClimateNWP_4Points"
 DirIN = "Data/Compute/15_Climate_SA/24h_2000_2019"
 DirOUT = "Data/Compute/16_Climate_G/24h_2000_2019"
 ########################################################################################################
